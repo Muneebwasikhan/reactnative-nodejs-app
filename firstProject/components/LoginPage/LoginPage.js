@@ -5,9 +5,26 @@ import FacebookBtn from "../FacebookBtn";
 // const FBSDK = require('react-native-fbsdk');
 import FBSDK, { LoginManager, AccessToken, GraphRequest, GraphRequestManager } from "react-native-fbsdk";
 import { Actions } from "react-native-router-flux";
+import axios from 'axios';
+import path from '../../config/Path';
+import {AsyncStorage} from 'react-native';
 
 class LoginPage extends Component {
+
+componentDidMount() {
+  console.log(path.LOGIN_AUTHENTICATION);
+}
+  _storeData = async (data) => {
+    try {
+      await AsyncStorage.setItem('regStudent', data);
+      console.log(data);
+    } catch (error) {
+      alert('User Auth error');
+    }
+  };
+
   _fbAuth = () => {
+    const th = this;
     // Attempt a login using the Facebook login dialog,
     // asking for default permissions.
     LoginManager.logInWithReadPermissions().then(
@@ -24,10 +41,22 @@ class LoginPage extends Component {
             const responseInfoCallback = (error, result) => {
               if (error) {
                 console.log(error)
-                alert('Error fetching data: ' + error.toString());
+                // alert('Error fetching data: ' + error.toString());
               } else {
-                console.log(result);
-
+                console.log(path.LOGIN_AUTHENTICATION);
+                axios.post(path.LOGIN_AUTHENTICATION, {
+                  name: result.name,
+                  fbId: result.id,
+                  accessToken: accessToken
+                })
+                .then(response => {
+                  th._storeData(JSON.stringify(response.data));
+                  // console.log(response.data);
+                  Actions.replace("home");
+                })
+                .catch( (error) => {
+                  console.log(error);
+                });
               }
             }
 

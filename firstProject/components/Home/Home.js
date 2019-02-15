@@ -1,9 +1,19 @@
 import React, { Component } from "react";
 import { Platform, StyleSheet, Text, View, Button } from "react-native";
-
+import {AsyncStorage} from 'react-native'
 
 class Home extends Component {
   
+  _asyncGetRegStudent = async () => {
+    try{
+      let user = await AsyncStorage.getItem('regStudent');
+      alert(user);
+    }
+    catch(er){alert(er)}
+  }
+  componentDidMount() {
+    this._asyncGetRegStudent();
+  }
   render() {
     return (
       <View style={styles.container}>

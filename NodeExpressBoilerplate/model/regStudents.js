@@ -1,8 +1,8 @@
 
 exports = module.exports = function (app, mongoose) {
 
-    // 'use strict';
-    const validator = require('validator');
+    // 'use strict';a
+
     var Schema = mongoose.Schema;
 
     var RegStudent = new Schema({
@@ -12,24 +12,17 @@ exports = module.exports = function (app, mongoose) {
         },
         fbId: {
             type: String,
-            require: true,
+            require: true
         },
         accessToken: {
             type: String,
-            require: true,
+            require: true
         },
         email: {
             type: String,
-            trim: true,
-            validate: {
-                validator: validator.isEmail,
-                message: '{VALUE} is not a valid email'
-            }
         },
         phoneNumber: {
             type: String,
-            minlength: 10,
-            unique: true
         }
     });
 

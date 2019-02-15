@@ -1,5 +1,6 @@
-class path {
-  static path = 'http://localhost:3001';
+export default class path {
+  static BASE_URL = 'http://localhost:3001';
 
-  static LOGIN_AUTHENTICATION = '';
+  static LOGIN_AUTHENTICATION = path.BASE_URL + '/studentAuth';
+
 }

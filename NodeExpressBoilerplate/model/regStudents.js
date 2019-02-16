@@ -23,6 +23,9 @@ exports = module.exports = function (app, mongoose) {
         },
         phoneNumber: {
             type: String,
+        },
+        profilePhoto: {
+            type: String,
         }
     });
 

@@ -60,7 +60,7 @@
 	<key>NSCameraUsageDescription</key>
 	<string>YOUR_REASON_FOR_USING_USER_CAMERA_HERE</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string/>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>YOUR_REASON_FOR_USING_USER_PHOTOS_HERE</string>
 	<key>UIAppFonts</key>

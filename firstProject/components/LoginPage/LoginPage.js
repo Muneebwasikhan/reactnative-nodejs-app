@@ -51,8 +51,13 @@ componentDidMount() {
                 })
                 .then(response => {
                   th._storeData(JSON.stringify(response.data));
-                  // console.log(response.data);
+                  console.log(response.data);
+                  if(response.data.already && response.data.profilePhoto && response.data.phNumber){
                   Actions.replace("home");
+                  }
+                  else if(!response.data.already){
+                    Actions.replace("uploaddata");
+                  }
                 })
                 .catch( (error) => {
                   console.log(error);

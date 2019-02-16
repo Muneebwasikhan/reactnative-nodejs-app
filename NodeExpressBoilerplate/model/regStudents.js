@@ -24,8 +24,17 @@ exports = module.exports = function (app, mongoose) {
         phoneNumber: {
             type: String,
         },
+        skills: {
+            type: Array,
+        },
         profilePhoto: {
             type: String,
+        },
+        location: {
+            type: Object,
+        },
+        rating: {
+            type: Object,
         }
     });
 

@@ -11,9 +11,29 @@ import {AsyncStorage} from 'react-native';
 
 class LoginPage extends Component {
 
-componentDidMount() {
-  console.log(path.LOGIN_AUTHENTICATION);
-}
+  state = {
+    logedIn: false
+  };
+
+  async componentWillMount() {
+    var userData = JSON.parse(await AsyncStorage.getItem('regStudent'));
+    if(userData){
+      if(userData.already && userData.studentData.profilePhoto && userData.studentData.phNumber){
+        console.log('userData1',userData);
+        Actions.replace("home");
+      }
+        else if(userData.already){
+          console.log('userData2',userData);
+          Actions.replace("uploaddata");
+        }
+      }
+      else{
+        console.log('userData3',userData);
+        Actions.replace("uploaddata");
+      }
+    }
+
+
   _storeData = async (data) => {
     try {
       await AsyncStorage.setItem('regStudent', data);
@@ -52,7 +72,7 @@ componentDidMount() {
                 .then(response => {
                   th._storeData(JSON.stringify(response.data));
                   console.log(response.data);
-                  if(response.data.already && response.data.profilePhoto && response.data.phNumber){
+                  if(response.data.already && response.data.studentData.profilePhoto && response.data.studentData.phNumber){
                   Actions.replace("home");
                   }
                   else if(!response.data.already){

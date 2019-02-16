@@ -8,7 +8,8 @@ import { Input, Button } from "react-native-elements";
 
 class UploadData extends Component {
   state = {
-    myNumber: ""
+    myNumber: "",
+    profilePhoto: "https://www.sparklabs.com/forum/styles/comboot/theme/images/default_avatar.jpg"
   };
 
   onChanged(text) {
@@ -20,6 +21,11 @@ class UploadData extends Component {
     } else {
       console.log("Char not allowed");
     }
+  }
+
+  updateData = () => {
+    alert(this.state.myNumber);
+    alert(this.state.profilePhoto);
   }
 
   componentDidMount() {}
@@ -44,8 +50,7 @@ class UploadData extends Component {
               }}
               resizeMode="cover"
               source={{
-                uri:
-                  "https://www.sparklabs.com/forum/styles/comboot/theme/images/default_avatar.jpg"
+                uri: this.state.profilePhoto
               }}
             />
           </PhotoUpload>
@@ -75,7 +80,7 @@ class UploadData extends Component {
             containerStyle={{width: '60%',marginTop: 20,}}
             buttonStyle={{backgroundColor: 'gray',borderRadius: 27}}
             title="UPDATE"
-            onPress={() => {alert(this.state.myNumber)}}
+            onPress={this.updateData}
           />
         </View>
         {/* <Image source={this.state.avatarSource} style={styles.uploadAvatar} /> */}

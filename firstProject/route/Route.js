@@ -1,54 +1,98 @@
 import React, { Component } from "react";
-import { Router, Stack, Scene } from "react-native-router-flux";
+import { Router, Stack, Scene, Tabs } from "react-native-router-flux";
 import LoginPage from "../components/LoginPage/LoginPage";
 import Home from "../components/Home/Home";
 import UploadData from "../components/UploadData/UploadData";
-import { AsyncStorage } from "react-native";
-import { Text } from 'react-native';
-import { Icon } from 'react-native-elements'
-
+import { Icon } from "react-native-elements";
+import Profile from '../components/Profile/Profile';
+import Services from '../components/Services/Services';
 
 class Route extends Component {
-  async componentDidMount() {
-    // var userData = await ASyncStorage.getItem('regStudent');
-    // if(userData){
-    //   console.log(userData);
-    //   this.setState({logedIn: true})
-    // }
-  }
 
   render() {
-    const TabIcon = (user) => {
-      return <Icon
-      name={user}
-      type='font-awesome'
-      // color='black'
-      />;
+    const TabIcon = ({ focused, title }) => {
+      switch (title) {
+        case "home":
+          console.log(focused);
+          return (
+            <Icon
+              name="home"
+              type="font-awesome"
+              size={30}
+              color={focused ? "lightgray" : "white"}
+            />
+          );
+        case "profile":
+          return (
+            <Icon
+              name="user"
+              type="font-awesome"
+              size={30}
+              color={focused ? "lightgray" : "white"}
+            />
+          );
+        default: {
+          return (
+            <Icon
+              // name={focused ? "far fa-user" : "ios-speedometer-outline"}
+              type="font-awesome"
+              size={30}
+              color={focused ? "lightgray" : "white"}
+            />
+          );
+        }
+      }
     };
 
     return (
       <Router>
         <Stack key="root">
           <Scene key="loginpage" component={LoginPage} title="Login" />
+          
           <Scene
             key="home"
             tabs={true}
-            tabBarStyle={{ backgroundColor: "#FFFFFF" }}
+            showLabel={false}
+            hideNavBar={true}
+            tabBarPosition="bottom"
+            activeBackgroundColor="gray"
+            inactiveBackgroundColor="darkgray"
           >
-            {/* Tab and it's scenes */}
-            <Scene key="homePage" title="homePage" component={Home} icon={() => <Icon
-      name='home'
-      type='font-awesome'
-      // color='black'
-      />} />
-              {/* <Scene key="dashboard" component={Home} title="Dashboard" /> */}
-              {/* <Scene key="loginpage" component={LoginPage} title="LoginPage" /> */}
-            {/* </Scene> */}
-            <Scene key="loginpage" title="LoginPage" component={LoginPage} icon={() => {TabIcon('user')}} />
-              {/* <Scene key="loginpage" component={LoginPage} title="LoginPage" /> */}
-              {/* <Scene key="loginpage" component={LoginPage} title="LoginPage" /> */}
-            {/* </Scene> */}
+            <Scene
+              key="homePage"
+              title="home"
+              component={Home}
+              icon={TabIcon}
+              showLabel={false}
+              hideNavBar={true}
+            />
+            <Scene
+              key="profilePage"
+              title="profile"
+              // component={Profile}
+              icon={TabIcon}
+              showLabel={false}
+              hideNavBar={true}
+            >
+            <Scene
+              key="profilePageDashboard"
+              // title="home"
+              component={Profile}
+              icon={TabIcon}
+              showLabel={false}
+              hideNavBar={true}
+            />
+            <Scene
+              key="profilePageServices"
+              // title="home"
+              component={Services}
+              icon={TabIcon}
+              showLabel={false}
+              hideNavBar={true}
+            />
+            </Scene>
           </Scene>
+
           <Scene key="uploaddata" component={UploadData} title="Upload Data" />
         </Stack>
       </Router>

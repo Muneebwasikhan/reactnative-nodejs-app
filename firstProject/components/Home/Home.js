@@ -8,9 +8,9 @@ class Home extends Component {
   _asyncGetRegStudent = async () => {
     try{
       let user = await AsyncStorage.getItem('regStudent');
-      alert(user);
+      console.log(user);
     }
-    catch(er){alert(er)}
+    catch(er){console.log(er)}
   }
   componentDidMount() {
     this._asyncGetRegStudent();

@@ -40,7 +40,7 @@ class LoginPage extends Component {
       await AsyncStorage.setItem('regStudent', data);
       console.log(data);
     } catch (error) {
-      alert('User Auth error');
+      console.log('User Auth error');
     }
   };
 
@@ -57,7 +57,7 @@ class LoginPage extends Component {
           AccessToken.getCurrentAccessToken().then(data => {
             console.log(data);
             let accessToken = data.accessToken
-            alert(accessToken.toString())
+            console.log(accessToken.toString())
 
             const responseInfoCallback = (error, result) => {
               if (error) {

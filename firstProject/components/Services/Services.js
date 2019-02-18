@@ -28,12 +28,17 @@ class Services extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>Services</Text>
-
+        <Button
+          title="Home"
+          onPress={() => {
+            Actions.replace("home");
+          }}
+        />
         
         <Card
         containerStyle={{width: '100%'}}
   title='HELLO WORLD'
-  image={'https://statusgalaxy.com/wp-content/uploads/photo-gallery/thumb/happiness_whatsapp_dp_(12).jpg'}>
+  image={{uri: 'https://statusgalaxy.com/wp-content/uploads/photo-gallery/thumb/happiness_whatsapp_dp_(12).jpg'}}>
   <Text style={{marginBottom: 10}}>
     The idea with React Native Elements is more about component structure than actual design.
   </Text>
@@ -46,7 +51,7 @@ class Services extends Component {
 <Card
         containerStyle={{width: '100%'}}
   title='HELLO WORLD'
-  image={'https://d1r8m46oob3o9u.cloudfront.net/images/home-demo-photo-2c.jpg'}>
+  image={{uri: 'https://d1r8m46oob3o9u.cloudfront.net/images/home-demo-photo-2c.jpg'}}>
   <Text style={{marginBottom: 10}}>
     The idea with React Native Elements is more about component structure than actual design.
   </Text>

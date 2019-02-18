@@ -17,19 +17,20 @@ class LoginPage extends Component {
 
   async componentWillMount() {
     var userData = JSON.parse(await AsyncStorage.getItem('regStudent'));
+    console.log(userData);
     if(userData){
-      if(userData.already && userData.studentData.profilePhoto && userData.studentData.phNumber){
+      if(userData.already && userData.studentData.profilePhoto && userData.studentData.phoneNumber){
         console.log('userData1',userData);
         Actions.replace("home");
       }
-        else if(userData.already){
+        else{
           console.log('userData2',userData);
           Actions.replace("uploaddata");
         }
       }
       else{
         console.log('userData3',userData);
-        Actions.replace("uploaddata");
+        // Actions.replace("uploaddata");
       }
     }
 
@@ -72,10 +73,10 @@ class LoginPage extends Component {
                 .then(response => {
                   th._storeData(JSON.stringify(response.data));
                   console.log(response.data);
-                  if(response.data.already && response.data.studentData.profilePhoto && response.data.studentData.phNumber){
+                  if(response.data.studentData.profilePhoto && response.data.studentData.phoneNumber){
                   Actions.replace("home");
                   }
-                  else if(!response.data.already){
+                  else{
                     Actions.replace("uploaddata");
                   }
                 })

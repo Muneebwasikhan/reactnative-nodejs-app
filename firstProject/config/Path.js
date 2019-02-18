@@ -3,4 +3,6 @@ export default class path {
 
   static LOGIN_AUTHENTICATION = path.BASE_URL + '/studentAuth';
 
+  static UPDATE_NUMBER_PROFILE = path.BASE_URL + '/updateData/numberandprofile';
+
 }

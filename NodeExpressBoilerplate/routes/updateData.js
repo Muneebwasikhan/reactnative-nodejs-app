@@ -3,28 +3,27 @@ exports = module.exports = function(app, mongoose) {
   var router = express.Router();
 
   /* GET users listing. */
-  router.post("/", async (req, res, next) => {
+  router.post("/numberandprofile", async (req, res, next) => {
     // console.log(req.body)
     try {
-      let previousData = await app.db.models.RegStudent.findOneAndUpdate(
+      let upadataDataNumImg = await app.db.models.RegStudent.findOneAndUpdate(
         { fbId: req.body.fbId },
-        { $set: { accessToken: req.body.accessToken } },
+        { $set: { phoneNumber: req.body.phoneNumber, profilePhoto: req.body.profilePhoto, } },
         { new: true }
       );
-      if (previousData) {
+      if (upadataDataNumImg) {
         return res.send({
           success: true,
-          already: true,
-          studentData: previousData
+          studentData: upadataDataNumImg
         });
       }
-      let RegStudentModel = new app.db.models.RegStudent({
-        userName: req.body.name,
-        fbId: req.body.fbId,
-        accessToken: req.body.accessToken
-      });
-      let regStudent = await RegStudentModel.save();
-      res.send({ success: true, already: false, studentData: regStudent });
+      else{
+        return res.send({
+          success: false,
+          message: 'Invalid User'
+        });
+      }
+      
     } catch (error) {
       res.send({ success: false, message: error.message });
     }

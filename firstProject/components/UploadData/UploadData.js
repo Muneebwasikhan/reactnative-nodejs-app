@@ -5,6 +5,8 @@ import { Image } from "react-native";
 import PhotoUpload from "react-native-photo-upload";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { Input, Button } from "react-native-elements";
+import axios from 'axios';
+import path from "../../config/Path";
 
 class UploadData extends Component {
   state = {
@@ -24,11 +26,35 @@ class UploadData extends Component {
   }
 
   updateData = () => {
-    alert(this.state.myNumber);
-    alert(this.state.profilePhoto);
-  }
+    // alert(this.state.myNumber);
+    // alert(this.state.profilePhoto);
+    const { myNumber, profilePhoto } = this.state;
+    this._asyncGetRegStudent().then((res) => {
+      if(res){
+        axios.post(path.UPDATE_NUMBER_PROFILE, {
+      fbId: res.studentData.fbId,
+      phoneNumber: myNumber,
+      profilePhoto: profilePhoto
+    }).then(data => {
+      console.log(data);
+    })
+      }
+    });
+    
 
-  componentDidMount() {}
+  }
+  _asyncGetRegStudent = async () => {
+    try{
+      let user = await AsyncStorage.getItem('regStudent');
+     return JSON.parse(user)
+    }
+    catch(er){
+      return false
+    }
+  }
+  componentDidMount() {
+    this._asyncGetRegStudent();
+  }
   render() {
     return (
       <View style={styles.container}>
@@ -81,6 +107,14 @@ class UploadData extends Component {
             buttonStyle={{backgroundColor: 'gray',borderRadius: 27}}
             title="UPDATE"
             onPress={this.updateData}
+          />
+        </View>
+        <View style={styles.horCenterCont }>
+          <Button
+            containerStyle={{width: '60%',marginTop: 20,}}
+            buttonStyle={{backgroundColor: 'gray',borderRadius: 27}}
+            title="CLEAR ASYNC STORAGE"
+            onPress={() => {AsyncStorage.clear(() => {console.log('cleared storage')})}}
           />
         </View>
         {/* <Image source={this.state.avatarSource} style={styles.uploadAvatar} /> */}

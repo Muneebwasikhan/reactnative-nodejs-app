@@ -29,10 +29,10 @@ exports = module.exports = function (app, mongoose) {
   });
 
   /* GET users listing. */
-  router.post("/", upload.single('image'), async (req, res, next) => {
+  router.post("/", async (req, res, next) => {
     // console.log(req.body)
     try {
-      console.log(req.file);
+      console.log(req.body);
       res.send('data')
     } catch (error) {
       res.send({ success: false, message: error.message });

@@ -37,5 +37,5 @@ cloudinary.config({
     }
   });
 
-  app.use("/addService", router);
+  app.use("/addservice", router);
 };

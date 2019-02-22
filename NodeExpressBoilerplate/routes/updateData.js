@@ -1,6 +1,6 @@
 exports = module.exports = function(app, mongoose) {
-  var express = require("express");
-  var router = express.Router();
+  var express = require("express")
+  var router = express.Router()
 
   /* GET users listing. */
   router.post("/numberandprofile", async (req, res, next) => {
@@ -8,26 +8,24 @@ exports = module.exports = function(app, mongoose) {
     try {
       let upadataDataNumImg = await app.db.models.RegStudent.findOneAndUpdate(
         { fbId: req.body.fbId },
-        { $set: { phoneNumber: req.body.phoneNumber, profilePhoto: req.body.profilePhoto, } },
+        { $set: { phoneNumber: req.body.phoneNumber, profilePhoto: req.body.profilePhoto } },
         { new: true }
-      );
+      )
       if (upadataDataNumImg) {
         return res.send({
           success: true,
           studentData: upadataDataNumImg
-        });
-      }
-      else{
+        })
+      } else {
         return res.send({
           success: false,
-          message: 'Invalid User'
-        });
+          message: "Invalid User"
+        })
       }
-      
     } catch (error) {
-      res.send({ success: false, message: error.message });
+      res.send({ success: false, message: error.message })
     }
-  });
+  })
 
-  app.use("/updateData", router);
-};
+  app.use("/updateData", router)
+}

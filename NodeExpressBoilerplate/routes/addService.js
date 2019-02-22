@@ -1,63 +1,71 @@
 exports = module.exports = function (app, mongoose) {
-  var express = require("express");
-  var router = express.Router();
-  const multer = require("multer");
-  const cloudinary = require("cloudinary");
-  const validator = require("validator");
-  // const imgUpload  =require('./imgUploadMiddleWare'); 
-
-  var storage = multer.diskStorage({
-    filename: function (req, file, callback) {
-      callback(null, Date.now() + file.originalname);
-    }
-  });
-
-
-  var imageFilter = function (req, file, cb) {
-    // accept image files only
-    if (!file.originalname.match(/\.(jpg|jpeg|png)$/i)) {
-
-      req.imgError = true;
-      // return cb(new Error("Only image files are allowed!"), true);
-    }
-    cb(null, true);
-  };
-  var upload = multer({ storage: storage, fileFilter: imageFilter });
+  var express = require("express")
+  var router = express.Router()
+  const multer = require("multer")
+  const cloudinary = require("cloudinary")
+  const validator = require("validator")
+  // const imgUpload  =require('./imgUploadMiddleWare');
 
   cloudinary.config({
-    cloud_name: app.get('cloud_name'),
-    api_key: app.get('api_key'),
-    api_secret: app.get('api_secret')
-  });
+    cloud_name: app.get("cloud_name"),
+    api_key: app.get("api_key"),
+    api_secret: app.get("api_secret")
+  })
 
   /* GET users listing. */
   router.post("/", async (req, res, next) => {
-    // console.log(req.body)
+    console.log(req.body)
     try {
-      // console.log(req.file);
-      // console.log(req.body);
-      cloudinary.v2.uploader.upload(req.body.image, {
-        secure: true,
-      },
-        (err, imgData) => {
-          if (err) {
-            // console.log(err);
-            // change it to unable to process your image, please try again
-            console.log(err.message)
-            return res.send({ success: false, message: err.message });
-          }
+      if (!req.body.image) {
+        return res.send({ success: false, message: "Please Provide a valid Image" })
+      }
+      if (req.body.image.path) {
+        var imageObj = await uploadImage(req.body.image.path)
+      } else {
+        var imageObj = await uploadImage(req.body.image)
+      }
 
-          console.log(imgData.secure_url);
+      let serviceObj = {
+        imageUrl: imageObj.secure_url,
+        title: req.body.title,
+        user_id: req.body.user_id,
+        discription: req.body.discription,
+        amount: req.body.amount,
+        category: req.body.category
+      }
 
-          // updateStudent(req, res, imgData.secure_url, _id);
+      let newServiceModel = new app.db.models.Services(serviceObj);
 
-        });
-      res.send({success:true})
-    } catch (error) {
-      console.log(error);
-      res.send({ success: false, message: error.message });
+      let newServiceObj = await newServiceModel.save();
+
+      res.send({ success: true, data: newServiceObj })
+    } catch (err) {
+      console.log(err)
+      res.send({ success: false, message: err.message })
     }
-  });
+  })
 
-  app.use("/addservice", router);
-};
+  app.use("/addservice", router)
+
+  async function uploadImage(image) {
+    return new Promise((resolve, reject) => {
+      try {
+        cloudinary.v2.uploader.upload(
+          image,
+          {
+            secure: true
+          },
+          (err, imgData) => {
+            if (err) {
+              reject(err)
+            }
+            console.log(imgData.secure_url)
+            resolve(imgData)
+          }
+        )
+      } catch (err) {
+        reject(err)
+      }
+    })
+  }
+}

@@ -17,7 +17,10 @@ exports = module.exports = function (app, mongoose) {
     console.log(req.body)
     try {
       if (!req.body.image) {
-        return res.send({ success: false, message: "Please Provide a valid Image" })
+        return res.send({
+          success: false,
+          message: "Please Provide a valid Image"
+        })
       }
       if (req.body.image.path) {
         var imageObj = await uploadImage(req.body.image.path)
@@ -38,25 +41,35 @@ exports = module.exports = function (app, mongoose) {
 
       let newServiceObj = await newServiceModel.save();
 
-      res.send({ success: true, data: newServiceObj })
+      res.send({
+        success: true,
+        data: newServiceObj
+      })
     } catch (err) {
       console.log(err)
-      res.send({ success: false, message: err.message })
+      res.send({
+        success: false,
+        message: err.message
+      })
     }
   })
+
+  router.post('./getallservice', function (req, res, next) {
+
+  })
+
 
   app.use("/service", router)
 
 
 
-  
+
 
   async function uploadImage(image) {
     return new Promise((resolve, reject) => {
       try {
         cloudinary.v2.uploader.upload(
-          image,
-          {
+          image, {
             secure: true
           },
           (err, imgData) => {

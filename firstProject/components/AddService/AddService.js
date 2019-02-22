@@ -8,8 +8,12 @@ import { Input, Button } from "react-native-elements";
 import axios from "axios";
 import path from "../../config/Path";
 import ImagePicker from "react-native-image-picker";
-
-
+// import base64ToFile from "base64-to-file";
+import {
+  image64toCanvasRef,
+  extractImageFileExtensionFromBase64,
+  base64StringtoFile
+} from "./ReUtilities";
 
 class AddService extends Component {
   state = {
@@ -30,12 +34,98 @@ class AddService extends Component {
     }
   }
 
-  
+  selectImage = () => {
+    const options = {
+      title: "Select Avatar",
+      customButtons: [{ name: "fb", title: "Choose Photo from Facebook" }],
+      storageOptions: {
+        skipBackup: true,
+        path: "images"
+      }
+    };
+    // Function form the react-native-image-picker library
+    ImagePicker.showImagePicker({ title: "Select Image" }, response => {
+      // format the image data
+      const image = {
+        uri: response.uri,
+        type: "image/jpeg",
+        name: "myImage" + "-" + Date.now() + ".jpg"
+      };
+      console.log(response);
+      // Instantiate a FormData() object
+      const imgBody = new FormData();
+      // append the image to the object with the title 'image'
+      // console.log(image[0])
+      imgBody.append("image", image);
+      const url = `http://localhost:3001/addservice`;
+      console.log(imgBody);
+      // Perform the request. Note the content type - very important
+      axios.post(url, { data: imgBody }).then(res => {
+        console.log(res);
+      });
+      // fetch(url, {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'multipart/form-data',
+      //   },
+      //   body: imgBody
+      //   }).then(res => res.json()).then(results => {
+      //     // Just me assigning the image url to be seen in the view
+      //     // const source = { uri: res.imageUrl, isStatic: true };
+      //     // const images = this.state.images;
+      //     // images[index] = source;
+      //     // this.setState({ images });
+      //   console.error(results);
+      // }).catch(error => {
+      //   console.error(error);
+      // });
+    });
+  };
+  b64toBlob(b64Data, contentType, sliceSize) {
+    contentType = contentType || "";
+    sliceSize = sliceSize || 512;
+
+    var byteCharacters = atob(b64Data);
+    var byteArrays = [];
+
+    for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+      var slice = byteCharacters.slice(offset, offset + sliceSize);
+
+      var byteNumbers = new Array(slice.length);
+      for (var i = 0; i < slice.length; i++) {
+        byteNumbers[i] = slice.charCodeAt(i);
+      }
+
+      var byteArray = new Uint8Array(byteNumbers);
+
+      byteArrays.push(byteArray);
+    }
+
+    var blob = new Blob(byteArrays, { type: contentType });
+    return blob;
+  }
+
   sendData = () => {
     console.log("call__________");
     const { avatar } = this.state;
     if (avatar) {
-      console.log(JSON.stringify(avatar));
+      console.log(avatar);
+      // base64ToFile.convert(avatar, "upload/", ["jpg", "jpeg", "png"], function(
+      //   filePath
+      // ) {
+      //   console.log(filePath);
+      // });
+
+      const url = `http://localhost:3001/addservice`;
+      // console.log(imgBody)
+      // Perform the request. Note the content type - very important
+      const imgBody = new FormData();
+      // append the image to the object with the title 'image'
+      // console.log(image[0])
+      // imgBody.append("image", blob);
+      axios.post(url, { data: imgBody }).then(res => {
+        console.log(res);
+      });
       // var photo = {
       //   data: avatar,
       //   type: 'image/jpeg',
@@ -109,8 +199,10 @@ class AddService extends Component {
               source={{
                 uri: this.state.profilePhoto
               }}
+              ref={el => (this.canvas = el)}
             />
           </PhotoUpload>
+          {/* <Image ref={el => (this.canvas = el)} style={{ display: "none" }} /> */}
         </View>
         <View style={{ ...styles.horCenterCont }}>
           <Input
@@ -136,11 +228,18 @@ class AddService extends Component {
           <Button
             containerStyle={{ width: "60%", marginTop: 20 }}
             buttonStyle={{ backgroundColor: "gray", borderRadius: 27 }}
-            title="UPLOAD"
+            title="UPLOAD b64"
             onPress={this.sendData}
           />
         </View>
-       
+        <View style={styles.horCenterCont}>
+          <Button
+            containerStyle={{ width: "60%", marginTop: 20 }}
+            buttonStyle={{ backgroundColor: "gray", borderRadius: 27 }}
+            title="UPLOAD uri"
+            onPress={this.selectImage}
+          />
+        </View>
         {/* <Image source={this.state.avatarSource} style={styles.uploadAvatar} /> */}
       </View>
     );

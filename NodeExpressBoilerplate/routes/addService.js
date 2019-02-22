@@ -4,13 +4,15 @@ exports = module.exports = function (app, mongoose) {
   const multer = require("multer");
   const cloudinary = require("cloudinary");
   const validator = require("validator");
-
+  // const imgUpload  =require('./imgUploadMiddleWare'); 
 
   var storage = multer.diskStorage({
     filename: function (req, file, callback) {
       callback(null, Date.now() + file.originalname);
     }
   });
+
+
   var imageFilter = function (req, file, cb) {
     // accept image files only
     if (!file.originalname.match(/\.(jpg|jpeg|png)$/i)) {
@@ -32,9 +34,11 @@ exports = module.exports = function (app, mongoose) {
   router.post("/", async (req, res, next) => {
     // console.log(req.body)
     try {
-      console.log(req.body);
-      res.send('data')
+      console.log(req.file);
+      console.log(req.body.image);
+      res.send({success:true})
     } catch (error) {
+      console.log(error);
       res.send({ success: false, message: error.message });
     }
   });

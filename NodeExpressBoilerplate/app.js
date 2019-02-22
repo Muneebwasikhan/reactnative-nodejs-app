@@ -4,12 +4,31 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose');
+const formData = require("express-form-data");
+
 
 /*
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 */
 var app = express();
+const options = {
+  /*
+  uploadDir: os.tmpdir(),
+  autoClean: true
+  */
+};
+
+
+
+
+app.use(formData.parse(options));
+// clear from the request and delete all empty files (size == 0)
+app.use(formData.format());
+// change file objects to stream.Readable 
+app.use(formData.stream());
+// union body and files
+app.use(formData.union());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

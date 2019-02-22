@@ -1,4 +1,4 @@
-exports = module.exports = function(app, mongoose) {
+exports = module.exports = function (app, mongoose) {
   var express = require("express")
   var router = express.Router()
   const multer = require("multer")
@@ -34,10 +34,14 @@ exports = module.exports = function(app, mongoose) {
         category: req.body.category
       }
 
-      res.send({ success: true, imageObj })
-    } catch (error) {
-      console.log(error)
-      res.send({ success: false, message: error.message })
+      let newServiceModel = new app.db.models.Services(serviceObj);
+
+      let newServiceObj = await newServiceModel.save();
+
+      res.send({ success: true, data: newServiceObj })
+    } catch (err) {
+      console.log(err)
+      res.send({ success: false, message: err.message })
     }
   })
 

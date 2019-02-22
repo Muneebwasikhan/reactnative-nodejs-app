@@ -34,8 +34,24 @@ exports = module.exports = function (app, mongoose) {
   router.post("/", async (req, res, next) => {
     // console.log(req.body)
     try {
-      console.log(req.file);
-      console.log(req.body.image);
+      // console.log(req.file);
+      // console.log(req.body);
+      cloudinary.v2.uploader.upload(req.body.image, {
+        secure: true,
+      },
+        (err, imgData) => {
+          if (err) {
+            // console.log(err);
+            // change it to unable to process your image, please try again
+            console.log(err.message)
+            return res.send({ success: false, message: err.message });
+          }
+
+          console.log(imgData.secure_url);
+
+          // updateStudent(req, res, imgData.secure_url, _id);
+
+        });
       res.send({success:true})
     } catch (error) {
       console.log(error);

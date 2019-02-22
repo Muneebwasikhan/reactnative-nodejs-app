@@ -56,7 +56,7 @@ class AddService extends Component {
       const imgBody = new FormData();
       // append the image to the object with the title 'image'
       // console.log(image[0])
-      imgBody.append("image", image);
+      imgBody.append("image",image);
       const url = `http://localhost:3001/addservice`;
       console.log(imgBody);
       // Perform the request. Note the content type - very important
@@ -123,7 +123,7 @@ class AddService extends Component {
       // append the image to the object with the title 'image'
       // console.log(image[0])
       // imgBody.append("image", blob);
-      axios.post(url, { data: imgBody }).then(res => {
+      axios.post(url, { image: "data:image/jpeg;base64,"+avatar }).then(res => {
         console.log(res);
       });
       // var photo = {
@@ -198,6 +198,9 @@ class AddService extends Component {
               resizeMode="cover"
               source={{
                 uri: this.state.profilePhoto
+              }}
+              onChanged={(res)=>{
+                console.log("Changdedd===>",res)
               }}
               ref={el => (this.canvas = el)}
             />

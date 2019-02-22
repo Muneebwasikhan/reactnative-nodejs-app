@@ -52,18 +52,34 @@ exports = module.exports = function (app, mongoose) {
         message: err.message
       })
     }
-  })
+  });
 
-  router.post('./getallservice', function (req, res, next) {
 
-  })
+
+  router.post('/getalluserservices', async function (req, res, next) {
+    try {
+      let ServiceModel = app.db.models.Services;
+      let ServiceArray = ServiceModel.find({
+        user_id: req.body.user_id
+      });
+      res.send({
+        success: true,
+        data: ServiceArray
+      });
+    } catch (err) {
+      res.send({
+        success: false,
+        message: err.message
+      })
+    }
+  });
 
 
   app.use("/service", router)
 
 
 
-
+  //Helper Functions
 
   async function uploadImage(image) {
     return new Promise((resolve, reject) => {

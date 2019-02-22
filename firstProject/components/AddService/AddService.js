@@ -57,16 +57,28 @@ class AddService extends Component {
     const { avatar, title, amount, discription, category } = this.state;
     this._asyncGetRegStudent().then(res => {
       console.log(!!res);
-      console.log({ image: avatar, title, amount, discription, category, user_id: res.studentData._id });
+      // console.log({ image: avatar, title, amount, discription, category, user_id: res.studentData._id });
       if(res.studentData._id && avatar && title && amount && discription && category){
-        console.log({ image: avatar, title, amount, discription, category, user_id: res.studentData._id });
+        console.log({ image: 'data:image/png;base64,'+avatar, title, amount, discription, category, user_id: res.studentData._id });
+        axios.post(path.ADD_SERVICE,{ image: 'data:image/png;base64,'+avatar, title, amount, discription, category, user_id: res.studentData._id }).then(res => {
+          console.log(res);
+          if(res.data.success){
+            this.setState({
+              title: '',
+    amount: '',
+    discription: ''
+            },() => {
+              alert('Successfully Uploaded');
+            })
+          }
+        })
       }
       else{
         alert('fill all fields!');
       }
     })
   };
-  
+
   updateData = () => {
     const { myNumber, profilePhoto } = this.state;
     this._asyncGetRegStudent().then(res => {
@@ -179,6 +191,7 @@ class AddService extends Component {
               placeholderTextColor="grey"
               numberOfLines={10}
               multiline={true}
+              value={discription}
               onChangeText={discription => {this.setState({discription})}}
             />
           </View></View>

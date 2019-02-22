@@ -5,4 +5,5 @@ export default class path {
 
   static UPDATE_NUMBER_PROFILE = path.BASE_URL + '/updateData/numberandprofile';
 
+  static ADD_SERVICE = path.BASE_URL + '/addservice';
 }

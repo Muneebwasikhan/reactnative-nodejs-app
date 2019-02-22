@@ -35,9 +35,9 @@ class Services extends Component {
     return (
       <View style={styles.container}>
         <ScrollView contentContainerStyle={styles.scrollView}>
-          <Text style={styles.welcome}>Services</Text>
+          {/* <Text style={styles.welcome}>Services</Text> */}
           <Button
-            title="Home"
+            title="Add Services"
             onPress={() => {
               console.log(Actions);
               Actions.addServicePage();

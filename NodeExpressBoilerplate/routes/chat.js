@@ -47,10 +47,31 @@ exports = module.exports = function (app, mongoose) {
             return res.send({
                 success: false,
                 message: err.message
-            })
+            });
+        }
+    });
+
+    router.post('./sendmessage', async function (req, res, next) {
+        try {
+            let messageObj = {
+                message: req.body.message,
+                senderId: req.body.user_id,
+                chatId: req.body.chatId
+            };
+            let MessageModel = new app.db.models.Message(messageObj);
+            let newMessageObj = await MessageModel.save();
+            res.send({
+                success: true,
+                data: newMessageObj
+            });
+        } catch (err) {
+            return res.send({
+                success: false,
+                message: err.message
+            });
         }
 
-    });
+    })
 
 
     app.use("/chat", router)
@@ -64,7 +85,7 @@ exports = module.exports = function (app, mongoose) {
     /**
      * 
      * @param {Object} chatObj to find messages related to this
-     */
+    */
     async function getMessages(chatObj) {
         return new Promise(async (resolve, reject) => {
             try {

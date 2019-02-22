@@ -28,7 +28,7 @@ class AddService extends Component {
     title: '',
     amount: '',
     discription: '',
-    category: ''
+    category: 'mechanic'
   };
   _asyncGetRegStudent = async () => {
     try{
@@ -56,11 +56,17 @@ class AddService extends Component {
     console.log("call__________");
     const { avatar, title, amount, discription, category } = this.state;
     this._asyncGetRegStudent().then(res => {
-      if(res && avatar && title && amount && discription && category){
+      console.log(!!res);
+      console.log({ image: avatar, title, amount, discription, category, user_id: res.studentData._id });
+      if(res.studentData._id && avatar && title && amount && discription && category){
         console.log({ image: avatar, title, amount, discription, category, user_id: res.studentData._id });
+      }
+      else{
+        alert('fill all fields!');
       }
     })
   };
+  
   updateData = () => {
     const { myNumber, profilePhoto } = this.state;
     this._asyncGetRegStudent().then(res => {
@@ -173,7 +179,7 @@ class AddService extends Component {
               placeholderTextColor="grey"
               numberOfLines={10}
               multiline={true}
-              onChange={discription => {this.setState({discription})}}
+              onChangeText={discription => {this.setState({discription})}}
             />
           </View></View>
           <View style={{ height: 150 }}>

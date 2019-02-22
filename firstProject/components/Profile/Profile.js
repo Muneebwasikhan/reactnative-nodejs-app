@@ -4,7 +4,7 @@ import { ListItem, Icon } from 'react-native-elements'
 import { AsyncStorage } from 'react-native'
 import { Actions } from "react-native-router-flux";
 
-class Profile extends Component {
+class AddService extends Component {
   
   _asyncGetRegStudent = async () => {
     try{
@@ -46,26 +46,19 @@ class Profile extends Component {
         badge={{ value: 3, textStyle: { color: 'white' } }}
         onPress={() => {Actions.profilePageServices()}}
       />
-        {/* {
-    list.map((l, i) => (
       <ListItem
       containerStyle={{width: '100%'}}
-        key={i}
-        // leftAvatar={{ source: { uri: l.avatar_url } }}
         leftIcon={() => (<Icon
           name="cogs"
           type="font-awesome"
-          // size={30}
           color="gray"
         />)}
-        title={'Add Services'}
+        title={'Contacts'}
         // subtitle={l.subtitle}
-        badge={{ value: 3, textStyle: { color: 'white' }, containerStyle: { marginTop: -20 } }}
+        badge={{ value: 3, textStyle: { color: 'white' } }}
+        onPress={() => {Actions.contactListPage()}}
       />
-    ))
-  } */}
-
-  
+      
       </View>
     );
   }
@@ -90,4 +83,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Profile;
+export default AddService;

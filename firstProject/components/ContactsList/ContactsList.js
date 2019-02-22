@@ -8,39 +8,26 @@ import {
   ScrollView
 } from "react-native";
 import { Card, ListItem, Button, Icon } from "react-native-elements";
-
+import Contacts from 'react-native-contacts';
 import { AsyncStorage } from "react-native";
 import { Actions } from "react-native-router-flux";
 
-class Services extends Component {
-  _asyncGetRegStudent = async () => {
-    try {
-      let user = await AsyncStorage.getItem("regStudent");
-      console.log(user);
-    } catch (er) {
-      console.log(er);
-    }
-  };
+class ContactsList extends Component {
+  
   componentDidMount() {
     this._asyncGetRegStudent();
   }
   render() {
-    const users = [
-      {
-        name: "brynn",
-        avatar: "https://s3.amazonaws.com/uifaces/faces/twitter/brynn/128.jpg"
-      }
-    ];
+    
 
     return (
       <View style={styles.container}>
         <ScrollView contentContainerStyle={styles.scrollView}>
-          <Text style={styles.welcome}>Services</Text>
+          <Text style={styles.welcome}>ContactsList</Text>
           <Button
             title="Home"
             onPress={() => {
-              console.log(Actions);
-              Actions.addServicePage();
+              Actions.replace("home");
             }}
           />
 
@@ -131,4 +118,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Services;
+export default ContactsList;

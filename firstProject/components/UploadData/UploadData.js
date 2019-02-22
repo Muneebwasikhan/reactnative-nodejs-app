@@ -7,6 +7,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import { Input, Button } from "react-native-elements";
 import axios from 'axios';
 import path from "../../config/Path";
+import { Actions } from "react-native-router-flux";
 
 class UploadData extends Component {
   state = {
@@ -29,20 +30,50 @@ class UploadData extends Component {
     // alert(this.state.myNumber);
     // alert(this.state.profilePhoto);
     const { myNumber, profilePhoto } = this.state;
-    this._asyncGetRegStudent().then((res) => {
-      if(res){
+    this._asyncGetRegStudent().then((resp) => {
+      var responce = resp;
+      if(responce){
+        console.log(responce);
         axios.post(path.UPDATE_NUMBER_PROFILE, {
-      fbId: res.studentData.fbId,
+      fbId: responce.studentData.fbId,
       phoneNumber: myNumber,
       profilePhoto: profilePhoto
     }).then(data => {
-      console.log(data);
+      // console.log(this._asyncGetRegStudent());
+      this._asyncGetRegStudent().then((res) => {
+        console.log(res);
+        var newData = res;
+        console.log(data.data.studentData);
+        if(data.data.studentData){
+          newData.studentData = data.data.studentData;
+          console.log(res)
+          this._storeData(JSON.stringify(newData)).then(res => {
+            console.log(res)
+            if(res){
+              Actions.replace("home");
+            }
+            else{
+              console.log('error')
+            }
+          })
+        }
+      })
+      
     })
       }
     });
-    
 
   }
+  _storeData = async (data) => {
+    try {
+      await AsyncStorage.setItem('regStudent', data);
+      console.log(data);
+      return true;
+    } catch (error) {
+      console.log('User Auth error');
+      return false;
+    }
+  };
   _asyncGetRegStudent = async () => {
     try{
       let user = await AsyncStorage.getItem('regStudent');

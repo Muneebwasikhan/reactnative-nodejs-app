@@ -58,7 +58,7 @@ exports = module.exports = function (app, mongoose) {
   router.post('/getservices', async function (req, res, next) {
     try {
       let ServiceModel = app.db.models.Services;
-      let ServiceArray = ServiceModel.find(req.body);
+      let ServiceArray = await ServiceModel.find(req.body);
       res.send({
         success: true,
         data: ServiceArray

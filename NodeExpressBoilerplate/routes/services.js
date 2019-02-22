@@ -55,11 +55,32 @@ exports = module.exports = function (app, mongoose) {
   });
 
 
+  router.post('/getservices', async function (req, res, next) {
+    try {
+      let ServiceModel = app.db.models.Services;
+      let ServiceArray = ServiceModel.find(req.body);
+      res.send({
+        success: true,
+        data: ServiceArray
+      });
+    } catch (err) {
+      res.send({
+        success: false,
+        message: err.message
+      })
+    }
+  });
+
+
+
+
+
+
 
   router.post('/getalluserservices', async function (req, res, next) {
     try {
       let ServiceModel = app.db.models.Services;
-      let ServiceArray = ServiceModel.find({
+      let ServiceArray = await ServiceModel.find({
         user_id: req.body.user_id
       });
       res.send({

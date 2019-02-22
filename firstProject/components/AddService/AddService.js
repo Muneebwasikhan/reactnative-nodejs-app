@@ -7,6 +7,9 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import { Input, Button } from "react-native-elements";
 import axios from "axios";
 import path from "../../config/Path";
+import ImagePicker from "react-native-image-picker";
+
+
 
 class AddService extends Component {
   state = {
@@ -27,33 +30,33 @@ class AddService extends Component {
     }
   }
 
+  
   sendData = () => {
-    console.log('call__________');
+    console.log("call__________");
     const { avatar } = this.state;
     if (avatar) {
-      var photo = {
-        data: avatar,
-        type: 'image/jpeg',
-        name: 'photo.jpg',
-      };
-      let formdata = new FormData();
-      formdata.append("image", JSON.stringify(photo));
-      fetch("http://localhost:3001/addservice", {
-        method: "post",
-        headers: {
-          "Content-Type": "multipart/form-data"
-        },
-        body: formdata
-      }).then(data=>{
-        console.log(data)
-      }).catch(err =>{
-        console.log(err);
-      });
+      console.log(JSON.stringify(avatar));
+      // var photo = {
+      //   data: avatar,
+      //   type: 'image/jpeg',
+      //   name: 'photo.jpg',
+      // };
+      // let formdata = new FormData();
+      // formdata.append("image", JSON.stringify(photo));
+      // fetch("http://localhost:3001/addservice", {
+      //   method: "post",
+      //   headers: {
+      //     "Content-Type": "multipart/form-data"
+      //   },
+      //   body: formdata
+      // }).then(data=>{
+      //   console.log(data)
+      // }).catch(err =>{
+      //   console.log(err);
+      // });
     }
   };
   updateData = () => {
-    // alert(this.state.myNumber);
-    // alert(this.state.profilePhoto);
     const { myNumber, profilePhoto } = this.state;
     this._asyncGetRegStudent().then(res => {
       if (res) {
@@ -69,6 +72,7 @@ class AddService extends Component {
       }
     });
   };
+
   _asyncGetRegStudent = async () => {
     try {
       let user = await AsyncStorage.getItem("regStudent");
@@ -80,12 +84,13 @@ class AddService extends Component {
   componentDidMount() {
     this._asyncGetRegStudent();
   }
+
   render() {
     return (
       <View style={styles.container}>
         <View style={{ height: 200 }}>
+          {/* <Image source={this.state.avatarSource} style={styles.uploadAvatar} /> */}
           <PhotoUpload
-            // containerStyle={{height: 150, backgroundColor: 'powderblue'}}
             onPhotoSelect={avatar => {
               if (avatar) {
                 console.log("Image base64 string: ", avatar);
@@ -135,7 +140,7 @@ class AddService extends Component {
             onPress={this.sendData}
           />
         </View>
-
+       
         {/* <Image source={this.state.avatarSource} style={styles.uploadAvatar} /> */}
       </View>
     );

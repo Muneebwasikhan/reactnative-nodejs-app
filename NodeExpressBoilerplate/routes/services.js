@@ -13,7 +13,7 @@ exports = module.exports = function (app, mongoose) {
   })
 
   /* GET users listing. */
-  router.post("/", async (req, res, next) => {
+  router.post("/addservice", async (req, res, next) => {
     console.log(req.body)
     try {
       if (!req.body.image) {
@@ -45,7 +45,11 @@ exports = module.exports = function (app, mongoose) {
     }
   })
 
-  app.use("/addservice", router)
+  app.use("/service", router)
+
+
+
+  
 
   async function uploadImage(image) {
     return new Promise((resolve, reject) => {

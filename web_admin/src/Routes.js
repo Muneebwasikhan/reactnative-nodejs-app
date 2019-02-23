@@ -7,7 +7,7 @@ import Dashboard from "./components/Dashboard/Dashboard"
 import SideBar from "./components/Sidebar/Sidebar"
 
 import Navbar from "./components/Navbar/Navbar";
-
+import CategoryForm from "./components/Catogary/AddCatogaryForm";
 
 
 
@@ -27,6 +27,7 @@ class Routes extends Component {
                                 <Route exact path="/" component={AdminLogin} />
                                 <PrivateRoute path="/dashboard" component={Dashboard} />
                                 <PrivateRoute path="/sellers" component={Sellers} />
+                                <PrivateRoute path="/add-category" component={CategoryForm} />
                             </Switch>
                         </div>
                     </div>

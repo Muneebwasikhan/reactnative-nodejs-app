@@ -26,7 +26,7 @@ class Sidebar extends Component {
         }
     }
     componentDidMount() {
-       
+
     }
 
     static getDerivedStateFromProps(nextProps) {
@@ -35,7 +35,7 @@ class Sidebar extends Component {
             errMsg: nextProps.errMsg
         }
     }
-    
+
 
 
     changeMenu = (ev, link) => {
@@ -49,10 +49,10 @@ class Sidebar extends Component {
         newObj[link] = !options[link]
         this.setState({ options: newObj })
     }
-    
+
 
     render() {
-        const { options  } = this.state;
+        const { options } = this.state;
         return (
             <div className="col-sm-3 side-menu-list">
                 <div id="sidebar-list-wrapper">
@@ -66,10 +66,28 @@ class Sidebar extends Component {
                         <li className={`sidebar-parent-li ${options.new ? 'active-main-tab' : "non-active-tab"}`}>
                             <div className="group-link">
                                 <i className="fa fa-plus-circle"></i>
-                                <Link to="" onClick={(ev) => this.changeMenu(ev, "new")}>Activities</Link>
+                                <Link to="" onClick={(ev) => this.changeMenu(ev, "new")}>New</Link>
                             </div>
                             {
                                 <Collapse in={options.new}>
+                                    <ul id="sidebar-inner-ul">
+                                        <li className="sidebar-inner-li">
+                                            <div className="group-link">
+                                                <i className="fa fa-circle"></i>
+                                                <Link to="add-category">Category</Link>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </Collapse>
+                            }
+                        </li>
+                        <li className={`sidebar-parent-li ${options.activities ? 'active-main-tab' : "non-active-tab"}`}>
+                            <div className="group-link">
+                                <i className="fa fa-plus-circle"></i>
+                                <Link to="" onClick={(ev) => this.changeMenu(ev, "activities")}>Activities</Link>
+                            </div>
+                            {
+                                <Collapse in={options.activities}>
                                     <ul id="sidebar-inner-ul">
                                         <li className="sidebar-inner-li">
                                             <div className="group-link">

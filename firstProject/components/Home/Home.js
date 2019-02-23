@@ -4,7 +4,9 @@ import {
   View,
   Image,
   ScrollView,
-  RefreshControl
+  RefreshControl,
+  TouchableOpacity,
+  Text 
 } from "react-native";
 import { AsyncStorage } from "react-native";
 import {
@@ -28,7 +30,8 @@ class Home extends Component {
   state = {
     feed: [],
     refreshing: false,
-    modalVisible: false
+    modalVisible: false,
+    modalData: {}
   }
 
   _onRefresh = () => {
@@ -65,17 +68,12 @@ class Home extends Component {
   }
 
   render() {
-    const { feed, modalVisible } = this.state;
+    const { feed, modalVisible,modalData } = this.state;
     return (
       <View>
        
-      <ModalService modalVisible={ modalVisible } modalInvisible={(visible) => {this.setState({modalVisible: visible})}} />
-        {/* <Header
-        backgroundColor= '#6200EE'
-  leftComponent={{ icon: 'menu', color: '#fff' }}
-  centerComponent={{ text: 'MY TITLE', style: { color: '#fff' } }}
-  rightComponent={{ icon: 'home', color: '#fff' }}
-/> */}
+      <ModalService modalData={modalData} modalVisible={ modalVisible } modalInvisible={(visible) => {this.setState({modalVisible: visible})}} />
+        
         <ScrollView
         style={{minHeight: 50}}
           automaticallyAdjustContentInsets={true}
@@ -108,18 +106,16 @@ class Home extends Component {
               {value.discription}
               </RkText>
             </View>
-            <View >
               <RkText rkType="cardPrice">
               Rs: {value.amount} 
               </RkText>
-            </View>
             <View rkCardFooter={true}>
-              <RkButton touchable={() => console.log('worked')} rkType="clear link">
-                <RkText rkType="hint">Open</RkText>
-              </RkButton>
-              <RkButton rkType="clear link">
-                <RkText rkType="hint">Order</RkText>
-              </RkButton>
+            <TouchableOpacity onPress={() => {this.setState({modalVisible: true})}}>
+              <Text>Open</Text>
+            </TouchableOpacity >
+            <TouchableOpacity onPress={() => {this.setState({ modalVisible: true })}}>
+              <Text>Hire</Text>
+            </TouchableOpacity >
             </View>
           </RkCard>
         </View>

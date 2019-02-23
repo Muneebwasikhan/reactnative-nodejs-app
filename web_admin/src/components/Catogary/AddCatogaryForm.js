@@ -46,7 +46,6 @@ class CategoryForm extends Component {
                 }
                 errors.serverError = "";
                 this.setState({ errors: { hasError: false, errorsObj: {}, serverError: "" }, success: true, name: "" });
-                document.getElementById("form").reset();
             }).catch(err => {
                 console.log(err);
             })

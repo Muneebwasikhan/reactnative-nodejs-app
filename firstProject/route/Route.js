@@ -9,6 +9,8 @@ import Services from "../components/Services/Services";
 import ContactsList from "../components/ContactsList/ContactsList";
 import AddService from "../components/AddService/AddService";
 import { Header } from 'react-native-elements'
+import SearchPage from "../components/SearchPage/SearchPage";
+import Activites from "../components/Activites/Activites";
 
 
 const ElementHeader = (props) => {
@@ -16,8 +18,13 @@ const ElementHeader = (props) => {
   return (<Header
   backgroundColor= '#6200EE'
 leftComponent={{ icon: 'menu', color: '#fff' }}
-centerComponent={{ text: Actions.currentScene.name, style: { color: '#fff' } }}
-rightComponent={{ icon: 'home', color: '#fff' }}
+centerComponent={{ text: 'CHACHU', style: { color: '#fff', fontFamily: 'Kailasa-Bold',ontWeight: 'bold' } }}
+rightComponent={<Icon
+  name='envelope'
+  type="font-awesome"
+  color='#fff'
+  // size={30}
+/>}
 />)
 }
 class Route extends Component {
@@ -38,6 +45,24 @@ class Route extends Component {
           return (
             <Icon
               name="user"
+              type="font-awesome"
+              size={30}
+              color={focused ? "#6200EE" : "#6200ee7a"}
+            />
+          );
+          case "Search":
+          return (
+            <Icon
+              name="search"
+              type="font-awesome"
+              size={30}
+              color={focused ? "#6200EE" : "#6200ee7a"}
+            />
+          );
+          case "Activites":
+          return (
+            <Icon
+              name="bell"
               type="font-awesome"
               size={30}
               color={focused ? "#6200EE" : "#6200ee7a"}
@@ -74,6 +99,22 @@ class Route extends Component {
               key="homePage"
               title="home"
               component={Home}
+              icon={TabIcon}
+              showLabel={false}
+              // hideNavBar={true}
+            />
+            <Scene
+              key="searchPage"
+              title="Search"
+              component={SearchPage}
+              icon={TabIcon}
+              showLabel={false}
+              hideNavBar={true}
+            />
+            <Scene
+              key="activitesPage"
+              title="Activites"
+              component={Activites}
               icon={TabIcon}
               showLabel={false}
               // hideNavBar={true}

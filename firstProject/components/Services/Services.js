@@ -11,18 +11,39 @@ import { Card, ListItem, Button, Icon } from "react-native-elements";
 
 import { AsyncStorage } from "react-native";
 import { Actions } from "react-native-router-flux";
+import axios from "axios";
+import path from "../../config/Path";
 
 class Services extends Component {
+  state = {
+    userData: "",
+    userServices: []
+  };
   _asyncGetRegStudent = async () => {
     try {
       let user = await AsyncStorage.getItem("regStudent");
-      console.log(user);
+      return JSON.parse(user);
     } catch (er) {
-      console.log(er);
+      return false;
     }
   };
   componentDidMount() {
-    this._asyncGetRegStudent();
+    this._asyncGetRegStudent().then(data => {
+      if (data) {
+        console.log(data.studentData);
+        this.setState({ userData: data.studentData }, () => {
+          const { userData } = this.state;
+          axios
+            .post(path.GET_USER_SERVICES, { user_id: userData._id })
+            .then(res => {
+              if (res.data.success) {
+                console.log(res.data.data);
+                this.setState({userServices: res.data.data});
+              }
+            });
+        });
+      }
+    });
   }
   render() {
     const users = [
@@ -31,6 +52,7 @@ class Services extends Component {
         avatar: "https://s3.amazonaws.com/uifaces/faces/twitter/brynn/128.jpg"
       }
     ];
+    const { userServices, userData } = this.state;
 
     return (
       <View style={styles.container}>
@@ -44,31 +66,29 @@ class Services extends Component {
             }}
           />
 
-          <Card
-            containerStyle={styles.cardStyle}
-            title="HELLO WORLD"
-            image={{
-              uri:
-                "https://statusgalaxy.com/wp-content/uploads/photo-gallery/thumb/happiness_whatsapp_dp_(12).jpg"
-            }}
-          >
-            <Text style={{ marginBottom: 10 }}>
-              The idea with React Native Elements is more about component
-              structure than actual design.
-            </Text>
-            <Button
-              icon={<Icon name="code" color="#ffffff" />}
-              backgroundColor="#03A9F4"
-              buttonStyle={{
-                borderRadius: 0,
-                marginLeft: 0,
-                marginRight: 0,
-                marginBottom: 0
-              }}
-              title="VIEW NOW"
-            />
-          </Card>
-          <Card
+          {userServices.length >= 0 &&
+            userServices.map(service => {
+              return (
+                <Card
+                  containerStyle={styles.cardStyle}
+                  title={`${service.title}`}
+                  image={{
+                    uri: `${service.imageUrl}`
+                  }}
+                ><Text style={{ marginBottom: 10 }}>{`${service.discription}`}</Text><Button
+                    icon={<Icon name="code" color="#ffffff" />}
+                    backgroundColor="#03A9F4"
+                    buttonStyle={{
+                      borderRadius: 0,
+                      marginLeft: 0,
+                      marginRight: 0,
+                      marginBottom: 0
+                    }}
+                    title="VIEW NOW"
+                  /></Card>
+              );
+            })}
+          {/* <Card
             containerStyle={styles.cardStyle}
             title="HELLO WORLD"
             image={{
@@ -92,6 +112,7 @@ class Services extends Component {
               title="VIEW NOW"
             />
           </Card>
+        */}
         </ScrollView>
       </View>
     );

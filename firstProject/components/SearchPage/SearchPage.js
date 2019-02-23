@@ -52,8 +52,9 @@ class SearchPage extends Component {
  <SearchBar
         placeholder="Type Here..."
         onChangeText={(updateSearch) => this.setState({updateSearch},() => {
-          _.debounce(() => this.searchItem(),300)
-          // this.searchItem()
+          // console.log(updateSearch)
+          // _.debounce(() => this.searchItem(),300)
+          this.searchItem()
         })}
         containerStyle={{width: '100%',backgroundColor: "#6200EE"}}
         inputContainerStyle={{backgroundColor: '#fff'}}

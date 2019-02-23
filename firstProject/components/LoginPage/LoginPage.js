@@ -48,7 +48,7 @@ class LoginPage extends Component {
     const th = this;
     // Attempt a login using the Facebook login dialog,
     // asking for default permissions.
-    LoginManager.logInWithReadPermissions().then(
+    LoginManager.logInWithReadPermissions(["public_profile"]).then(
       function(result) {
         if (result.isCancelled) {
           console.log("Login was cancelled");

@@ -8,4 +8,6 @@ export default class path {
   static ADD_SERVICE = path.BASE_URL + '/service/addservice';
 
   static GET_USER_SERVICES = path.BASE_URL + '/service/getalluserservices';
+
+  static GET_SERVICES = path.BASE_URL + '/service/getservices';
 }

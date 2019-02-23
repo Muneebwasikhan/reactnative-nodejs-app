@@ -26,7 +26,7 @@ import Axios from "axios";
 import path from "../../config/Path";
 
 RkTheme.setType('RkText', 'cardPrice', {
-  color: 'blue',
+  color: '#6200EE',
   paddingLeft: 15,
   fontWeight: 'bold'
 });
@@ -46,7 +46,7 @@ class Home extends Component {
   };
   componentDidMount() {
     this._asyncGetRegStudent().then(stdData => {
-      Axios.post(path.GET_USER_SERVICES,{}).then(data => {
+      Axios.post(path.GET_SERVICES).then(data => {
         if(data.data.success){
           console.log(data.data.data);
           this.setState({feed: data.data.data})
@@ -74,32 +74,29 @@ class Home extends Component {
           style={[ styles.screen]}
         >
         
-        {feed.map(index => (<View style={{paddingTop: 10,paddingBottom: 10}}>
+        {feed.map((value,index) => (<View style={{paddingTop: 10,paddingBottom: 10}}>
           
-          <RkCard>
+          <RkCard key={value}>
             <View rkCardHeader={true}>
               <View>
-                <RkText rkType="header">Title</RkText>
-                <RkText rkType="subtitle">Category</RkText>
+                <RkText rkType="header">{value.title}</RkText>
+                <RkText rkType="subtitle">{value.category}</RkText>
               </View>
             </View>
             <Image
               rkCardImg={true}
               source={{
-                uri:
-                  "https://helpx.adobe.com/in/stock/how-to/visual-reverse-image-search/_jcr_content/main-pars/image.img.jpg/visual-reverse-image-search-v2_1000x560.jpg"
+                uri: value.imageUrl
               }}
             />
             <View rkCardContent={true}>
               <RkText rkType="cardText">
-              Discription
-                Far far away, behind the word mountains, far from the countries
-                Vokalia and Consonantia, there live the blind texts.
+              {value.discription}
               </RkText>
             </View>
             <View >
               <RkText rkType="cardPrice">
-              Rs:/ 500
+              Rs: {value.amount} 
               </RkText>
             </View>
             <View rkCardFooter={true}>

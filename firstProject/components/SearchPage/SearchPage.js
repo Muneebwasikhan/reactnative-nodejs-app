@@ -14,6 +14,8 @@ import { AsyncStorage } from "react-native";
 import { Actions } from "react-native-router-flux";
 import axios from "axios";
 import path from "../../config/Path";
+import { Dropdown } from 'react-native-material-dropdown';
+
 
 class SearchPage extends Component {
   state = {
@@ -39,7 +41,13 @@ class SearchPage extends Component {
       }
     ];
     const { userServices, userData, updateSearch } = this.state;
-
+    let data = [{
+      value: 'Banana',
+    }, {
+      value: 'Mango',
+    }, {
+      value: 'Pear',
+    }];
     return (
       <View>
      {/* <Header backgroundColor= '#6200EE'> */}
@@ -51,9 +59,17 @@ class SearchPage extends Component {
         inputStyle={{color: "#6200EE"}}
         value={updateSearch}
       />
+       <Dropdown
+        label='Categories'
+        data={data}
+        fontSize={15}
+        containerStyle={{width: '100%',backgroundColor: "#6200EE", padding: 0,margin: 0,border: 3,borderColor: 'white'}}
+        overlayStyle={{border: 0}}
+        shadeOpacity={0}
+      />
 {/* </Header> */}
         <ScrollView contentContainerStyle={styles.scrollView}>
-          <Text style={styles.welcome}>SearchPage</Text>
+          {/* <Text style={styles.welcome}>SearchPage</Text> */}
          
         </ScrollView>
       </View>

@@ -204,12 +204,12 @@ class AddService extends Component {
                 this.setState({ category: itemValue })
               }
             >
-              <Picker.Item label="Mechanic" value="mechanic" />
-              <Picker.Item label="Plumber" value="plumber" />
-              <Picker.Item label="Car painter" value="car-painter" />
-              <Picker.Item label="Labour" value="labour" />
-              <Picker.Item label="Electrician" value="electrician" />
-              <Picker.Item label="AC Technician" value="ac-technician" />
+              <Picker.Item label="Mechanic" value="Mechanic" />
+              <Picker.Item label="Plumber" value="Plumber" />
+              <Picker.Item label="Car painter" value="Car painter" />
+              <Picker.Item label="Labour" value="Labour" />
+              <Picker.Item label="Electrician" value="Electrician" />
+              <Picker.Item label="AC Technician" value="AC Technician" />
             </Picker>
           </View>
 

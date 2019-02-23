@@ -71,6 +71,7 @@ class SchoolForm extends Component {
                     return;
                 }
                 errorMsg = "";
+                sellers[index] = res.data;
                 // sellers.splice(index, 1)
                 this.setState({ errorMsg, sellers });
 
@@ -141,13 +142,13 @@ class SchoolForm extends Component {
                                                         </th>
                                                         <th className="my-table-border">
                                                             <center className="my-table-span" >
-                                                                <button className={`my-table-btn ${seller.warning ? "warning" : "unwarning"}`} onClick={() => this.performActions(`${seller.warning ? "warning" : "unwarning"}`, seller._id, index)} >
+                                                                <button className={`my-table-btn ${seller.warning ? "warning" : "unwarning"}`} onClick={() => this.performActions(`${seller.warning ? "unwarning" : "warning"}`, seller._id, index)} >
                                                                     <i className="fa fa-warning"></i>{seller.warning ? "Un-Warn" : "Warn"}</button>
                                                             </center>
                                                         </th>
                                                         <th className="my-table-border">
                                                             <center className="my-table-span" >
-                                                                    <button className={`my-table-btn ${seller.block ? "block" : "unblock"}`} onClick={() => this.performActions(`${seller.warning ? "block" : "unblock"}`, seller._id, index)} >
+                                                                <button className={`my-table-btn ${seller.block ? "block" : "unblock"}`} onClick={() => this.performActions(`${seller.block ? "unblock" : "block"}`, seller._id, index)} >
                                                                     <i className="fa fa-ban"></i>{seller.block ? "Un-Block" : "Block"}</button>
                                                             </center>
                                                         </th>

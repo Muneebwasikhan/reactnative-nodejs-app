@@ -240,7 +240,8 @@ button,label{
 .search-teacher input{
   border: 1px solid #dee2e6!important;
   width: 300px;
-  padding: 5px 30px;
+  padding: 5px 35px;
+  border-radius: 50px;
   color: #7b8188;
 }
 .search-teacher input:focus{
@@ -251,7 +252,7 @@ button,label{
 }
 .search-teacher i{
   position: relative;
-  right: -23px;
+  right: -28px;
   top: 10px;
 }
 .my-table-border img{

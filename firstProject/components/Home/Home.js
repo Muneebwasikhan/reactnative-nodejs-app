@@ -114,7 +114,7 @@ class Home extends Component {
               </RkText>
             </View>
             <View rkCardFooter={true}>
-              <RkButton rkType="clear link">
+              <RkButton touchable={() => console.log('worked')} rkType="clear link">
                 <RkText rkType="hint">Open</RkText>
               </RkButton>
               <RkButton rkType="clear link">

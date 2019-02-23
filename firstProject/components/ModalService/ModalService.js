@@ -11,6 +11,7 @@ import {
 import { ActivityIndicator } from "react-native";
 import { Image, ListItem, Text,Button } from "react-native-elements";
 import { Icon, Header } from "react-native-elements";
+import { Actions } from 'react-native-router-flux';
 
 class ModalService extends Component {
   state = {
@@ -93,7 +94,9 @@ class ModalService extends Component {
             <Text h4>Discription:</Text>
             <Text style={{color: 'gray'}}>{modalData.discription}:</Text>
             <View style={{paddingTop: 50}}>
-              <Button containerStyle={{marginBottom: 10}} buttonStyle={{backgroundColor: "#6200EE"}} title="SEND MESSAGE" type="solid"/>
+              <Button
+              onPress={() => {this.props.modalInvisible(false); Actions.chatpage()}}
+              containerStyle={{marginBottom: 10}} buttonStyle={{backgroundColor: "#6200EE"}} title="SEND MESSAGE" type="solid"/>
               <Button containerStyle={{marginBottom: 10}} buttonStyle={{borderColor: "#6200EE"}} titleStyle={{color: "#6200EE"}} title="HIRE" type="outline"/>
             </View>
           </View>

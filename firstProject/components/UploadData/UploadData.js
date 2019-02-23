@@ -99,7 +99,6 @@ class UploadData extends Component {
             // containerStyle={{height: 150, backgroundColor: 'powderblue'}}
             onPhotoSelect={avatar => {
               if (avatar) {
-                // console.log("Image base64 string: ", avatar);
                 this.setState({avatar})
               }
             }}
@@ -146,15 +145,6 @@ class UploadData extends Component {
             onPress={this.updateData}
           />
         </View>
-        {/* <View style={styles.horCenterCont }>
-          <Button
-            containerStyle={{width: '60%',marginTop: 20,}}
-            buttonStyle={{backgroundColor: 'gray',borderRadius: 27}}
-            title="CLEAR ASYNC STORAGE"
-            onPress={() => {AsyncStorage.clear(() => {console.log('cleared storage')})}}
-          />
-        </View> */}
-        {/* <Image source={this.state.avatarSource} style={styles.uploadAvatar} /> */}
       </View>
     );
   }

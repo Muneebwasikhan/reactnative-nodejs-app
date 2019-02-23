@@ -26,6 +26,7 @@ exports = module.exports = function (app, mongoose) {
           message: "Please provide Profile Image"
         })
       }
+      console.log(req.body);
 
       let profileImageObj = await uploadImage(req.body.profilePhoto);
 

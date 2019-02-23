@@ -34,11 +34,13 @@ class UploadData extends Component {
     this._asyncGetRegStudent().then((resp) => {
       var responce = resp;
       if(responce && avatar){
+
         console.log(responce);
+        console.log('data:image/png;base64,'+ avatar);
         axios.post(path.UPDATE_NUMBER_PROFILE, {
       fbId: responce.studentData.fbId,
       phoneNumber: myNumber,
-      profilePhoto: avatar
+      profilePhoto: 'data:image/png;base64,'+ avatar
     }).then(data => {
       // console.log(this._asyncGetRegStudent());
       this._asyncGetRegStudent().then((res) => {
@@ -96,7 +98,7 @@ class UploadData extends Component {
             // containerStyle={{height: 150, backgroundColor: 'powderblue'}}
             onPhotoSelect={avatar => {
               if (avatar) {
-                console.log("Image base64 string: ", avatar);
+                // console.log("Image base64 string: ", avatar);
                 this.setState({avatar})
               }
             }}

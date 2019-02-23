@@ -6,7 +6,8 @@ import {
   View,
   Button,
   Image,
-  ScrollView
+  ScrollView,
+  RefreshControl
 } from "react-native";
 import { AsyncStorage } from "react-native";
 import { Actions } from "react-native-router-flux";
@@ -34,8 +35,14 @@ RkTheme.setType('RkText', 'cardPrice', {
 class Home extends Component {
 
   state = {
-    feed: []
+    feed: [],
+    refreshing: false,
   }
+
+  _onRefresh = () => {
+    this.cdmFUn();
+  }
+
   _asyncGetRegStudent = async () => {
     try {
       let user = await AsyncStorage.getItem("regStudent");
@@ -45,13 +52,19 @@ class Home extends Component {
     }
   };
   componentDidMount() {
+    this.cdmFUn();
+  }
+
+  cdmFUn = () => {
+    this.setState({refreshing: true});
     this._asyncGetRegStudent().then(stdData => {
       Axios.post(path.GET_SERVICES).then(data => {
         if(data.data.success){
           console.log(data.data.data);
-          this.setState({feed: data.data.data})
+          this.setState({feed: data.data.data,refreshing: false})
         }
         else{
+          this.setState({refreshing: false});
           alert('An error occur!');
         }
         console.log(data);
@@ -70,8 +83,15 @@ class Home extends Component {
   rightComponent={{ icon: 'home', color: '#fff' }}
 /> */}
         <ScrollView
+        style={{height: '100%'}}
           automaticallyAdjustContentInsets={true}
           style={[ styles.screen]}
+          refreshControl={
+            <RefreshControl
+              refreshing={this.state.refreshing}
+              onRefresh={this._onRefresh}
+            />
+          }
         >
         
         {feed.map((value,index) => (<View style={{paddingTop: 10,paddingBottom: 10}}>

@@ -82,6 +82,7 @@ class Services extends Component {
           {/* <Text style={styles.welcome}>Services</Text> */}
           <Button
             title="Add Services"
+            buttonStyle={{backgroundColor: "#6200EE"}}
             onPress={() => {
               console.log(Actions);
               Actions.addServicePage();
@@ -104,7 +105,8 @@ class Services extends Component {
                       borderRadius: 0,
                       marginLeft: 0,
                       marginRight: 0,
-                      marginBottom: 0
+                      marginBottom: 0,
+                      backgroundColor: "#6200EE"
                     }}
                     title="VIEW NOW"
                   /></Card>

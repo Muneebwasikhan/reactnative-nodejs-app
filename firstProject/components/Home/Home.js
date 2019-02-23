@@ -22,6 +22,8 @@ import {Header} from 'react-native-elements';
 import Icon from "react-native-vector-icons/FontAwesome";
 import { UtilStyles } from "./utilsStyle";
 import { ImageIcon } from "./imageIcon";
+import Axios from "axios";
+import path from "../../config/Path";
 
 RkTheme.setType('RkText', 'cardPrice', {
   color: 'blue',
@@ -30,6 +32,10 @@ RkTheme.setType('RkText', 'cardPrice', {
 });
 
 class Home extends Component {
+
+  state = {
+    feed: []
+  }
   _asyncGetRegStudent = async () => {
     try {
       let user = await AsyncStorage.getItem("regStudent");
@@ -39,15 +45,22 @@ class Home extends Component {
     }
   };
   componentDidMount() {
-    this._asyncGetRegStudent();
+    this._asyncGetRegStudent().then(stdData => {
+      Axios.post(path.GET_USER_SERVICES,{}).then(data => {
+        if(data.data.success){
+          console.log(data.data.data);
+          this.setState({feed: data.data.data})
+        }
+        else{
+          alert('An error occur!');
+        }
+        console.log(data);
+      })
+    });
   }
 
   render() {
-    const likeStyle = [styles.buttonIcon, { color: RkTheme.colors.accent }];
-    const iconButton = [
-      styles.buttonIcon,
-      { color: RkTheme.current.colors.text.hint }
-    ];
+    const { feed } = this.state;
     return (
       <View>
         {/* <Header
@@ -61,7 +74,7 @@ class Home extends Component {
           style={[ styles.screen]}
         >
         
-        {['a','b','c','d'].map(index => (<View style={{paddingTop: 10,paddingBottom: 10}}>
+        {feed.map(index => (<View style={{paddingTop: 10,paddingBottom: 10}}>
           
           <RkCard>
             <View rkCardHeader={true}>

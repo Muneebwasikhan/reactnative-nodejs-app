@@ -1,7 +1,7 @@
 export default class path {
   static BASE_URL = 'http://localhost:3001';
 
-  static LOGIN_AUTHENTICATION = path.BASE_URL + '/studentAuth';
+  static LOGIN_AUTHENTICATION = path.BASE_URL + '/userauth';
 
   static UPDATE_NUMBER_PROFILE = path.BASE_URL + '/updateData/numberandprofile';
 

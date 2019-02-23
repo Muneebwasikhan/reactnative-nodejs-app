@@ -2,7 +2,7 @@ exports = module.exports = function (app, mongoose) {
     var express = require("express")
     var router = express.Router()
 
-    router.get("/", function (req, res, next) {
+    router.post("/", function (req, res, next) {
         if (req.body.username == "irfan" && req.body.password == "123") {
             return res.send({
                 success: true,

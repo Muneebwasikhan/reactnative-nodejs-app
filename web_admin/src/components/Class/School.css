@@ -1,0 +1,69 @@
+#Add-School-Form-Container form{
+    position: absolute;
+    left:50%;
+    transform: translateX(-50%);
+}
+.normal-heading{
+    font-size:80px;
+    margin: 10px 0px;
+    text-align: center;
+}
+.studentList{
+    max-height: 400px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    padding: 0px 5px !important;
+}
+
+.studentList::-webkit-scrollbar{
+    width: 5px;
+    background-color: rgba(0, 0, 0, 0.11);
+}
+.studentList::-webkit-scrollbar-thumb{
+   background-color: #007bff;
+}
+
+/* .content-bar::-webkit-scrollbar{
+    width: 10px;
+    background-color: blue;
+} */
+
+.add-student-group{
+    display: flex;
+    justify-content: center;
+    margin-bottom:15px;
+    
+}
+.add-student-group h3 i{
+    font-size: 25px !important;
+    color: #fff;
+}
+.add-student-group ul{
+    width: 50%;
+    margin: auto 3px;
+    white-space: nowrap;
+    border: 1px solid rgba(0, 0, 0, 0.226);
+    height:147px;
+    overflow: hidden;
+    overflow-y: auto;
+}
+.add-student-group h3{
+    width: 100% !important; 
+    white-space: nowrap;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 0px;
+}
+
+.add-student-group li{
+    width: 100% !important; 
+    background: #00000021;
+    margin-bottom:8px;
+    padding: 10px 0px;
+}
+.add-student-group li center{
+    color: #fff;
+    white-space: pre-wrap !important;
+    
+}

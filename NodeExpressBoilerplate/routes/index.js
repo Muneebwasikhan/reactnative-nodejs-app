@@ -6,4 +6,5 @@ exports = module.exports = function (app, mongoose) {
   require("./chat")(app, mongoose)
   require("./adminAuth")(app, mongoose)
   require("./adminUser")(app, mongoose)
+  require("./category")(app, mongoose)
 }

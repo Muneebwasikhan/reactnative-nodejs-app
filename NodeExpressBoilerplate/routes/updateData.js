@@ -30,7 +30,7 @@ exports = module.exports = function (app, mongoose) {
       let profileImageObj = await uploadImage(req.body.profilePhoto);
 
 
-      let upadataDataNumImg = await app.db.models.RegStudent.findOneAndUpdate({
+      let upadataDataNumImg = await app.db.models.User.findOneAndUpdate({
         fbId: req.body.fbId
       }, {
         $set: {

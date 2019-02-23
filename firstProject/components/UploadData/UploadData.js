@@ -42,6 +42,7 @@ class UploadData extends Component {
       phoneNumber: myNumber,
       profilePhoto: 'data:image/png;base64,'+ avatar
     }).then(data => {
+      console.log(data.data);
       // console.log(this._asyncGetRegStudent());
       this._asyncGetRegStudent().then((res) => {
         console.log(res);
@@ -53,7 +54,7 @@ class UploadData extends Component {
           this._storeData(JSON.stringify(newData)).then(res => {
             console.log(res)
             if(res){
-              // Actions.replace("home");
+              Actions.replace("home");  
               console.log(res);
             }
             else{

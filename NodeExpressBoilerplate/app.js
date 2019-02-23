@@ -5,6 +5,7 @@ var cookieParser = require("cookie-parser")
 var logger = require("morgan")
 var mongoose = require("mongoose")
 const formData = require("express-form-data")
+var cors = require('cors')
 
 /*
 var indexRouter = require('./routes/index');
@@ -17,7 +18,7 @@ const options = {
   autoClean: true
   */
 }
-
+app.use(cors())
 app.use(formData.parse(options))
 // clear from the request and delete all empty files (size == 0)
 app.use(formData.format())

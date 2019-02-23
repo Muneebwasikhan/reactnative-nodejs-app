@@ -15,7 +15,7 @@ import { Actions } from "react-native-router-flux";
 import axios from "axios";
 import path from "../../config/Path";
 import { Dropdown } from 'react-native-material-dropdown';
-
+import _ from 'lodash';
 
 class SearchPage extends Component {
   state = {
@@ -30,16 +30,14 @@ class SearchPage extends Component {
     }
   };
   componentDidMount() {
-   
-    
   }
+
+  searchItem = () => {
+    console.log(this.state.updateSearch);
+  }
+
   render() {
-    const users = [
-      {
-        name: "brynn",
-        avatar: "https://s3.amazonaws.com/uifaces/faces/twitter/brynn/128.jpg"
-      }
-    ];
+    
     const { userServices, userData, updateSearch } = this.state;
     let data = [{
       value: 'Banana',
@@ -53,19 +51,26 @@ class SearchPage extends Component {
      {/* <Header backgroundColor= '#6200EE'> */}
  <SearchBar
         placeholder="Type Here..."
-        onChangeText={(updateSearch) => this.setState({updateSearch})}
+        onChangeText={(updateSearch) => this.setState({updateSearch},() => {
+          _.debounce(() => this.searchItem(),300)
+          // this.searchItem()
+        })}
         containerStyle={{width: '100%',backgroundColor: "#6200EE"}}
         inputContainerStyle={{backgroundColor: '#fff'}}
         inputStyle={{color: "#6200EE"}}
         value={updateSearch}
+       
       />
        <Dropdown
         label='Categories'
         data={data}
         fontSize={15}
+        textColor='#fff'
         containerStyle={{width: '100%',backgroundColor: "#6200EE", padding: 0,margin: 0,border: 3,borderColor: 'white'}}
         overlayStyle={{border: 0}}
         shadeOpacity={0}
+        selectedItemColor="#6200EE"
+        itemColor="gray"
       />
 {/* </Header> */}
         <ScrollView contentContainerStyle={styles.scrollView}>

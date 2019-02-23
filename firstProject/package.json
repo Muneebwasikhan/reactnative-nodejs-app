@@ -11,6 +11,7 @@
     "adm-zip": "^0.4.13",
     "axios": "^0.18.0",
     "base64-to-file": "^1.1.0",
+    "lodash": "^4.17.11",
     "plist": "^3.0.1",
     "react": "16.6.3",
     "react-native": "^0.58.5",

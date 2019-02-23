@@ -2,7 +2,7 @@ exports = module.exports = function (app, mongoose) {
     var express = require("express")
     var router = express.Router()
 
-    router.post("admin/category/add", async function (req, res, next) {
+    router.post("/admin/category/add", async function (req, res, next) {
         try {
             let category = new app.db.models.Category({
                 name: req.body.name

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {Modal, Text, TouchableHighlight, View, Alert} from 'react-native';
+import {Modal, Text, TouchableHighlight, View,TouchableOpacity, Alert} from 'react-native';
+import { Icon,Header } from 'react-native-elements';
 
 class ModalService extends Component {
   state = {
@@ -11,6 +12,8 @@ class ModalService extends Component {
   }
 
   render() {
+    const { modalData } = this.state;
+    console.log(modalData);
     return (
       // <View style={{marginTop: 22}}>
         <Modal
@@ -20,7 +23,23 @@ class ModalService extends Component {
           onRequestClose={() => {
             Alert.alert('Modal has been closed.');
           }}>
-          <View style={{marginTop: 22}}>
+          <Header
+          backgroundColor= '#6200EE'
+  placement="left"
+  leftComponent={
+  <TouchableOpacity
+  onPress={() => {this.props.modalInvisible(false)}}>
+<Icon
+  
+    name="angle-down"
+    type="font-awesome"
+    size={30}
+    color='#fff'
+  />
+  </TouchableOpacity>
+  }
+/>
+          {/* <View style={{marginTop: 22}}>
             <View>
               <Text>Hello World!</Text>
 
@@ -31,7 +50,7 @@ class ModalService extends Component {
                 <Text>Hide Modal</Text>
               </TouchableHighlight>
             </View>
-          </View>
+          </View> */}
         </Modal>
 
       //   <TouchableHighlight

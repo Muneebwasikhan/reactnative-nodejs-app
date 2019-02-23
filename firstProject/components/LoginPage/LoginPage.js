@@ -73,7 +73,7 @@ class LoginPage extends Component {
                 .then(response => {
                   th._storeData(JSON.stringify(response.data));
                   console.log(response.data);
-                  if(response.data.studentData.profilePhoto && response.data.studentData.phoneNumber){
+                  if(response && response.data.studentData.profilePhoto && response.data.studentData.phoneNumber){
                   Actions.replace("home");
                   }
                   else{
@@ -113,7 +113,7 @@ class LoginPage extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>Facebook Login</Text>
-        <FacebookBtn />
+        {/* <FacebookBtn /> */}
         <Button title="fb login" onPress={this._fbAuth} />
         <Button
           title="Home"

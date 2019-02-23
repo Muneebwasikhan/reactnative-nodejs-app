@@ -12,7 +12,8 @@ import { Actions } from "react-native-router-flux";
 class UploadData extends Component {
   state = {
     myNumber: "",
-    profilePhoto: "https://www.sparklabs.com/forum/styles/comboot/theme/images/default_avatar.jpg"
+    profilePhoto: "https://www.sparklabs.com/forum/styles/comboot/theme/images/default_avatar.jpg",
+    avatar: ''
   };
 
   onChanged(text) {
@@ -29,15 +30,15 @@ class UploadData extends Component {
   updateData = () => {
     // alert(this.state.myNumber);
     // alert(this.state.profilePhoto);
-    const { myNumber, profilePhoto } = this.state;
+    const { myNumber, avatar } = this.state;
     this._asyncGetRegStudent().then((resp) => {
       var responce = resp;
-      if(responce){
+      if(responce && avatar){
         console.log(responce);
         axios.post(path.UPDATE_NUMBER_PROFILE, {
       fbId: responce.studentData.fbId,
       phoneNumber: myNumber,
-      profilePhoto: profilePhoto
+      profilePhoto: avatar
     }).then(data => {
       // console.log(this._asyncGetRegStudent());
       this._asyncGetRegStudent().then((res) => {
@@ -50,7 +51,8 @@ class UploadData extends Component {
           this._storeData(JSON.stringify(newData)).then(res => {
             console.log(res)
             if(res){
-              Actions.replace("home");
+              // Actions.replace("home");
+              console.log(res);
             }
             else{
               console.log('error')
@@ -95,6 +97,7 @@ class UploadData extends Component {
             onPhotoSelect={avatar => {
               if (avatar) {
                 console.log("Image base64 string: ", avatar);
+                this.setState({avatar})
               }
             }}
           >

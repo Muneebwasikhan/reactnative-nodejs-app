@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Router, Stack, Scene, Tabs, Actions } from "react-native-router-flux";
+import { View } from 'react-native';
 import LoginPage from "../components/LoginPage/LoginPage";
 import Home from "../components/Home/Home";
 import UploadData from "../components/UploadData/UploadData";
@@ -11,7 +12,7 @@ import AddService from "../components/AddService/AddService";
 import { Header } from 'react-native-elements'
 import SearchPage from "../components/SearchPage/SearchPage";
 import Activites from "../components/Activites/Activites";
-
+import { AsyncStorage } from 'react-native';
 
 const ElementHeader = (props) => {
   console.log(props);
@@ -19,12 +20,23 @@ const ElementHeader = (props) => {
   backgroundColor= '#6200EE'
 leftComponent={{ icon: 'menu', color: '#fff' }}
 centerComponent={{ text: 'CHACHU', style: { color: '#fff', fontFamily: 'Kailasa-Bold',ontWeight: 'bold' } }}
-rightComponent={<Icon
+rightComponent={
+<View style={{display: 'flex', flexDirection: 'row',justifyContent: 'space-around',width: 70}}>
+<Icon
   name='envelope'
   type="font-awesome"
   color='#fff'
   // size={30}
-/>}
+/>
+<Icon
+  name='sign-out'
+  type="font-awesome"
+  color='#fff'
+  onPress={() => {AsyncStorage.clear(() => {console.log('cleared storage');Actions.replace('loginpage')})}}
+  // size={30}
+/>
+</View>
+}
 />)
 }
 class Route extends Component {
@@ -84,7 +96,9 @@ class Route extends Component {
     return (
       <Router navBar={ElementHeader}>
         <Stack key="root">
-          <Scene key="loginpage" component={LoginPage} title="Login" />
+          <Scene key="loginpage" component={LoginPage} title="Login" 
+              hideNavBar={true}
+              />
 
           <Scene
             key="home"

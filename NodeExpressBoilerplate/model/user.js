@@ -1,14 +1,40 @@
 exports = module.exports = function(app, mongoose) {
-  "use strict"
-  let Schema = mongoose.Schema
+  // 'use strict';a
 
-  let UserSchema = new Schema({
-    name: {
-      type: String
+  var Schema = mongoose.Schema
+
+  var User = new Schema({
+    userName: {
+      type: String,
+      require: true
+    },
+    fbId: {
+      type: String,
+      require: true
+    },
+    accessToken: {
+      type: String,
+      require: true
     },
     email: {
       type: String
+    },
+    phoneNumber: {
+      type: String
+    },
+    skills: {
+      type: Array
+    },
+    profilePhoto: {
+      type: String
+    },
+    location: {
+      type: Object
+    },
+    rating: {
+      type: Object
     }
   })
-  app.db.model("User", UserSchema)
+
+  app.db.model("User", User)
 }

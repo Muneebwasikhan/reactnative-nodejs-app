@@ -82,8 +82,7 @@ exports = module.exports = function (app, mongoose) {
 
 
 
-    /**
-     * 
+    /** 
      * @param {Object} chatObj to find messages related to this
     */
     async function getMessages(chatObj) {

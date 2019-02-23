@@ -14,12 +14,14 @@ import { AsyncStorage } from "react-native";
 import { Actions } from "react-native-router-flux";
 import axios from "axios";
 import path from "../../config/Path";
+import ModalService from "../ModalService/ModalService";
 
 class Services extends Component {
   state = {
     userData: "",
     userServices: [],
     refreshing: false,
+    modalVisible: false
   };
   _asyncGetRegStudent = async () => {
     try {
@@ -64,10 +66,11 @@ class Services extends Component {
         avatar: "https://s3.amazonaws.com/uifaces/faces/twitter/brynn/128.jpg"
       }
     ];
-    const { userServices, userData } = this.state;
+    const { userServices, userData, modalVisible } = this.state;
 
     return (
       <View style={styles.container}>
+      {/* <ModalService modalVisible={ modalVisible } modalInvisible={(visible) => {this.setState({modalVisible: visible})}} /> */}
         <ScrollView contentContainerStyle={styles.scrollView}
         refreshControl={
           <RefreshControl

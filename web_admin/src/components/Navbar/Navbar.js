@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import logo from "../../Assets/background.webp";
+import logo from "../../Assets/logo.png";
 import "./Navbar.css";
 import { Fade } from "react-bootstrap"
 
@@ -23,8 +23,8 @@ class Navbar extends Component {
                         alt=""
                     />
                     <div className="logo-heading-group">
-                        <i className="logo-heading" >Darast</i>
-                        <i>Attendence App</i>
+                        <i className="logo-heading" >Fiverr</i>
+                        <i>Selling Platform</i>
                     </div>
                 </div>
                 {isLoggedIn &&

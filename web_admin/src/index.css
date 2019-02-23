@@ -254,8 +254,19 @@ button,label{
   right: -23px;
   top: 10px;
 }
+.my-table-border img{
+  border-radius: 100%;
+  vertical-align: middle;
+  margin:0px 10px;
+}
 
-
+.table th{
+  vertical-align: unset !important;
+}
+.my-table-btn{
+  display: flex;
+  justify-content: space-around;
+}
 
 
 

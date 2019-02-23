@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { Input } from "../input/input"
 import "./AdminLogin.css"
 import Path from '../../config/path'
-import logo from "../../Assets/background.webp"
+import logo from "../../Assets/logo.png";
+
 
 
 class AdminLogin extends Component {
@@ -34,7 +35,7 @@ class AdminLogin extends Component {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                userName,
+                username: userName,
                 password
             })
         })
@@ -48,7 +49,8 @@ class AdminLogin extends Component {
                 errors.serverError = "";
                 this.setState({ errors })
                 console.log(res);
-                localStorage.setItem("AdminData", JSON.stringify(res.data));
+                // localStorage.setItem("AdminData", JSON.stringify(res.data));
+                localStorage.setItem("AdminData", JSON.stringify(res));
                 window.location.reload();
 
             }).catch(err => {
@@ -77,7 +79,7 @@ class AdminLogin extends Component {
                                 <span className="login100-form-title p-b-34 p-t-27">
                                     Admin
 					            </span>
-                                {errors.serverError && 
+                                {errors.serverError &&
                                     <p className="error">{errors.serverError}</p>
                                 }
                                 <Input

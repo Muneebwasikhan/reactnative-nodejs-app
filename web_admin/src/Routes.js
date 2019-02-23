@@ -1,19 +1,11 @@
 import React, { Component } from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom"
 import AdminLogin from "./components/AdminLogin/AdminLogin"
-import SchoolForm from "./components/School/AddSchoolForm"
-import TeacherForm from "./components/Teacher/AddTeacherForm"
-
-import ClassForm from "./components/Class/AddClassForm"
-
-import StudentForm from "./components/Student/AddStudentForm"
-import ParentForm from "./components/Parent/AddParentForm"
-
+import Sellers from "./components/Sellers/Sellers"
 
 import Dashboard from "./components/Dashboard/Dashboard"
 import SideBar from "./components/Sidebar/Sidebar"
 
-import DataShow from "./components/DataShow/DataShow";
 import Navbar from "./components/Navbar/Navbar";
 
 
@@ -34,12 +26,7 @@ class Routes extends Component {
                             <Switch>
                                 <Route exact path="/" component={AdminLogin} />
                                 <PrivateRoute path="/dashboard" component={Dashboard} />
-                                <PrivateRoute path="/add-school" component={SchoolForm} />
-                                <PrivateRoute path="/add-teacher" component={TeacherForm} />
-                                <PrivateRoute path="/add-class" component={ClassForm} />
-                                <PrivateRoute path="/add-student" component={StudentForm} />
-                                <PrivateRoute path="/add-parent" component={ParentForm} />
-                                <PrivateRoute path="/datashow" component={DataShow} />
+                                <PrivateRoute path="/sellers" component={Sellers} />
                             </Switch>
                         </div>
                     </div>

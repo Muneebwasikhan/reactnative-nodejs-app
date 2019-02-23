@@ -141,19 +141,19 @@ class SchoolForm extends Component {
                                                         </th>
                                                         <th className="my-table-border">
                                                             <center className="my-table-span" >
-                                                                <button className="my-table-btn" onClick={() => this.performActions("warn", seller._id)} >
-                                                                    <i className="fa fa-warning"></i>Warn</button>
+                                                                <button className={`my-table-btn ${seller.warning ? "warning" : "unwarning"}`} onClick={() => this.performActions(`${seller.warning ? "warning" : "unwarning"}`, seller._id, index)} >
+                                                                    <i className="fa fa-warning"></i>{seller.warning ? "Un-Warn" : "Warn"}</button>
                                                             </center>
                                                         </th>
                                                         <th className="my-table-border">
                                                             <center className="my-table-span" >
-                                                                <button className="my-table-btn" onClick={() => this.performActions("block", seller._id)} >
-                                                                    <i className="fa fa-ban"></i>Block</button>
+                                                                    <button className={`my-table-btn ${seller.block ? "block" : "unblock"}`} onClick={() => this.performActions(`${seller.warning ? "block" : "unblock"}`, seller._id, index)} >
+                                                                    <i className="fa fa-ban"></i>{seller.block ? "Un-Block" : "Block"}</button>
                                                             </center>
                                                         </th>
                                                         <th className="my-table-border">
                                                             <center className="my-table-span">
-                                                                <button className="my-table-btn" onClick={() => this.performActions("delete",seller._id, index)} >
+                                                                <button className="my-table-btn" onClick={() => this.performActions("delete", seller._id, index)} >
                                                                     <i className="fa fa-trash"></i>Delete</button>
                                                             </center>
                                                         </th>

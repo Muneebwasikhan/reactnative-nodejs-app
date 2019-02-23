@@ -18,6 +18,7 @@ import {
   rkType,
   RkButton
 } from "react-native-ui-kitten";
+import {Header} from 'react-native-elements';
 import Icon from "react-native-vector-icons/FontAwesome";
 import { UtilStyles } from "./utilsStyle";
 import { ImageIcon } from "./imageIcon";
@@ -49,10 +50,19 @@ class Home extends Component {
     ];
     return (
       <View>
+        {/* <Header
+        backgroundColor= '#6200EE'
+  leftComponent={{ icon: 'menu', color: '#fff' }}
+  centerComponent={{ text: 'MY TITLE', style: { color: '#fff' } }}
+  rightComponent={{ icon: 'home', color: '#fff' }}
+/> */}
         <ScrollView
           automaticallyAdjustContentInsets={true}
           style={[ styles.screen]}
         >
+        
+        {['a','b','c','d'].map(index => (<View style={{paddingTop: 10,paddingBottom: 10}}>
+          
           <RkCard>
             <View rkCardHeader={true}>
               <View>
@@ -80,220 +90,22 @@ class Home extends Component {
               </RkText>
             </View>
             <View rkCardFooter={true}>
+              {/* <RkButton rkType="clear link"> */}
+                {/* <Icon name="heart" style={likeStyle} /> */}
+                {/* <RkText rkType="accent">18 Likes</RkText> */}
+              {/* </RkButton> */}
               <RkButton rkType="clear link">
-                <Icon name="heart" style={likeStyle} />
-                <RkText rkType="accent">18 Likes</RkText>
+                {/* <Icon name="comment-o" style={iconButton} /> */}
+                <RkText rkType="hint">Open</RkText>
               </RkButton>
               <RkButton rkType="clear link">
-                <Icon name="comment-o" style={iconButton} />
-                <RkText rkType="hint">2 Comments</RkText>
-              </RkButton>
-              <RkButton rkType="clear link">
-                <Icon name="send-o" style={iconButton} />
-                <RkText rkType="hint">6 Shares</RkText>
+                {/* <Icon name="send-o" style={iconButton} /> */}
+                <RkText rkType="hint">Order</RkText>
               </RkButton>
             </View>
           </RkCard>
-          {/* <RkCard>
-            <View rkCardHeader={true}>
-              <View>
-                <RkText rkType="header">Header</RkText>
-                <RkText rkType="subtitle">Subtitle</RkText>
-              </View>
-            </View>
-            <Image
-              rkCardImg={true}
-              source={{
-                uri:
-                  "https://helpx.adobe.com/in/stock/how-to/visual-reverse-image-search/_jcr_content/main-pars/image.img.jpg/visual-reverse-image-search-v2_1000x560.jpg"
-              }}
-            />
-            <View rkCardContent={true}>
-              <RkText rkType="cardText">
-                Far far away, behind the word mountains, far from the countries
-                Vokalia and Consonantia, there live the blind texts.
-              </RkText>
-            </View>
-            <View rkCardFooter={true} style={styles.footer}>
-              <RkButton rkType="clear link accent">
-                <Icon name="heart" style={likeStyle} />
-                <RkText rkType="accent">18</RkText>
-              </RkButton>
-              <RkButton rkType="clear link">
-                <Icon name="comment-o" style={iconButton} />
-                <RkText rkType="hint">2</RkText>
-              </RkButton>
-              <RkButton rkType="clear link">
-                <Icon name="send-o" style={iconButton} />
-                <RkText rkType="hint">6</RkText>
-              </RkButton>
-            </View>
-          </RkCard> */}
-          {/* <RkCard>
-            <View rkCardHeader={true}>
-              <View style={{ flexDirection: "row" }}>
-                <Image
-                  source={{
-                    uri:
-                      "https://helpx.adobe.com/in/stock/how-to/visual-reverse-image-search/_jcr_content/main-pars/image.img.jpg/visual-reverse-image-search-v2_1000x560.jpg"
-                  }}
-                  style={styles.avatar}
-                />
-                <View style={{}}>
-                  <RkText rkType="header">Elena Zhukova</RkText>
-                  <RkText rkType="subtitle">6 minutes ago</RkText>
-                </View>
-              </View>
-              <RkButton rkType="clear">
-                <Icon style={styles.dot} name="circle" />
-                <Icon style={styles.dot} name="circle" />
-                <Icon style={styles.dot} name="circle" />
-              </RkButton>
-            </View>
-            <View rkCardContent={true}>
-              <RkText rkType="cardText">
-                Far far away, behind the word mountains, far from the countries
-                Vokalia and Consonantia, there live the blind texts.
-              </RkText>
-            </View>
-            <View rkCardFooter={true} style={styles.footer}>
-              <RkButton rkType="clear link accent">
-                <Icon name="heart" style={likeStyle} />
-                <RkText rkType="accent">18</RkText>
-              </RkButton>
-              <RkButton rkType="clear link">
-                <Icon name="comment-o" style={iconButton} />
-                <RkText rkType="hint">2</RkText>
-              </RkButton>
-              <RkButton rkType="clear link">
-                <Icon name="send-o" style={iconButton} />
-                <RkText rkType="hint">6</RkText>
-              </RkButton>
-            </View>
-          </RkCard> */}
-          {/* <RkCard rkType="shadowed">
-            <View>
-              <Image
-                rkCardImg={true}
-                source={{
-                  uri:
-                    "https://helpx.adobe.com/in/stock/how-to/visual-reverse-image-search/_jcr_content/main-pars/image.img.jpg/visual-reverse-image-search-v2_1000x560.jpg"
-                }}
-              />
-              <View rkCardImgOverlay={true} />
-            </View>
-            <RkButton rkType="circle accent-bg" style={styles.floating}>
-              <ImageIcon name="plus" />
-            </RkButton>
-            <View rkCardHeader={true} style={{ paddingBottom: 2.5 }}>
-              <View>
-                <RkText rkType="header xxlarge">Header</RkText>
-                <RkText rkType="subtitle">Subtitle</RkText>
-              </View>
-            </View>
-            <View rkCardContent={true}>
-              <RkText rkType="compactCardText">
-                Far far away, behind the word mountains, far from the countries
-                Vokalia and Consonantia, there live the blind texts.
-              </RkText>
-            </View>
-            <View rkCardFooter={true}>
-              <View style={styles.footerButtons}>
-                <RkButton rkType="clear action" style={{ marginRight: 16 }}>
-                  SHARE
-                </RkButton>
-                <RkButton rkType="clear action">EXPLORE</RkButton>
-              </View>
-            </View>
-          </RkCard> */}
-          {/* <RkCard rkType="shadowed">
-            <View>
-              <Image
-                rkCardImg={true}
-                source={{
-                  uri:
-                    "https://helpx.adobe.com/in/stock/how-to/visual-reverse-image-search/_jcr_content/main-pars/image.img.jpg/visual-reverse-image-search-v2_1000x560.jpg"
-                }}
-              />
-              <View rkCardImgOverlay={true} style={styles.overlay}>
-                <RkText rkType="header xxlarge" style={{ color: "white" }}>
-                  Header
-                </RkText>
-              </View>
-            </View>
-            <RkButton rkType="circle accent-bg" style={styles.floating}>
-              <ImageIcon name="plus" />
-            </RkButton>
-            <View rkCardHeader={true} style={{ paddingBottom: 2.5 }}>
-              <View>
-                <RkText rkType="subtitle">Subtitle</RkText>
-              </View>
-            </View>
-            <View rkCardContent={true}>
-              <RkText rkType="compactCardText">
-                Far far away, behind the word mountains, far from the countries
-                Vokalia and Consonantia, there live the blind texts.
-              </RkText>
-            </View>
-            <View rkCardFooter={true}>
-              <View style={styles.footerButtons}>
-                <RkButton rkType="clear action" style={{ marginRight: 16 }}>
-                  SHARE
-                </RkButton>
-                <RkButton rkType="clear action">EXPLORE</RkButton>
-              </View>
-            </View>
-          </RkCard> */}
-          {/* <RkCard rkType="heroImage shadowed">
-            <View>
-              <Image
-                rkCardImg={true}
-                source={{
-                  uri:
-                    "https://helpx.adobe.com/in/stock/how-to/visual-reverse-image-search/_jcr_content/main-pars/image.img.jpg/visual-reverse-image-search-v2_1000x560.jpg"
-                }}
-              />
-              <View rkCardImgOverlay={true} style={styles.overlay}>
-                <View style={{ marginBottom: 20 }}>
-                  <RkText rkType="header xxlarge" style={{ color: "white" }}>
-                    Header
-                  </RkText>
-                  <RkText rkType="subtitle" style={{ color: "white" }}>
-                    Subtitle
-                  </RkText>
-                </View>
-                <View style={styles.footerButtons}>
-                  <RkButton rkType="clear" style={{ marginRight: 16 }}>
-                    SHARE
-                  </RkButton>
-                  <RkButton rkType="clear ">EXPLORE</RkButton>
-                </View>
-              </View>
-            </View>
-          </RkCard> */}
-          {/* <RkCard>
-            <View rkCardHeader={true}>
-              <View>
-                <RkText rkType="header">Header</RkText>
-                <RkText rkType="subtitle">Subtitle</RkText>
-              </View>
-            </View>
-            <View rkCardContent={true} style={{ paddingTop: 0 }}>
-              <RkText rkType="compactCardText">
-                The Big Oxmox advised her not to do so, because there were
-                thousands of bad Commas, wild Question Marks and devious
-                Semikoli, but the Little Blind Text didn’t listen.
-              </RkText>
-            </View>
-            <View rkCardFooter={true}>
-              <View style={styles.footerButtons}>
-                <RkButton rkType="clear action" style={{ marginRight: 16 }}>
-                  SHARE
-                </RkButton>
-                <RkButton rkType="clear action">EXPLORE</RkButton>
-              </View>
-            </View>
-          </RkCard> */}
+        </View>
+        ))}  
         </ScrollView>
       </View>
     );
@@ -302,7 +114,7 @@ class Home extends Component {
 const styles = StyleSheet.create({
   screen: {
     backgroundColor: '#f0f1f5',
-    padding: 12,
+    // padding: 12,
   },
   buttonIcon: {
     marginRight: 7,

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Router, Stack, Scene, Tabs } from "react-native-router-flux";
+import { Router, Stack, Scene, Tabs, Actions } from "react-native-router-flux";
 import LoginPage from "../components/LoginPage/LoginPage";
 import Home from "../components/Home/Home";
 import UploadData from "../components/UploadData/UploadData";
@@ -8,9 +8,18 @@ import Profile from "../components/Profile/Profile";
 import Services from "../components/Services/Services";
 import ContactsList from "../components/ContactsList/ContactsList";
 import AddService from "../components/AddService/AddService";
+import { Header } from 'react-native-elements'
 
 
-
+const ElementHeader = (props) => {
+  console.log(props);
+  return (<Header
+  backgroundColor= '#6200EE'
+leftComponent={{ icon: 'menu', color: '#fff' }}
+centerComponent={{ text: Actions.currentScene.name, style: { color: '#fff' } }}
+rightComponent={{ icon: 'home', color: '#fff' }}
+/>)
+}
 class Route extends Component {
   render() {
     const TabIcon = ({ focused, title }) => {
@@ -22,7 +31,7 @@ class Route extends Component {
               name="home"
               type="font-awesome"
               size={30}
-              color={focused ? "lightgray" : "white"}
+              color={focused ? "#6200EE" : "#6200ee7a"}
             />
           );
         case "profile":
@@ -31,7 +40,7 @@ class Route extends Component {
               name="user"
               type="font-awesome"
               size={30}
-              color={focused ? "lightgray" : "white"}
+              color={focused ? "#6200EE" : "#6200ee7a"}
             />
           );
         default: {
@@ -40,7 +49,7 @@ class Route extends Component {
               // name={focused ? "far fa-user" : "ios-speedometer-outline"}
               type="font-awesome"
               size={30}
-              color={focused ? "lightgray" : "white"}
+              color={focused ? "#6200EE" : "#6200ee7a"}
             />
           );
         }
@@ -48,7 +57,7 @@ class Route extends Component {
     };
 
     return (
-      <Router>
+      <Router navBar={ElementHeader}>
         <Stack key="root">
           <Scene key="loginpage" component={LoginPage} title="Login" />
 
@@ -58,8 +67,8 @@ class Route extends Component {
             showLabel={false}
             hideNavBar={true}
             tabBarPosition="bottom"
-            activeBackgroundColor="gray"
-            inactiveBackgroundColor="darkgray"
+            // activeBackgroundColor="gray"
+            // inactiveBackgroundColor="darkgray"
           >
             <Scene
               key="homePage"
@@ -67,7 +76,7 @@ class Route extends Component {
               component={Home}
               icon={TabIcon}
               showLabel={false}
-              hideNavBar={true}
+              // hideNavBar={true}
             />
             <Scene
               key="profilePage"
@@ -75,7 +84,7 @@ class Route extends Component {
               // component={Profile}
               icon={TabIcon}
               showLabel={false}
-              hideNavBar={true}
+              // hideNavBar={true}
             >
               <Scene
                 key="profilePageDashboard"
@@ -83,7 +92,7 @@ class Route extends Component {
                 component={Profile}
                 // icon={TabIcon}
                 showLabel={false}
-                hideNavBar={true}
+                // hideNavBar={true}
               />
               <Scene
                 key="profilePageServices"
@@ -91,9 +100,9 @@ class Route extends Component {
                 component={Services}
                 // icon={TabIcon}
                 showLabel={false}
-                hideNavBar={true}
+                // hideNavBar={true}
               />
-               <Scene
+              <Scene
                 key="contactListPage"
                 // title="home"
                 component={ContactsList}

@@ -11,7 +11,7 @@ exports = module.exports = function(app, mongoose) {
       type: String
     },
     user_id: {
-      type: String
+      type: { type: Schema.Types.ObjectId, ref: 'User' }
     },
     discription: {
       type: String

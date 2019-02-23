@@ -146,14 +146,14 @@ class UploadData extends Component {
             onPress={this.updateData}
           />
         </View>
-        <View style={styles.horCenterCont }>
+        {/* <View style={styles.horCenterCont }>
           <Button
             containerStyle={{width: '60%',marginTop: 20,}}
             buttonStyle={{backgroundColor: 'gray',borderRadius: 27}}
             title="CLEAR ASYNC STORAGE"
             onPress={() => {AsyncStorage.clear(() => {console.log('cleared storage')})}}
           />
-        </View>
+        </View> */}
         {/* <Image source={this.state.avatarSource} style={styles.uploadAvatar} /> */}
       </View>
     );

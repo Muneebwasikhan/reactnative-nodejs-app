@@ -185,6 +185,12 @@ class Route extends Component {
                 // showLabel={false}
                 // hideNavBar={true}
               />
+              <Scene
+                key="uploaddata2" component={UploadData}
+                // icon={TabIcon}
+                // showLabel={false}
+                // hideNavBar={true}
+              />
             </Scene>
           </Scene>
 

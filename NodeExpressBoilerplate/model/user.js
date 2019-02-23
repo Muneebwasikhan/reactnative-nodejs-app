@@ -1,4 +1,4 @@
-exports = module.exports = function(app, mongoose) {
+exports = module.exports = function (app, mongoose) {
   // 'use strict';a
 
   var Schema = mongoose.Schema
@@ -29,10 +29,16 @@ exports = module.exports = function(app, mongoose) {
       type: String
     },
     location: {
-      type: Object
+      type: String
     },
     rating: {
-      type: Object
+      type: String
+    },
+    warning: {
+      type: Boolean
+    },
+    block: {
+      type: Boolean
     }
   })
 

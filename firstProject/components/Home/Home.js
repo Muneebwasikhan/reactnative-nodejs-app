@@ -1,30 +1,21 @@
 import React, { Component } from "react";
 import {
-  Platform,
   StyleSheet,
-  Text,
   View,
-  Button,
   Image,
   ScrollView,
   RefreshControl
 } from "react-native";
 import { AsyncStorage } from "react-native";
-import { Actions } from "react-native-router-flux";
 import {
   RkCard,
-  rkCardImg,
   RkTheme,
   RkText,
-  rkType,
   RkButton
 } from "react-native-ui-kitten";
-import {Header} from 'react-native-elements';
-import Icon from "react-native-vector-icons/FontAwesome";
-import { UtilStyles } from "./utilsStyle";
-import { ImageIcon } from "./imageIcon";
 import Axios from "axios";
 import path from "../../config/Path";
+import ModalService from '../ModalService/ModalService';
 
 RkTheme.setType('RkText', 'cardPrice', {
   color: '#6200EE',
@@ -37,6 +28,7 @@ class Home extends Component {
   state = {
     feed: [],
     refreshing: false,
+    modalVisible: false
   }
 
   _onRefresh = () => {
@@ -73,9 +65,11 @@ class Home extends Component {
   }
 
   render() {
-    const { feed } = this.state;
+    const { feed, modalVisible } = this.state;
     return (
       <View>
+       
+      <ModalService modalVisible={ modalVisible } modalInvisible={(visible) => {this.setState({modalVisible: visible})}} />
         {/* <Header
         backgroundColor= '#6200EE'
   leftComponent={{ icon: 'menu', color: '#fff' }}
@@ -83,7 +77,7 @@ class Home extends Component {
   rightComponent={{ icon: 'home', color: '#fff' }}
 /> */}
         <ScrollView
-        style={{height: '100%'}}
+        style={{minHeight: 50}}
           automaticallyAdjustContentInsets={true}
           style={[ styles.screen]}
           refreshControl={
@@ -120,16 +114,10 @@ class Home extends Component {
               </RkText>
             </View>
             <View rkCardFooter={true}>
-              {/* <RkButton rkType="clear link"> */}
-                {/* <Icon name="heart" style={likeStyle} /> */}
-                {/* <RkText rkType="accent">18 Likes</RkText> */}
-              {/* </RkButton> */}
-              <RkButton rkType="clear link">
-                {/* <Icon name="comment-o" style={iconButton} /> */}
+              <RkButton touchable={() => console.log('worked')} rkType="clear link">
                 <RkText rkType="hint">Open</RkText>
               </RkButton>
               <RkButton rkType="clear link">
-                {/* <Icon name="send-o" style={iconButton} /> */}
                 <RkText rkType="hint">Order</RkText>
               </RkButton>
             </View>

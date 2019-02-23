@@ -1,0 +1,48 @@
+#Add-School-Form-Container{
+    height:100%;
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+#Add-School-Form-Container h3{
+    font-size: 40px !important;
+    justify-self: flex-start !important;
+    background: #00000021;
+    color: rgba(32, 30, 30, 0.719);
+    width: 79.6%; 
+    margin-left: auto;
+    margin-right: auto;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+#Add-School-Form-Container form{
+    display: block;
+    position: relative;
+    background:radial-gradient(circle,#547596,#34495e);
+    padding: 20px;
+    margin-top:59px;
+    width: 79.5%; 
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.my-btn-submit{
+    border: 1px solid rgba(180, 180, 180, 0.527);
+    padding: 10px 30px;
+    border-radius: 30px;
+    display: block;
+    margin: auto;
+    background: #cccbcb;
+    color:rgba(57, 57, 57, 0.783);
+}
+#Gender-Wrapper{
+    color: white !important;
+}
+
+
+
+#Gender-Wrapper label{
+    margin: 12px 8px;
+}

@@ -1,0 +1,94 @@
+.side-menu-list{
+    padding: 0 !important;
+    background: #34495e;
+    border-right:1px solid #3a3a3a5d; 
+    overflow-y: scroll !important;
+    max-height: 100%;
+    max-width: 100%;
+    min-height:100%;
+}
+.side-menu-list::-webkit-scrollbar-track{
+    background: #3a3a3a5d;
+}
+i{
+    font-family: FontAwesome !important
+}
+
+#sidebar-list-wrapper ul,#sidebar-list-wrapper li{
+    padding: 0 !important;
+}
+#sidebar-inner-ul{
+   background: #283849;
+}
+
+.sidebar-parent-li a{
+    flex: 3;
+    display: block;
+    padding: 10px 0px;
+    color: #abb4be;
+    white-space: nowrap;
+ }
+ .sidebar-parent-li i{
+    flex: 1;
+    padding-right: 5px;
+    padding-bottom:2px;
+    align-self:center; 
+    text-align: right; 
+}
+.sidebar-parent-li input{
+    width: 80%;
+    display: block;
+    background: transparent;    
+    border-bottom: 1px solid #212f3f;
+    padding: 5px 22px;
+    position: relative;
+    left: -13px;
+    color: #abb4be;
+    font-size: 14px;
+    white-space: nowrap;
+ }
+ .sidebar-parent-li input::placeholder{
+    color: #abb4be;
+
+ }
+ .search-school{
+     padding: 0px 10px;
+ }
+ .search-school i{
+    position: relative; 
+    left: 7px;
+
+ }
+ .sidebar-parent-li input:focus{
+    border-bottom: 1px solid #212f3f !important;
+ }
+ .sidebar-parent-li a:hover{
+     text-decoration: none;
+     color: #abb4be;
+ }
+ .sidebar-parent-li:hover{
+     cursor: pointer;
+     background: #212f3f;
+    }
+    .active-main-tab{
+     background: #212f3f;
+     }
+     .non-active-tab{
+        background:transparent;
+    }
+    .group-link{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        color: #abb4be;
+
+    }
+
+    
+    @media (max-width:575px){
+        .side-menu-list{
+            min-height: auto;
+        }
+    
+      }
+

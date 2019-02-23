@@ -5,7 +5,8 @@ import {
   View,
   Text,
   Image,
-  ScrollView
+  ScrollView,
+  RefreshControl
 } from "react-native";
 import { Card, ListItem, Button, Icon } from "react-native-elements";
 
@@ -17,7 +18,8 @@ import path from "../../config/Path";
 class Services extends Component {
   state = {
     userData: "",
-    userServices: []
+    userServices: [],
+    refreshing: false,
   };
   _asyncGetRegStudent = async () => {
     try {
@@ -27,7 +29,11 @@ class Services extends Component {
       return false;
     }
   };
-  componentDidMount() {
+  _onRefresh = () => {
+    this.cdmFun();
+  }
+  cdmFun = () => {
+    this.setState({refreshing: true})
     this._asyncGetRegStudent().then(data => {
       if (data) {
         console.log(data.studentData);
@@ -38,12 +44,18 @@ class Services extends Component {
             .then(res => {
               if (res.data.success) {
                 console.log(res.data.data);
-                this.setState({userServices: res.data.data});
+                this.setState({userServices: res.data.data, refreshing: false});
+              }
+              else{
+                this.setState({refreshing: false})
               }
             });
         });
       }
     });
+  }
+  componentDidMount() {
+  this.cdmFun();
   }
   render() {
     const users = [
@@ -56,7 +68,14 @@ class Services extends Component {
 
     return (
       <View style={styles.container}>
-        <ScrollView contentContainerStyle={styles.scrollView}>
+        <ScrollView contentContainerStyle={styles.scrollView}
+        refreshControl={
+          <RefreshControl
+            refreshing={this.state.refreshing}
+            onRefresh={this._onRefresh}
+          />
+        }
+        >
           {/* <Text style={styles.welcome}>Services</Text> */}
           <Button
             title="Add Services"

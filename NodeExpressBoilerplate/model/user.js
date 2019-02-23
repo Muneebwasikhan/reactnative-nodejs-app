@@ -37,7 +37,7 @@ exports = module.exports = function (app, mongoose) {
     warning: {
       type: Boolean
     },
-    blocked: {
+    block: {
       type: Boolean
     }
   })

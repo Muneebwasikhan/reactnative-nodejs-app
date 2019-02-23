@@ -57,7 +57,7 @@ class LoginPage extends Component {
           AccessToken.getCurrentAccessToken().then(data => {
             console.log("access Token===>", data);
             let accessToken = data.accessToken
-            console.log(accessToken.toString())
+            // console.log(accessToken.toString())
 
             const responseInfoCallback = (error, result) => {
               if (error) {
@@ -81,7 +81,7 @@ class LoginPage extends Component {
                     }
                   })
                   .catch((error) => {
-                    console.log(error);
+                    console.log(error.message);
                   });
               }
             }

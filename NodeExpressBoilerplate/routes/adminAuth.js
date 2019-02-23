@@ -6,7 +6,7 @@ exports = module.exports = function (app, mongoose) {
         if (req.body.username == "irfan" && req.body.password) {
             return res.send({
                 success: true,
-                message: "Password Correct"
+                databaseToken: "Pp1575z8ds7d5a4ass5d4asd98ad5a1ss6d54a98de"
             });
         }
         res.send({

@@ -1,6 +1,8 @@
 exports = module.exports = function (app, mongoose) {
     var express = require("express")
     var router = express.Router()
+    const socket = require('socket.io');
+    const io = socket();
 
     router.post("/getchat", async function (req, res, next) {
         try {
@@ -60,10 +62,12 @@ exports = module.exports = function (app, mongoose) {
             };
             let MessageModel = new app.db.models.Message(messageObj);
             let newMessageObj = await MessageModel.save();
+
             res.send({
                 success: true,
                 data: newMessageObj
             });
+            io.emit(req.body.chatId, newMessageObj);
         } catch (err) {
             return res.send({
                 success: false,
@@ -84,7 +88,7 @@ exports = module.exports = function (app, mongoose) {
 
     /** 
      * @param {Object} chatObj to find messages related to this
-    */
+     */
     async function getMessages(chatObj) {
         return new Promise(async (resolve, reject) => {
             try {

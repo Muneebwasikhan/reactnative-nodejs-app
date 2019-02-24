@@ -30,7 +30,7 @@ const ElementHeader = props => {
         />
       }
       centerComponent={{
-        text: "CHACHU",
+        text: "Fiverr",
         style: { color: "#fff", fontFamily: "Kailasa-Bold", ontWeight: "bold" }
       }}
       rightComponent={

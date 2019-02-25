@@ -7,6 +7,7 @@ import {
   RefreshControl,
   Image,
   KeyboardAvoidingView,
+  Platform,
   TextInput,
   FlatList,
   TouchableHighlight,
@@ -14,7 +15,7 @@ import {
 } from "react-native";
 import { AsyncStorage } from "react-native";
 import { ListItem, Header, Avatar, Button } from "react-native-elements";
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 class Chat extends Component {
   state = {
@@ -30,29 +31,17 @@ class Chat extends Component {
   };
 
   _onRefresh = () => {};
-  showListOrSpinner() {
-    if (this.props.fetching) {
-        return (
-            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <ActivityIndicator size='large' />
-            </View>
-        );
-    }
-
-    return (
-        <FlatList
-            inverted
-            data={this.props.messages}
-            renderItem={this.renderChatItem}
-            keyExtractor={this.keyExtractor}
-        />
-    );
-}
+  
   componentDidMount() {}
   render() {
+    let behavior = "";
+    if (Platform.OS == "ios") {
+      behavior = "padding";
+    }
     return (
       <View style={styles.container}>
         <Header
+        backgroundColor="#6200EE"
           containerStyle={{ height: 80 }}
           leftComponent={
             <View
@@ -79,111 +68,157 @@ class Chat extends Component {
             </View>
           }
         />
-         {/* { this.showListOrSpinner () } */}
-         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <ActivityIndicator size='large' />
-            </View>
-                <KeyboardAvoidingView behavior={'padding'}>
-                    <View style={styles.inputBar}>
-                        
-                        <TextInput 
-                            style={styles.textBox} 
-                            multiline
-                            onChangeText={(text) => this.onTyping(text)}
-                            ref={input => { this.textInput = input; } }
-                        />
+        <View style={{ flex: 1 }}>
+        <ScrollView>
+        <MyChat message="Muneeb wasi khan" />
+          <MyChat message="Muneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khan" />
+          <MyChat message="Muneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khan" />
+          <MyChat message="Muneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khan" />
+          <MyChat message="Muneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khan" />
+          <MyChat message="Muneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khan wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khan wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khan" />
 
-                        <TouchableHighlight 
-                            style={[styles.sendBtn, styles.enabledBtn ]}
-                            // disabled={this.state.disabled}
-                            // onPress={this.onSendBtnPressed.bind(this)}
-                        >
-                            <Text style={{ color: '#fff'}}>Send</Text>
-                        </TouchableHighlight>
-                    </View>
-                </KeyboardAvoidingView>
-        {/* <View
-          style={{
-           flex: 1,
-           backgroundColor: 'red'
-          }}
-        >
-          <KeyboardAwareScrollView
-            contentContainerStyle={styles.scrollView}
-            refreshControl={
-              <RefreshControl
-                refreshing={this.state.refreshing}
-                onRefresh={this._onRefresh}
-              />
-            }
-          />
-        </View>
+          <UserChat message="Muneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khan wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khan wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khan" />
+          <UserChat message="Muneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khan" />
+          <UserChat message="Muneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khan" />
+          <UserChat message="Muneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khan" />
+          <UserChat message="Muneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khan" />
+          <UserChat message="Muneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khan" />
+          
+        </ScrollView>
+          {/* <ActivityIndicator size='large' /> */}
 
-        <View />
-        <KeyboardAvoidingView style={{ flex: 1, flexDirection: 'column',justifyContent: 'center',}} behavior="padding" enabled   keyboardVerticalOffset={100}>
-	<ScrollView>
-		<View style={styles.row}>
-        <View
-        // style={{
-        //   position: "absolute",
-        //   bottom: 0,
-        //   width: "100%"
-        // }}
-        >
-          <TextInput
-            style={{ ...styles.input, backgroundColor: "white" }}
-            onChangeText={text => this.setState({ message: text })}
-            placeholderTextColor="white"
-            underlineColorAndroid="transparent"
-          />
-          <Button buttonStyle={{ backgroundColor: "blue" }} title="SEND" />
+          
+          
+          
+
+         
         </View>
-        </View>
-	</ScrollView>
-</KeyboardAvoidingView>
-      */}
-     
-     
-     
+        <KeyboardAvoidingView behavior={behavior}>
+          <View style={styles.inputBar}>
+            <TextInput
+              style={styles.textBox}
+              multiline
+              onChangeText={text => this.onTyping(text)}
+              ref={input => {
+                this.textInput = input;
+              }}
+            />
+
+            <TouchableHighlight style={[styles.sendBtn, styles.enabledBtn]}>
+              <Text style={{ color: "#fff" }}>Send</Text>
+            </TouchableHighlight>
+          </View>
+        </KeyboardAvoidingView>
       </View>
     );
   }
 }
+
+
+
 const styles = StyleSheet.create({
   container: {
     flex: 1
-},
-inputBar: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+  },
+  myMessageTextCont: {
+    width: "100%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "flex-end",
+    paddingTop: 5,
+    paddingBottom: 5,
+    paddingRight: 10,
+  },
+  myMessageTextBody: {
+    backgroundColor: "#6200EE",
+    maxWidth: "80%",
+    paddingLeft: 15,
+    paddingRight: 15,
+    paddingTop: 5,
+    paddingBottom: 5,
+    // borderRadius: 10,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 0,
+    borderBottomRightRadius: 10,
+    borderBottomLeftRadius: 10,
+    overflow: "hidden"
+  },
+  myMessageText: {
+    fontSize: 15,
+    color: "white"
+  },
+  userTextCont: {
+    width: "100%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "flex-start",
+    paddingTop: 5,
+    paddingBottom: 5,
+    paddingLeft: 10,
+  },
+  userTextBody: {
+    backgroundColor: "lightgray",
+    maxWidth: "80%",
+    paddingLeft: 15,
+    paddingRight: 15,
+    paddingTop: 5,
+    paddingBottom: 5,
+    // borderRadius: 10,
+    borderTopLeftRadius: 0,
+    borderTopRightRadius: 10,
+    borderBottomRightRadius: 10,
+    borderBottomLeftRadius: 10,
+    overflow: "hidden"
+  },
+  userText: {
+    fontSize: 15,
+    color: "gray"
+  },
+  inputBar: {
+    flexDirection: "row",
+    justifyContent: "space-between",
     // paddingHoriztonal: 5,
     paddingVertical: 10,
-    backgroundColor: '#dadfea'
-},
-textBox: {
+    backgroundColor: "#dadfea"
+  },
+  textBox: {
     borderRadius: 5,
     borderWidth: 1,
-    borderColor: 'gray',
+    borderColor: "gray",
     fontSize: 14,
     // paddingHoriztonal: 10,
     flex: 1,
     paddingVertical: 5,
     marginLeft: 5
-},
-sendBtn: {
-    justifyContent: 'center',
-    alignItems: 'center',
+  },
+  sendBtn: {
+    justifyContent: "center",
+    alignItems: "center",
     paddingLeft: 15,
     paddingRight: 15,
     borderRadius: 5,
     marginLeft: 5
-},
-enabledBtn: {
-    backgroundColor: '#476DC5'
-},
-disabledBtn: {
-    backgroundColor: '#89a9f4'
-}
+  },
+  enabledBtn: {
+    backgroundColor: "#476DC5"
+  },
+  disabledBtn: {
+    backgroundColor: "#89a9f4"
+  }
 });
+
+
+const MyChat = (props) => (<View style={styles.myMessageTextCont}>
+    <View style={styles.myMessageTextBody}>
+      <Text style={styles.myMessageText}>{props.message}</Text>
+    </View>
+  </View>)
+
+const UserChat = (props) => (<View style={styles.userTextCont}>
+  <View style={styles.userTextBody}>
+    <Text style={styles.userText}>{props.message}</Text>
+  </View>
+</View>)
+
 
 export default Chat;

@@ -9,10 +9,14 @@ exports = module.exports = function (app, mongoose) {
 
             let newChatObj = {
                 person1_id: req.body.person1_id,
-                person2_id: req.body.person1_id,
-                person1_name: req.body.person1_name,
-                person2_name: req.body.person2_name
+                person2_id: req.body.person2_id,
             }
+            let userName1 = await getPersonInfo(req.body.person1_id);
+            let userName2 = await getPersonInfo(req.body.person2_id);
+
+            newChatObj.person1_name = userName1;
+            newChatObj.person2_name = userName2;
+
             let ChatModel = app.db.models.Chat;
 
             let ChatObj = await ChatModel.findOne({
@@ -99,6 +103,22 @@ exports = module.exports = function (app, mongoose) {
                     chatId: chatObj._id
                 });
                 resolve(MessageArray);
+            } catch (err) {
+                reject(err)
+            }
+        })
+    }
+
+
+
+    async function getPersonInfo(person_id) {
+        return new Promise(async (resolve, reject) => {
+            try {
+                let UserModel = app.db.models.User;
+                let PersonObj = await UserModel.findOne({
+                    _id: person_id
+                });
+                resolve(PersonObj.userName);
             } catch (err) {
                 reject(err)
             }

@@ -6,7 +6,9 @@ exports = module.exports = function (app, mongoose) {
 
     router.post("/getchat", async function (req, res, next) {
         try {
-
+            if (req.body.person1_id == req.body.person1_id) {
+                return res.send({success:false,message:"Please provide different ids you cancnot chat with yourself"})
+            }
             let newChatObj = {
                 person1_id: req.body.person1_id,
                 person2_id: req.body.person2_id,

@@ -29,7 +29,7 @@ exports = module.exports = function (app, mongoose) {
                 }]
             })
             if (ChatObj) {
-                let messagesArray = await getMessages(chatObj);
+                let messagesArray = await getMessages(ChatObj);
                 res.send({
                     success: true,
                     data: {
@@ -112,6 +112,7 @@ exports = module.exports = function (app, mongoose) {
 
 
     async function getPersonInfo(person_id) {
+        console.log(person_id);
         return new Promise(async (resolve, reject) => {
             try {
                 let UserModel = app.db.models.User;

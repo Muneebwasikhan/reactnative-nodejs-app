@@ -144,12 +144,14 @@ class Chat extends Component {
               <Button style={{ color: "#fff" }}
               icon={
                 <Icon
-                  name="share"
+                  name="send"
                   size={15}
                   color="white"
                 />
-              }
-              onPress={() => {chat.push({user:'me',message: text});this.setState({chat,text: ''})}} />
+               }
+              onPress={() => {chat.push({user:'me',message: text});this.setState({chat,text: ''})}}
+              containerStyle={{backgroundColor: 'red'}}
+              /> 
             </TouchableOpacity>
           </View>
         </KeyboardAvoidingView>

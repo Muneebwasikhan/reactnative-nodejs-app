@@ -26,7 +26,6 @@ const ElementHeader = props => {
           name="envelope"
           type="font-awesome"
           color="#fff"
-          // size={30}
         />
       }
       centerComponent={{
@@ -44,7 +43,6 @@ const ElementHeader = props => {
               Actions.replace("loginpage");
             });
           }}
-          // size={30}
         />
       }
     />
@@ -120,8 +118,6 @@ class Route extends Component {
             showLabel={false}
             hideNavBar={true}
             tabBarPosition="bottom"
-            // activeBackgroundColor="gray"
-            // inactiveBackgroundColor="darkgray"
           >
             <Scene
               key="homePage"
@@ -129,7 +125,6 @@ class Route extends Component {
               component={Home}
               icon={TabIcon}
               showLabel={false}
-              // hideNavBar={true}
             />
             <Scene
               key="searchPage"
@@ -145,58 +140,38 @@ class Route extends Component {
               component={Activites}
               icon={TabIcon}
               showLabel={false}
-              // hideNavBar={true}
             />
             <Scene
               key="profilePage"
               title="profile"
-              // component={Profile}
               icon={TabIcon}
               showLabel={false}
-              // hideNavBar={true}
             >
               <Scene
                 key="profilePageDashboard"
-                // title="home"
                 component={Profile}
-                // icon={TabIcon}
                 showLabel={false}
-                // hideNavBar={true}
               />
               <Scene
                 key="profilePageServices"
-                // title="home"
                 component={Services}
-                // icon={TabIcon}
                 showLabel={false}
-                // hideNavBar={true}
               />
               <Scene
                 key="contactListPage"
-                // title="home"
                 component={ContactsList}
-                // icon={TabIcon}
-                // showLabel={false}
-                // hideNavBar={true}
               />
               <Scene
                 key="addServicePage"
-                // title="home"
                 component={AddService}
-                // icon={TabIcon}
-                // showLabel={false}
-                // hideNavBar={true}
               />
               <Scene
                 key="uploaddata2" component={UploadData}
-                // icon={TabIcon}
-                // showLabel={false}
-                // hideNavBar={true}
               />
             </Scene>
           </Scene>
 
-          <Scene key="chatpage" initial={true} hideNavBar={true} component={Chat} title="Chat" />
+          <Scene key="chatpage" hideNavBar={true} component={Chat} title="Chat" />
           <Scene key="allmessages" component={AllMessages} title="Chats" />
           <Scene key="uploaddata" component={UploadData} title="Upload Data" />
         </Stack>

@@ -121,6 +121,9 @@ exports = module.exports = function (app, mongoose) {
                 let PersonObj = await UserModel.findOne({
                     _id: person_id
                 });
+                if(!PersonObj){
+                    return reject ({message:"User Id is Invalid"})
+                }
                 resolve(PersonObj.userName);
             } catch (err) {
                 reject(err)

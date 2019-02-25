@@ -111,23 +111,16 @@ componentDidMount() {
             />
             <Text h4>Discription:</Text>
             <Text style={{color: 'gray'}}>{modalData.discription}:</Text>
-            <View style={{paddingTop: 50}}>
+            {userData && (userData._id !=  modalData.user_id) && <View style={{paddingTop: 50}}>
               <Button
               onPress={() => {this.props.modalInvisible(false); Actions.chatpage({propsData: {person1: userData._id,person2: modalData.user_id} })}}
               containerStyle={{marginBottom: 10}} buttonStyle={{backgroundColor: "#6200EE"}} title="SEND MESSAGE" type="solid"/>
               <Button containerStyle={{marginBottom: 10}} buttonStyle={{borderColor: "#6200EE"}} titleStyle={{color: "#6200EE"}} title="HIRE" type="outline"/>
-            </View>
+            </View>}
           </View>
         </ScrollView>
       </Modal>
 
-      //   <TouchableHighlight
-      //     onPress={() => {
-      //       this.props.modalInvisible(true);
-      //     }}>
-      //     <Text>Show Modal</Text>
-      //   </TouchableHighlight>
-      // </View>
     );
   }
 }

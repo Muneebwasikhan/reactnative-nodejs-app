@@ -21,7 +21,27 @@ import { Actions } from "react-native-router-flux";
 
 class Chat extends Component {
   state = {
-    refreshing: false
+    refreshing: false,
+    text: '',
+    chat: [
+      {user: 'user',message: ' Muneeb wasi khan ;skdjf lsk flsk joasi slkd jasi jfalsd '},
+      {user: 'me',message: ' Muneeb wasi khan ;skdjf lsk flsk joasi slkd jasi jfals ;skdjf lsk flsk joasi slkd jasi jfals ;skdjf lsk flsk joasi slkd jasi jfalsd '},
+      {user: 'me',message: ' Muneeb wasi khan ;skdjf lsk flsk joasi slkd jasi jfalsd '},
+      {user: 'user',message: ' Muneeb wasi khan ;skdjf lsk flsk joasi slkd jasi jfalsd '},
+      {user: 'user',message: ' Muneeb wasi khan ;skdjf lsk flsk joasi slkd jasi jfalsd '},
+      {user: 'me',message: ' Munee ;skdjf lsk flsk joasi slkd jasi jfalshan ;skdjf lsk flsk joasi slkd jasi jfals ;skdjf lsk flsk joasi slkd jasi jfals ;skdjf lsk flsk joasi slkd jasi jfalsasi slkd jasi jfalsd '},
+      {user: 'musere',message: ' Muneeb wasi khan ;skdjf lsk flsk joasi slkd jasi jfalsd '},
+      {user: 'me',message: ' Muneeb wasi khan ;skdjf lsk flsk wasi khan ;skdjf lsk flsk wasi khan ;skdjf lsk flsk wasi khan ;skdjf lsk flsk joasi slkd jasi jfalsd '},
+      {user: 'me',message: ' Muneeb wasi khan ;skdjf lsk flsk joasi slkd jasi jfalsd '},
+      {user: 'user',message: ' Muneeb wasi khan ;skdjf lsk flsk joasi slkd jasi jfalsd '},
+      {user: 'me',message: ' Muneeb wasi khan ;skdjf lsk flsk joasi slkd jasi jfalsd '},
+      {user: 'me',message: ' Muneeb ;skdjf lsk flsk joasi han ;skdjf lsk flsk joasi ;skdjf lsk flsk joasi ;skdjf lsk flsk joasi ;skdjf lsk flsk joasi slkd jasi jfalsd '},
+      {user: 'me',message: ' Muneeb wasi khan ;skdjf lsk flsk joasi slkd jasi jfalsd '},
+      {user: 'user',message: ' Muneeb wasi khan ;skdjf lsk flsk joasi slkd jasi jfalsd '},
+      {user: 'me',message: ' Muneeb wasi khan ;skdjf lsk flsk joasi slkd jasi jfalsd '},
+      {user: 'me',message: ' Muneeb wasi khan ;skdjf lsk flsk joasi slkd jasi jfalsd '},
+      {user: 'user',message: ' Muneeb wasi khan Muneeb wasi khan Muneeb wasi khan Muneeb wasi khan Muneeb wasi khan Muneeb wasi khan ;skdjf lsk flsk joasi slkd jasi jfalsd '}
+    ]
   };
   _asyncGetRegStudent = async () => {
     try {
@@ -40,6 +60,8 @@ class Chat extends Component {
     if (Platform.OS == "ios") {
       behavior = "padding";
     }
+    const { chat, text } = this.state;
+    
     return (
       <View style={styles.container}>
         <Header
@@ -80,9 +102,20 @@ class Chat extends Component {
             </View>
           }
         />
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 1 }}
+        onContentSizeChange={(contentWidth, contentHeight)=>{        
+        this.scrollView.scrollToEnd({animated: true});
+    }}>
           <ScrollView>
-            <MyChat message="Muneeb wasi khan" />
+            {chat.map(val => {
+              if(val.user == 'me'){
+                return(<MyChat message={val.message} />)
+              }
+              else if(val.user == 'user'){
+                return(<UserChat message={val.message} />)
+              }
+            })}
+            {/* <MyChat message="Muneeb wasi khan" />
             <MyChat message="Muneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khan" />
             <MyChat message="Muneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khan" />
             <MyChat message="Muneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khan" />
@@ -94,7 +127,7 @@ class Chat extends Component {
             <UserChat message="Muneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khan" />
             <UserChat message="Muneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khan" />
             <UserChat message="Muneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khan" />
-            <UserChat message="Muneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khan" />
+            <UserChat message="Muneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khan" /> */}
           </ScrollView>
           {/* <ActivityIndicator size='large' /> */}
         </View>
@@ -103,15 +136,21 @@ class Chat extends Component {
             <TextInput
               style={styles.textBox}
               multiline
-              onChangeText={text => this.onTyping(text)}
-              ref={input => {
-                this.textInput = input;
-              }}
+              onChangeText={text => this.setState({text})}
+            value={text}
             />
 
-            <TouchableHighlight style={[styles.sendBtn, styles.enabledBtn]}>
-              <Text style={{ color: "#fff" }}>Send</Text>
-            </TouchableHighlight>
+            <TouchableOpacity style={[styles.sendBtn]}>
+              <Button style={{ color: "#fff" }}
+              icon={
+                <Icon
+                  name="share"
+                  size={15}
+                  color="white"
+                />
+              }
+              onPress={() => {chat.push({user:'me',message: text});this.setState({chat,text: ''})}} />
+            </TouchableOpacity>
           </View>
         </KeyboardAvoidingView>
       </View>

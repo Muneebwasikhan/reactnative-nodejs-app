@@ -11,5 +11,6 @@ export default class path {
 
   static GET_SERVICES = path.BASE_URL + '/service/getservices';
 
-  static GET_CHAT = path.BASE_URL + '/service/getservices';
+  static GET_CHAT = path.BASE_URL + '/chat/getchat';
+  
 }

@@ -18,6 +18,8 @@ import { AsyncStorage } from "react-native";
 import { ListItem, Header, Avatar, Button, Icon } from "react-native-elements";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { Actions } from "react-native-router-flux";
+import Axios from "axios";
+import path from "../../config/Path";
 
 class Chat extends Component {
   state = {
@@ -110,9 +112,14 @@ class Chat extends Component {
 
   _onRefresh = () => {};
 
-  componentDidMount() {
+  componentWillMount() {
     // this.refs._scrollView.scrollToEnd();
-    console.log(this.props.propsData)
+    console.log(this.props.propsData);
+
+  }
+
+  getChat = () => {
+    // Axios.post(path.GET_CHAT,{})
   }
   render() {
     let behavior = "";

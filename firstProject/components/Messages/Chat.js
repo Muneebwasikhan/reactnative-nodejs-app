@@ -121,14 +121,14 @@ class Chat extends Component {
 
   getChat = () => {
     const { person1, person2 } = this.props.propsData;
-    console.log({person1, person2});
+    console.log({ person1_id: person1,person2_id: person2 });
     console.log(path.GET_CHAT);
-    // Axios.post(path.GET_CHAT,{ person1_id: person1,person2_id: person2 }).then(res => {
-    //   console.log(res.data);
-    // })
-    // .catch(err => {
-    //   console.log(err.message)
-    // })
+    Axios.post(path.GET_CHAT,{ person1_id: person1,person2_id: person2 }).then(res => {
+      console.log(res.data);
+    })
+    .catch(err => {
+      console.log(err.message)
+    })
   }
   render() {
     let behavior = "";

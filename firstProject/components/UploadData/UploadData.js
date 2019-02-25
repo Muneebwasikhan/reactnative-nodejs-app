@@ -28,8 +28,7 @@ class UploadData extends Component {
   }
 
   updateData = () => {
-    // alert(this.state.myNumber);
-    // alert(this.state.profilePhoto);
+    
     const { myNumber, avatar } = this.state;
     this._asyncGetRegStudent().then((resp) => {
       var responce = resp;

@@ -22,25 +22,81 @@ import { Actions } from "react-native-router-flux";
 class Chat extends Component {
   state = {
     refreshing: false,
-    text: '',
+    text: "",
     chat: [
-      {user: 'user',message: ' Muneeb wasi khan ;skdjf lsk flsk joasi slkd jasi jfalsd '},
-      {user: 'me',message: ' Muneeb wasi khan ;skdjf lsk flsk joasi slkd jasi jfals ;skdjf lsk flsk joasi slkd jasi jfals ;skdjf lsk flsk joasi slkd jasi jfalsd '},
-      {user: 'me',message: ' Muneeb wasi khan ;skdjf lsk flsk joasi slkd jasi jfalsd '},
-      {user: 'user',message: ' Muneeb wasi khan ;skdjf lsk flsk joasi slkd jasi jfalsd '},
-      {user: 'user',message: ' Muneeb wasi khan ;skdjf lsk flsk joasi slkd jasi jfalsd '},
-      {user: 'me',message: ' Munee ;skdjf lsk flsk joasi slkd jasi jfalshan ;skdjf lsk flsk joasi slkd jasi jfals ;skdjf lsk flsk joasi slkd jasi jfals ;skdjf lsk flsk joasi slkd jasi jfalsasi slkd jasi jfalsd '},
-      {user: 'musere',message: ' Muneeb wasi khan ;skdjf lsk flsk joasi slkd jasi jfalsd '},
-      {user: 'me',message: ' Muneeb wasi khan ;skdjf lsk flsk wasi khan ;skdjf lsk flsk wasi khan ;skdjf lsk flsk wasi khan ;skdjf lsk flsk joasi slkd jasi jfalsd '},
-      {user: 'me',message: ' Muneeb wasi khan ;skdjf lsk flsk joasi slkd jasi jfalsd '},
-      {user: 'user',message: ' Muneeb wasi khan ;skdjf lsk flsk joasi slkd jasi jfalsd '},
-      {user: 'me',message: ' Muneeb wasi khan ;skdjf lsk flsk joasi slkd jasi jfalsd '},
-      {user: 'me',message: ' Muneeb ;skdjf lsk flsk joasi han ;skdjf lsk flsk joasi ;skdjf lsk flsk joasi ;skdjf lsk flsk joasi ;skdjf lsk flsk joasi slkd jasi jfalsd '},
-      {user: 'me',message: ' Muneeb wasi khan ;skdjf lsk flsk joasi slkd jasi jfalsd '},
-      {user: 'user',message: ' Muneeb wasi khan ;skdjf lsk flsk joasi slkd jasi jfalsd '},
-      {user: 'me',message: ' Muneeb wasi khan ;skdjf lsk flsk joasi slkd jasi jfalsd '},
-      {user: 'me',message: ' Muneeb wasi khan ;skdjf lsk flsk joasi slkd jasi jfalsd '},
-      {user: 'user',message: ' Muneeb wasi khan Muneeb wasi khan Muneeb wasi khan Muneeb wasi khan Muneeb wasi khan Muneeb wasi khan ;skdjf lsk flsk joasi slkd jasi jfalsd '}
+      {
+        user: "user",
+        message: " Muneeb wasi khan ;skdjf lsk flsk joasi slkd jasi jfalsd "
+      },
+      {
+        user: "me",
+        message:
+          " Muneeb wasi khan ;skdjf lsk flsk joasi slkd jasi jfals ;skdjf lsk flsk joasi slkd jasi jfals ;skdjf lsk flsk joasi slkd jasi jfalsd "
+      },
+      {
+        user: "me",
+        message: " Muneeb wasi khan ;skdjf lsk flsk joasi slkd jasi jfalsd "
+      },
+      {
+        user: "user",
+        message: " Muneeb wasi khan ;skdjf lsk flsk joasi slkd jasi jfalsd "
+      },
+      {
+        user: "user",
+        message: " Muneeb wasi khan ;skdjf lsk flsk joasi slkd jasi jfalsd "
+      },
+      {
+        user: "me",
+        message:
+          " Munee ;skdjf lsk flsk joasi slkd jasi jfalshan ;skdjf lsk flsk joasi slkd jasi jfals ;skdjf lsk flsk joasi slkd jasi jfals ;skdjf lsk flsk joasi slkd jasi jfalsasi slkd jasi jfalsd "
+      },
+      {
+        user: "musere",
+        message: " Muneeb wasi khan ;skdjf lsk flsk joasi slkd jasi jfalsd "
+      },
+      {
+        user: "me",
+        message:
+          " Muneeb wasi khan ;skdjf lsk flsk wasi khan ;skdjf lsk flsk wasi khan ;skdjf lsk flsk wasi khan ;skdjf lsk flsk joasi slkd jasi jfalsd "
+      },
+      {
+        user: "me",
+        message: " Muneeb wasi khan ;skdjf lsk flsk joasi slkd jasi jfalsd "
+      },
+      {
+        user: "user",
+        message: " Muneeb wasi khan ;skdjf lsk flsk joasi slkd jasi jfalsd "
+      },
+      {
+        user: "me",
+        message: " Muneeb wasi khan ;skdjf lsk flsk joasi slkd jasi jfalsd "
+      },
+      {
+        user: "me",
+        message:
+          " Muneeb ;skdjf lsk flsk joasi han ;skdjf lsk flsk joasi ;skdjf lsk flsk joasi ;skdjf lsk flsk joasi ;skdjf lsk flsk joasi slkd jasi jfalsd "
+      },
+      {
+        user: "me",
+        message: " Muneeb wasi khan ;skdjf lsk flsk joasi slkd jasi jfalsd "
+      },
+      {
+        user: "user",
+        message: " Muneeb wasi khan ;skdjf lsk flsk joasi slkd jasi jfalsd "
+      },
+      {
+        user: "me",
+        message: " Muneeb wasi khan ;skdjf lsk flsk joasi slkd jasi jfalsd "
+      },
+      {
+        user: "me",
+        message: " Muneeb wasi khan ;skdjf lsk flsk joasi slkd jasi jfalsd "
+      },
+      {
+        user: "user",
+        message:
+          " Muneeb wasi khan Muneeb wasi khan Muneeb wasi khan Muneeb wasi khan Muneeb wasi khan Muneeb wasi khan ;skdjf lsk flsk joasi slkd jasi jfalsd "
+      }
     ]
   };
   _asyncGetRegStudent = async () => {
@@ -54,14 +110,16 @@ class Chat extends Component {
 
   _onRefresh = () => {};
 
-  componentDidMount() {}
+  componentDidMount() {
+    // this.refs._scrollView.scrollToEnd();
+  }
   render() {
     let behavior = "";
     if (Platform.OS == "ios") {
       behavior = "padding";
     }
     const { chat, text } = this.state;
-    
+
     return (
       <View style={styles.container}>
         <Header
@@ -102,57 +160,44 @@ class Chat extends Component {
             </View>
           }
         />
-        <View style={{ flex: 1 }}
-        onContentSizeChange={(contentWidth, contentHeight)=>{        
-        this.scrollView.scrollToEnd({animated: true});
-    }}>
-          <ScrollView>
+        <View
+          style={{ flex: 1 }}
+        >
+          <ScrollView
+          ref="_scrollView">
             {chat.map(val => {
-              if(val.user == 'me'){
-                return(<MyChat message={val.message} />)
-              }
-              else if(val.user == 'user'){
-                return(<UserChat message={val.message} />)
+              if (val.user == "me") {
+                return <MyChat message={val.message} />;
+              } else if (val.user == "user") {
+                return <UserChat message={val.message} />;
               }
             })}
-            {/* <MyChat message="Muneeb wasi khan" />
-            <MyChat message="Muneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khan" />
-            <MyChat message="Muneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khan" />
-            <MyChat message="Muneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khan" />
-            <MyChat message="Muneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khan" />
-            <MyChat message="Muneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khan wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khan wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khan" />
-
-            <UserChat message="Muneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khan wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khan wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khan" />
-            <UserChat message="Muneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khan" />
-            <UserChat message="Muneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khan" />
-            <UserChat message="Muneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khan" />
-            <UserChat message="Muneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khan" />
-            <UserChat message="Muneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khan" /> */}
           </ScrollView>
-          {/* <ActivityIndicator size='large' /> */}
         </View>
         <KeyboardAvoidingView behavior={behavior}>
           <View style={styles.inputBar}>
             <TextInput
               style={styles.textBox}
               multiline
-              onChangeText={text => this.setState({text})}
-            value={text}
-            placeholder="Enter you text here"
+              onChangeText={text => this.setState({ text })}
+              value={text}
+              placeholder="Enter you text here"
             />
 
             <TouchableOpacity style={[styles.sendBtn]}>
-              <Button style={{ color: "#fff" }}
-              icon={
-                <Icon
-                  name="send"
-                  size={15}
-                  color="white"
-                />
-               }
-              onPress={() => {chat.push({user:'me',message: text});this.setState({chat,text: ''})}}
-              buttonStyle={{backgroundColor: "#6200EE"}}
-              /> 
+              <Button
+                style={{ color: "#fff" }}
+                icon={<Icon name="send" size={15} color="white" />}
+                onPress={() => {
+                  chat.push({ user: "me", message: text });
+                  this.setState({ chat, text: "" }, () => {
+                    setTimeout(() => {
+                      this.refs._scrollView.scrollToEnd();
+                    }, 10);
+                  });
+                }}
+                buttonStyle={{ backgroundColor: "#6200EE" }}
+              />
             </TouchableOpacity>
           </View>
         </KeyboardAvoidingView>
@@ -181,7 +226,6 @@ const styles = StyleSheet.create({
     paddingRight: 15,
     paddingTop: 5,
     paddingBottom: 5,
-    // borderRadius: 10,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 0,
     borderBottomRightRadius: 10,
@@ -208,7 +252,6 @@ const styles = StyleSheet.create({
     paddingRight: 15,
     paddingTop: 5,
     paddingBottom: 5,
-    // borderRadius: 10,
     borderTopLeftRadius: 0,
     borderTopRightRadius: 10,
     borderBottomRightRadius: 10,
@@ -222,16 +265,15 @@ const styles = StyleSheet.create({
   inputBar: {
     flexDirection: "row",
     justifyContent: "space-between",
-    // paddingHoriztonal: 5,
     paddingVertical: 10,
     backgroundColor: "#dadfea"
   },
   textBox: {
+    paddingLeft: 5,
     borderRadius: 5,
     borderWidth: 1,
     borderColor: "gray",
     fontSize: 14,
-    // paddingHoriztonal: 10,
     flex: 1,
     paddingVertical: 5,
     marginLeft: 5

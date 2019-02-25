@@ -138,6 +138,7 @@ class Chat extends Component {
               multiline
               onChangeText={text => this.setState({text})}
             value={text}
+            placeholder="Enter you text here"
             />
 
             <TouchableOpacity style={[styles.sendBtn]}>
@@ -150,7 +151,7 @@ class Chat extends Component {
                 />
                }
               onPress={() => {chat.push({user:'me',message: text});this.setState({chat,text: ''})}}
-              containerStyle={{backgroundColor: 'red'}}
+              buttonStyle={{backgroundColor: "#6200EE"}}
               /> 
             </TouchableOpacity>
           </View>

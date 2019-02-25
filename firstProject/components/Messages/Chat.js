@@ -10,12 +10,14 @@ import {
   Platform,
   TextInput,
   FlatList,
+  TouchableOpacity,
   TouchableHighlight,
   ActivityIndicator
 } from "react-native";
 import { AsyncStorage } from "react-native";
-import { ListItem, Header, Avatar, Button } from "react-native-elements";
+import { ListItem, Header, Avatar, Button, Icon } from "react-native-elements";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { Actions } from "react-native-router-flux";
 
 class Chat extends Component {
   state = {
@@ -31,7 +33,7 @@ class Chat extends Component {
   };
 
   _onRefresh = () => {};
-  
+
   componentDidMount() {}
   render() {
     let behavior = "";
@@ -41,9 +43,19 @@ class Chat extends Component {
     return (
       <View style={styles.container}>
         <Header
-        backgroundColor="#6200EE"
+          placement={"left"}
+          backgroundColor="#6200EE"
           containerStyle={{ height: 80 }}
           leftComponent={
+            <TouchableOpacity
+              onPress={() => {
+                Actions.pop();
+              }}
+            >
+              <Icon name="chevron-left" type="font-awesome" color="white" />
+            </TouchableOpacity>
+          }
+          centerComponent={
             <View
               style={{
                 display: "flex",
@@ -69,29 +81,22 @@ class Chat extends Component {
           }
         />
         <View style={{ flex: 1 }}>
-        <ScrollView>
-        <MyChat message="Muneeb wasi khan" />
-          <MyChat message="Muneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khan" />
-          <MyChat message="Muneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khan" />
-          <MyChat message="Muneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khan" />
-          <MyChat message="Muneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khan" />
-          <MyChat message="Muneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khan wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khan wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khan" />
+          <ScrollView>
+            <MyChat message="Muneeb wasi khan" />
+            <MyChat message="Muneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khan" />
+            <MyChat message="Muneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khan" />
+            <MyChat message="Muneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khan" />
+            <MyChat message="Muneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khan" />
+            <MyChat message="Muneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khan wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khan wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khan" />
 
-          <UserChat message="Muneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khan wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khan wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khan" />
-          <UserChat message="Muneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khan" />
-          <UserChat message="Muneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khan" />
-          <UserChat message="Muneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khan" />
-          <UserChat message="Muneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khan" />
-          <UserChat message="Muneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khan" />
-          
-        </ScrollView>
+            <UserChat message="Muneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khan wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khan wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khan" />
+            <UserChat message="Muneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khan" />
+            <UserChat message="Muneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khan" />
+            <UserChat message="Muneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khan" />
+            <UserChat message="Muneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khan" />
+            <UserChat message="Muneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khanMuneeb wasi khan" />
+          </ScrollView>
           {/* <ActivityIndicator size='large' /> */}
-
-          
-          
-          
-
-         
         </View>
         <KeyboardAvoidingView behavior={behavior}>
           <View style={styles.inputBar}>
@@ -114,8 +119,6 @@ class Chat extends Component {
   }
 }
 
-
-
 const styles = StyleSheet.create({
   container: {
     flex: 1
@@ -127,7 +130,7 @@ const styles = StyleSheet.create({
     alignItems: "flex-end",
     paddingTop: 5,
     paddingBottom: 5,
-    paddingRight: 10,
+    paddingRight: 10
   },
   myMessageTextBody: {
     backgroundColor: "#6200EE",
@@ -154,7 +157,7 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     paddingTop: 5,
     paddingBottom: 5,
-    paddingLeft: 10,
+    paddingLeft: 10
   },
   userTextBody: {
     backgroundColor: "lightgray",
@@ -207,18 +210,20 @@ const styles = StyleSheet.create({
   }
 });
 
-
-const MyChat = (props) => (<View style={styles.myMessageTextCont}>
+const MyChat = props => (
+  <View style={styles.myMessageTextCont}>
     <View style={styles.myMessageTextBody}>
       <Text style={styles.myMessageText}>{props.message}</Text>
     </View>
-  </View>)
-
-const UserChat = (props) => (<View style={styles.userTextCont}>
-  <View style={styles.userTextBody}>
-    <Text style={styles.userText}>{props.message}</Text>
   </View>
-</View>)
+);
 
+const UserChat = props => (
+  <View style={styles.userTextCont}>
+    <View style={styles.userTextBody}>
+      <Text style={styles.userText}>{props.message}</Text>
+    </View>
+  </View>
+);
 
 export default Chat;

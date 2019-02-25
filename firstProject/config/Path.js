@@ -10,4 +10,6 @@ export default class path {
   static GET_USER_SERVICES = path.BASE_URL + '/service/getalluserservices';
 
   static GET_SERVICES = path.BASE_URL + '/service/getservices';
+
+  static GET_CHAT = path.BASE_URL + '/service/getservices';
 }

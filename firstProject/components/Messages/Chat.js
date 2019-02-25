@@ -112,6 +112,7 @@ class Chat extends Component {
 
   componentDidMount() {
     // this.refs._scrollView.scrollToEnd();
+    console.log(this.props.propsData)
   }
   render() {
     let behavior = "";

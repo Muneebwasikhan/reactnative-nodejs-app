@@ -6,12 +6,14 @@ import {
   ScrollView,
   TouchableOpacity,
   Alert,
-  Dimensions
+  Dimensions,
+  AsyncStorage
 } from "react-native";
 import { ActivityIndicator } from "react-native";
 import { Image, ListItem, Text,Button } from "react-native-elements";
 import { Icon, Header } from "react-native-elements";
 import { Actions } from 'react-native-router-flux';
+
 
 class ModalService extends Component {
   state = {
@@ -21,9 +23,25 @@ class ModalService extends Component {
   setModalVisible(visible) {
     this.setState({ modalVisible: visible });
   }
-
+  _asyncGetRegStudent = async () => {
+    try {
+      let user = await AsyncStorage.getItem("regStudent");
+      return(JSON.parse(user));
+    } catch (er) {
+      return false;
+    }
+  };
+componentDidMount() {
+  this._asyncGetRegStudent().then(res => {
+    if(res){
+      console.log(res.studentData);
+      this.setState({userData: res.studentData});
+    }
+  })
+}
   render() {
     const { modalData } = this.props;
+    const { userData } = this.state;
     const { width, height } = Dimensions.get("window");
     console.log(modalData);
     return (
@@ -95,7 +113,7 @@ class ModalService extends Component {
             <Text style={{color: 'gray'}}>{modalData.discription}:</Text>
             <View style={{paddingTop: 50}}>
               <Button
-              onPress={() => {this.props.modalInvisible(false); Actions.chatpage()}}
+              onPress={() => {this.props.modalInvisible(false); Actions.chatpage({propsData: {person1: userData._id,person2: modalData._id} })}}
               containerStyle={{marginBottom: 10}} buttonStyle={{backgroundColor: "#6200EE"}} title="SEND MESSAGE" type="solid"/>
               <Button containerStyle={{marginBottom: 10}} buttonStyle={{borderColor: "#6200EE"}} titleStyle={{color: "#6200EE"}} title="HIRE" type="outline"/>
             </View>

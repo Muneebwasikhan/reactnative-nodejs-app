@@ -7,11 +7,10 @@ import {
   RefreshControl,
   Image,
   KeyboardAvoidingView,
-  TextInput,
-  Button
+  TextInput
 } from "react-native";
 import { AsyncStorage } from "react-native";
-import { ListItem, Header, Avatar } from "react-native-elements";
+import { ListItem, Header, Avatar, Button } from "react-native-elements";
 
 class Chat extends Component {
   state = {
@@ -33,24 +32,31 @@ class Chat extends Component {
     return (
       <View style={styles.container}>
         <Header
-        containerStyle={{height: 80}}
+          containerStyle={{ height: 80 }}
           leftComponent={
-            <View style={{display: 'flex',flexDirection: 'row',width: 150,justifyContent: 'center',alignItems: 'center',paddingLeft: 10}}>
- <Avatar
-            // containerStyle={{ height: 60,width: 60 }}
-            size={50}
-              rounded
-              source={{
-                uri:
-                  "http://images.math.cnrs.fr/IMG/png/section8-image.png"
+            <View
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                width: 150,
+                justifyContent: "center",
+                alignItems: "center",
+                paddingLeft: 10
               }}
-            />
-            <View style={{paddingLeft: 5}}>
-              <Text style={{color: '#fff',fontSize: 20}}>Muneeb khan</Text>
-              <Text style={{color: 'white',fontSize: 15}}>Online</Text>
-            </View>
+            >
+              <Avatar
+                // containerStyle={{ height: 60,width: 60 }}
+                size={50}
+                rounded
+                source={{
+                  uri: "http://images.math.cnrs.fr/IMG/png/section8-image.png"
+                }}
+              />
+              <View style={{ paddingLeft: 5 }}>
+                <Text style={{ color: "#fff", fontSize: 20 }}>Muneeb khan</Text>
+                <Text style={{ color: "white", fontSize: 15 }}>Online</Text>
               </View>
-           
+            </View>
           }
           // centerComponent={<MyCustomCenterComponent />}
           // rightComponent={<MyCustomRightComponent />}
@@ -76,20 +82,33 @@ class Chat extends Component {
           {/* <Text>Chat</Text> */}
         </ScrollView>
         <View>
- <KeyboardAvoidingView 
-   style={{position: 'absolute', left: 0, right: 0, bottom: 0}}
+          {/* <KeyboardAvoidingView 
+   style={{position: 'absolute', left: 0, right: 0, bottom: 0,width: '100%'}}
    behavior="position"
- >
-  <TextInput
-    style={styles.input}
-    onChangeText={text => this.setState({ message: text })}
-    // value={this.state.email}
-    placeholderTextColor='white'
-    underlineColorAndroid='transparent'
-  />
-  <Button onPress={this.send} title='SEND' />
- </KeyboardAvoidingView>
-</View>
+ > */}
+         
+          {/* </KeyboardAvoidingView> */}
+        </View>
+        <View
+            style={{
+              position: "absolute",
+              bottom: 0,
+              width: "100%"
+            }}
+          >
+            <TextInput
+              style={{ ...styles.input, backgroundColor: "white" }}
+              onChangeText={text => this.setState({ message: text })}
+              // value={this.state.email}
+              placeholderTextColor="white"
+              underlineColorAndroid="transparent"
+            />
+            <Button
+              buttonStyle={{ backgroundColor: "white" }}
+              // onPress={this.send}
+              title="SEND"
+            />
+          </View>
       </View>
     );
   }

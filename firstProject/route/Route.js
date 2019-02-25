@@ -196,7 +196,7 @@ class Route extends Component {
             </Scene>
           </Scene>
 
-          <Scene key="chatpage" hideNavBar={true} component={Chat} title="Chat" />
+          <Scene key="chatpage" initial={true} hideNavBar={true} component={Chat} title="Chat" />
           <Scene key="allmessages" component={AllMessages} title="Chats" />
           <Scene key="uploaddata" component={UploadData} title="Upload Data" />
         </Stack>

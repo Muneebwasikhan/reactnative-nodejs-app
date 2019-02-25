@@ -7,10 +7,14 @@ import {
   RefreshControl,
   Image,
   KeyboardAvoidingView,
-  TextInput
+  TextInput,
+  FlatList,
+  TouchableHighlight,
+  ActivityIndicator
 } from "react-native";
 import { AsyncStorage } from "react-native";
 import { ListItem, Header, Avatar, Button } from "react-native-elements";
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 class Chat extends Component {
   state = {
@@ -26,7 +30,24 @@ class Chat extends Component {
   };
 
   _onRefresh = () => {};
+  showListOrSpinner() {
+    if (this.props.fetching) {
+        return (
+            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                <ActivityIndicator size='large' />
+            </View>
+        );
+    }
 
+    return (
+        <FlatList
+            inverted
+            data={this.props.messages}
+            renderItem={this.renderChatItem}
+            keyExtractor={this.keyExtractor}
+        />
+    );
+}
   componentDidMount() {}
   render() {
     return (
@@ -45,7 +66,6 @@ class Chat extends Component {
               }}
             >
               <Avatar
-                // containerStyle={{ height: 60,width: 60 }}
                 size={50}
                 rounded
                 source={{
@@ -58,89 +78,112 @@ class Chat extends Component {
               </View>
             </View>
           }
-          // centerComponent={<MyCustomCenterComponent />}
-          // rightComponent={<MyCustomRightComponent />}
         />
+         {/* { this.showListOrSpinner () } */}
+         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                <ActivityIndicator size='large' />
+            </View>
+                <KeyboardAvoidingView behavior={'padding'}>
+                    <View style={styles.inputBar}>
+                        
+                        <TextInput 
+                            style={styles.textBox} 
+                            multiline
+                            onChangeText={(text) => this.onTyping(text)}
+                            ref={input => { this.textInput = input; } }
+                        />
 
-        {/* <View>
-<ListItem
-        leftAvatar={{ source: { uri: 'http://images.math.cnrs.fr/IMG/png/section8-image.png' } }}
-        title={'Najam Shahzad'}
-        subtitle={'online'}
-      />
-</View> */}
-        {/* <ModalService modalVisible={ modalVisible } modalInvisible={(visible) => {this.setState({modalVisible: visible})}} /> */}
-        <ScrollView
-          contentContainerStyle={styles.scrollView}
-          refreshControl={
-            <RefreshControl
-              refreshing={this.state.refreshing}
-              onRefresh={this._onRefresh}
-            />
-          }
+                        <TouchableHighlight 
+                            style={[styles.sendBtn, styles.enabledBtn ]}
+                            // disabled={this.state.disabled}
+                            // onPress={this.onSendBtnPressed.bind(this)}
+                        >
+                            <Text style={{ color: '#fff'}}>Send</Text>
+                        </TouchableHighlight>
+                    </View>
+                </KeyboardAvoidingView>
+        {/* <View
+          style={{
+           flex: 1,
+           backgroundColor: 'red'
+          }}
         >
-          {/* <Text>Chat</Text> */}
-        </ScrollView>
-        <View>
-          {/* <KeyboardAvoidingView 
-   style={{position: 'absolute', left: 0, right: 0, bottom: 0,width: '100%'}}
-   behavior="position"
- > */}
-         
-          {/* </KeyboardAvoidingView> */}
+          <KeyboardAwareScrollView
+            contentContainerStyle={styles.scrollView}
+            refreshControl={
+              <RefreshControl
+                refreshing={this.state.refreshing}
+                onRefresh={this._onRefresh}
+              />
+            }
+          />
         </View>
+
+        <View />
+        <KeyboardAvoidingView style={{ flex: 1, flexDirection: 'column',justifyContent: 'center',}} behavior="padding" enabled   keyboardVerticalOffset={100}>
+	<ScrollView>
+		<View style={styles.row}>
         <View
-            style={{
-              position: "absolute",
-              bottom: 0,
-              width: "100%"
-            }}
-          >
-            <TextInput
-              style={{ ...styles.input, backgroundColor: "white" }}
-              onChangeText={text => this.setState({ message: text })}
-              // value={this.state.email}
-              placeholderTextColor="white"
-              underlineColorAndroid="transparent"
-            />
-            <Button
-              buttonStyle={{ backgroundColor: "white" }}
-              // onPress={this.send}
-              title="SEND"
-            />
-          </View>
+        // style={{
+        //   position: "absolute",
+        //   bottom: 0,
+        //   width: "100%"
+        // }}
+        >
+          <TextInput
+            style={{ ...styles.input, backgroundColor: "white" }}
+            onChangeText={text => this.setState({ message: text })}
+            placeholderTextColor="white"
+            underlineColorAndroid="transparent"
+          />
+          <Button buttonStyle={{ backgroundColor: "blue" }} title="SEND" />
+        </View>
+        </View>
+	</ScrollView>
+</KeyboardAvoidingView>
+      */}
+     
+     
+     
       </View>
     );
   }
 }
 const styles = StyleSheet.create({
-  scrollView: {
-    padding: 0,
-    margin: 0,
-    width: "100%"
-  },
   container: {
-    backgroundColor: "white",
-    padding: 0,
-    margin: 0
-  },
-  cardStyle: {
-    width: "100%",
-    marginLeft: 0,
-    marginRight: 0,
-    marginBottom: 5,
-    marginBottom: 0
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: "center",
-    margin: 10
-  },
-  instructions: {
-    textAlign: "center",
-    color: "#333333",
-    marginBottom: 5
-  }
+    flex: 1
+},
+inputBar: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    // paddingHoriztonal: 5,
+    paddingVertical: 10,
+    backgroundColor: '#dadfea'
+},
+textBox: {
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: 'gray',
+    fontSize: 14,
+    // paddingHoriztonal: 10,
+    flex: 1,
+    paddingVertical: 5,
+    marginLeft: 5
+},
+sendBtn: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingLeft: 15,
+    paddingRight: 15,
+    borderRadius: 5,
+    marginLeft: 5
+},
+enabledBtn: {
+    backgroundColor: '#476DC5'
+},
+disabledBtn: {
+    backgroundColor: '#89a9f4'
+}
 });
 
 export default Chat;

@@ -5,7 +5,7 @@ exports = module.exports = function (app, mongoose) {
     const io = socket();
 
 
-    router.post("/getchat", async function (req, res, next) {
+    router.post("/getallchat", async function (req, res, next) {
         try{
 
             let ChatModel = app.db.models.Chat;

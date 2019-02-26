@@ -4,6 +4,33 @@ exports = module.exports = function (app, mongoose) {
     const socket = require('socket.io');
     const io = socket();
 
+
+    router.post("/getchat", async function (req, res, next) {
+        try{
+
+            let ChatModel = app.db.models.Chat;
+            let ChatArray = await ChatModel.find({
+                $or: [{
+                    person1_id: req.body.userId,
+                }, {
+                    person2_id: req.body.UserId
+                }]
+            });
+            return res.send({
+                success: true,
+                data: ChatArray
+            });
+        }catch(err){
+            return res.send({
+                success: false,
+                message: err.message
+            });
+        }
+
+    })
+
+
+
     router.post("/getchat", async function (req, res, next) {
         try {
             if (req.body.person1_id == req.body.person1_id) {

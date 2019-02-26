@@ -6,9 +6,10 @@ import {
   Text,
   Image,
   ScrollView,
-  RefreshControl
+  RefreshControl,
+  TouchableOpacity
 } from "react-native";
-import { Card, ListItem, Button, Icon } from "react-native-elements";
+import { Card, ListItem, Button, Icon, Header } from "react-native-elements";
 
 import { AsyncStorage } from "react-native";
 import { Actions } from "react-native-router-flux";
@@ -70,6 +71,26 @@ class Services extends Component {
 
     return (
       <View style={styles.container}>
+     <Header
+      backgroundColor="#6200EE"
+      leftComponent={
+        <TouchableOpacity
+          onPress={() => {
+            Actions.pop();
+          }}
+        >
+          <Icon name="chevron-left" type="font-awesome" color="white" />
+        </TouchableOpacity>
+      }
+      centerComponent={{
+        text: `My Services`,
+        style: { color: "#fff", fontFamily: "Kailasa-Bold", fontWeight: "bold" }
+      }}
+      rightComponent={{
+        text: `+`,
+        style: { color: "#fff",fontSize: 25 }
+      }}
+    />
       {/* <ModalService modalVisible={ modalVisible } modalInvisible={(visible) => {this.setState({modalVisible: visible})}} /> */}
         <ScrollView contentContainerStyle={styles.scrollView}
         refreshControl={

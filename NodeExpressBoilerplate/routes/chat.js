@@ -89,11 +89,6 @@ exports = module.exports = function (app, mongoose) {
     app.use("/chat", router)
 
 
-
-
-
-
-
     /** 
      * @param {Object} chatObj to find messages related to this
      */

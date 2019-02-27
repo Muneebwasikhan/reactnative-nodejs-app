@@ -13,4 +13,5 @@ export default class path {
 
   static GET_CHAT = path.BASE_URL + '/chat/getchat';
   
+  static GET_ALL_CHATS = path.BASE_URL + '/chat/getallchat';
 }

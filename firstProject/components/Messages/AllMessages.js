@@ -10,6 +10,8 @@ import {
 } from "react-native";
 import { ListItem, Header, Icon } from "react-native-elements";
 import { Actions } from 'react-native-router-flux';
+import axios from 'axios';
+import path from "../../config/Path";
 
 class AllMessages extends Component {
   state = {
@@ -26,11 +28,17 @@ class AllMessages extends Component {
 
   _onRefresh = () => {};
 
+  getAllChats = (userId) => {
+    axios.post(path.GET_ALL_CHATS,{userId}).then(res => {
+      console.log(res.data.data);
+      this.setState({chatList: res.data.data}); 
+    })
+  }
   componentDidMount() {
     this._asyncGetRegStudent().then(user => {
       console.log(user.studentData.userName)
-      this.setState({userData: user.studentData})
-      
+      this.setState({userData: user.studentData});
+      this.getAllChats(user.studentData._id);
     })
   }
   render() {

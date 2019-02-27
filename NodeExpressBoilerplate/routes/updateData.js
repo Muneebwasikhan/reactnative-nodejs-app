@@ -28,7 +28,7 @@ exports = module.exports = function (app, mongoose) {
       }
       // console.log(req.body);
 
-      let profileImageObj = await uploadImage(req.body.profilePhoto);
+      let profileImageObj = await uploadImage(req.body.profilePhoto,req.body.fbId);
 
 
       let upadataDataNumImg = await app.db.models.User.findOneAndUpdate({
@@ -66,12 +66,13 @@ exports = module.exports = function (app, mongoose) {
 
 
   //Upload Image
-  async function uploadImage(image) {
+  async function uploadImage(image,_id) {
     return new Promise((resolve, reject) => {
       try {
         cloudinary.v2.uploader.upload(
           image, {
-            secure: true
+            secure: true,
+            public_id:_id
           },
           (err, imgData) => {
             if (err) {

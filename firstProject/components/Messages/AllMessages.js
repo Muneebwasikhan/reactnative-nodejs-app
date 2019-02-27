@@ -15,7 +15,8 @@ import path from "../../config/Path";
 
 class AllMessages extends Component {
   state = {
-    refreshing: false
+    refreshing: false,
+    chatList: []
   };
   _asyncGetRegStudent = async () => {
     try {
@@ -26,7 +27,9 @@ class AllMessages extends Component {
     }
   };
 
-  _onRefresh = () => {};
+  _onRefresh = () => {
+    this.cdmFunc();
+  };
 
   getAllChats = (userId) => {
     axios.post(path.GET_ALL_CHATS,{userId}).then(res => {
@@ -34,29 +37,18 @@ class AllMessages extends Component {
       this.setState({chatList: res.data.data}); 
     })
   }
-  componentDidMount() {
+  cdmFunc = () => {
     this._asyncGetRegStudent().then(user => {
       console.log(user.studentData.userName)
       this.setState({userData: user.studentData});
       this.getAllChats(user.studentData._id);
     })
   }
+  componentDidMount() {
+    this.cdmFunc();
+  }
   render() {
-    const list = [
-      {
-        name: "Amy Farha",
-        avatar_url:
-          "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg",
-        subtitle: "Vice President"
-      },
-      {
-        name: "Chris Jackson",
-        avatar_url:
-          "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-        subtitle: "Vice Chairman"
-      }
-    ];
-    const { userData } = this.state;
+    const { userData, chatList } = this.state;
     return (
       <View style={styles.container}>
      <Header
@@ -89,12 +81,12 @@ class AllMessages extends Component {
             />
           }
         >
-          {list.map((l, i) => (
+          {chatList.length > 0 && chatList.map((l, i) => (
             <ListItem
               key={i}
-              leftAvatar={{ source: { uri: l.avatar_url } }}
-              title={l.name}
-              subtitle={l.subtitle}
+              leftAvatar={{ source: { uri: l.person2_image } }}
+              title={l.person2_name}
+              // subtitle={l.subtitle}
             />
           ))}
         </ScrollView>

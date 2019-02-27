@@ -115,16 +115,36 @@ class Chat extends Component {
   componentWillMount() {
     // this.refs._scrollView.scrollToEnd();
     console.log(this.props.propsData);
+    this._asyncGetRegStudent().then(user => {
+      console.log(user)
+      this.setState({ userData: user.studentData })
+    });
     this.getChat();
 
   }
 
+  sendMessage = () => {
+    const { text, userData, chatObj } = this.state;
+    // console.log(text);
+    // console.log(userData);
+    // console.log({ message: text, user_id: userData._id, chatObj: chatObj._id });
+    // message: req.body.message,
+    // senderId: req.body.user_id,
+    // chatId: req.body.chatId
+    Axios.post(path.SEND_MESSAGE,{ message: text, user_id: userData._id, chatObj: chatObj._id }).then(res => {
+      console.log(res);
+    })
+  }
   getChat = () => {
     const { person1, person2 } = this.props.propsData;
     console.log({ person1_id: person1,person2_id: person2 });
     console.log(path.GET_CHAT);
     Axios.post(path.GET_CHAT,{ person1_id: person1,person2_id: person2 }).then(res => {
       console.log(res.data);
+      if(res.data.success){
+        const { chatObj, messagesArray } = res.data.data;
+        this.setState({ chatObj, messagesArray });
+      }
     })
     .catch(err => {
       console.log(err.message)
@@ -206,12 +226,13 @@ class Chat extends Component {
                 style={{ color: "#fff" }}
                 icon={<Icon name="send" size={15} color="white" />}
                 onPress={() => {
-                  chat.push({ user: "me", message: text });
-                  this.setState({ chat, text: "" }, () => {
-                    setTimeout(() => {
-                      this.refs._scrollView.scrollToEnd();
-                    }, 10);
-                  });
+                  this.sendMessage();
+                  // chat.push({ user: "me", message: text });
+                  // this.setState({ chat, text: "" }, () => {
+                  //   setTimeout(() => {
+                  //     this.refs._scrollView.scrollToEnd();
+                  //   }, 10);
+                  // });
                 }}
                 buttonStyle={{ backgroundColor: "#6200EE" }}
               />

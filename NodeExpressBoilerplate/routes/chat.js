@@ -40,11 +40,14 @@ exports = module.exports = function (app, mongoose) {
                 person1_id: req.body.person1_id,
                 person2_id: req.body.person2_id,
             }
-            let userName1 = await getPersonInfo(req.body.person1_id);
-            let userName2 = await getPersonInfo(req.body.person2_id);
+            let person1Obj = await getPersonInfo(req.body.person1_id);
+            let person2Obj = await getPersonInfo(req.body.person2_id);
 
-            newChatObj.person1_name = userName1;
-            newChatObj.person2_name = userName2;
+            newChatObj.person1_name = person1Obj.userName;
+            newChatObj.person2_name = person2Obj.userName;
+            newChatObj.person1_image = person1Obj.profilePhoto;
+            newChatObj.person2_image = person2Obj.profilePhoto;
+
 
             let ChatModel = app.db.models.Chat;
 
@@ -146,7 +149,7 @@ exports = module.exports = function (app, mongoose) {
                 if(!PersonObj){
                     return reject ({message:"User Id is Invalid"})
                 }
-                resolve(PersonObj.userName);
+                resolve(PersonObj);
             } catch (err) {
                 reject(err)
             }

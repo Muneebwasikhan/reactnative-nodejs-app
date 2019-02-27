@@ -11,11 +11,19 @@ exports = module.exports = function (app, mongoose) {
             type: String,
             required:true
         },
+        person1_image:{
+            type: String,
+            required:true
+        },
         person2_id: {
             type: String,
             required:true
         },
         person2_name: {
+            type: String,
+            required:true
+        },
+        person2_image:{
             type: String,
             required:true
         },

@@ -105,7 +105,7 @@ class Services extends Component {
             title="Add Services"
             buttonStyle={{backgroundColor: "#6200EE"}}
             onPress={() => {
-              console.log(Actions);
+              // console.log(Actions);
               Actions.addServicePage();
             }}
           />

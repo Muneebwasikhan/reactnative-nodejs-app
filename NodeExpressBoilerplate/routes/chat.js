@@ -104,7 +104,7 @@ exports = module.exports = function (app, mongoose) {
                 success: true,
                 message: "Message Sent Successful"
             });
-            io.emit(req.body.chatId, newMessageObj);
+            app.io.emit(req.body.chatId, newMessageObj);
         } catch (err) {
             return res.send({
                 success: false,

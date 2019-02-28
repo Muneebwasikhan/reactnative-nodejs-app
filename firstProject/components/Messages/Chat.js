@@ -99,7 +99,10 @@ class Chat extends Component {
         message:
           " Muneeb wasi khan Muneeb wasi khan Muneeb wasi khan Muneeb wasi khan Muneeb wasi khan Muneeb wasi khan ;skdjf lsk flsk joasi slkd jasi jfalsd "
       }
-    ]
+    ],
+    userData: null,
+    messagesArray: [],
+    chatObj: null
   };
   _asyncGetRegStudent = async () => {
     try {
@@ -127,11 +130,11 @@ class Chat extends Component {
     const { text, userData, chatObj } = this.state;
     // console.log(text);
     // console.log(userData);
-    // console.log({ message: text, user_id: userData._id, chatObj: chatObj._id });
+    console.log({ message: text, user_id: userData._id, chatId: chatObj._id });
     // message: req.body.message,
     // senderId: req.body.user_id,
     // chatId: req.body.chatId
-    Axios.post(path.SEND_MESSAGE,{ message: text, user_id: userData._id, chatObj: chatObj._id }).then(res => {
+    Axios.post(path.SEND_MESSAGE,{ message: text, user_id: userData._id, chatId: chatObj._id }).then(res => {
       console.log(res);
     })
   }
@@ -140,9 +143,10 @@ class Chat extends Component {
     console.log({ person1_id: person1,person2_id: person2 });
     console.log(path.GET_CHAT);
     Axios.post(path.GET_CHAT,{ person1_id: person1,person2_id: person2 }).then(res => {
-      console.log(res.data);
+      
       if(res.data.success){
         const { chatObj, messagesArray } = res.data.data;
+        console.log({ chatObj, messagesArray });
         this.setState({ chatObj, messagesArray });
       }
     })
@@ -155,8 +159,8 @@ class Chat extends Component {
     if (Platform.OS == "ios") {
       behavior = "padding";
     }
-    const { chat, text } = this.state;
-
+    const { chat, userData, text, messagesArray, chatObj } = this.state;
+const { person1, person2 } = this.props.propsData;
     return (
       <View style={styles.container}>
         <Header
@@ -173,7 +177,7 @@ class Chat extends Component {
             </TouchableOpacity>
           }
           centerComponent={
-            <View
+            chatObj && <View
               style={{
                 display: "flex",
                 flexDirection: "row",
@@ -183,16 +187,17 @@ class Chat extends Component {
                 paddingLeft: 10
               }}
             >
+             
               <Avatar
                 size={50}
                 rounded
                 source={{
-                  uri: "http://images.math.cnrs.fr/IMG/png/section8-image.png"
+                  uri: `${chatObj.person1_id == userData._id ? chatObj.person2_image : chatObj.person1_image}`
                 }}
               />
               <View style={{ paddingLeft: 5 }}>
-                <Text style={{ color: "#fff", fontSize: 20 }}>Muneeb khan</Text>
-                <Text style={{ color: "white", fontSize: 15 }}>Online</Text>
+                <Text style={{ color: "#fff", fontSize: 20 }}>{chatObj.person1_id == userData._id ? chatObj.person2_name : chatObj.person1_name}</Text>
+                {/* <Text style={{ color: "white", fontSize: 15 }}>Online</Text> */}
               </View>
             </View>
           }
@@ -202,10 +207,10 @@ class Chat extends Component {
         >
           <ScrollView
           ref="_scrollView">
-            {chat.map(val => {
-              if (val.user == "me") {
+            {(messagesArray.length > 0) && messagesArray.map(val => {
+              if (val.senderId == person1) {
                 return <MyChat message={val.message} />;
-              } else if (val.user == "user") {
+              } else if (val.senderId == person2) {
                 return <UserChat message={val.message} />;
               }
             })}

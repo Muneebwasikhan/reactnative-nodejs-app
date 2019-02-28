@@ -84,8 +84,9 @@ class AllMessages extends Component {
           {chatList.length > 0 && chatList.map((l, i) => (
             <ListItem
               key={i}
-              leftAvatar={{ source: { uri: l.person2_image } }}
-              title={l.person2_name}
+              leftAvatar={{ source: { uri: `${l.person1_id == userData._id ? l.person2_image : l.person1_image}` } }}
+              title={l.person1_id == userData._id ? l.person2_name : l.person1_name}
+              onPress={() => {Actions.chatpage({propsData: {person1: `${l.person1_id == userData._id ? l.person1_id : l.person2_id}`,person2: `${l.person1_id == userData._id ? l.person2_id : l.person1_id}`} })}}
               // subtitle={l.subtitle}
             />
           ))}

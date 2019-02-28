@@ -13,7 +13,7 @@ exports = module.exports = function (app, mongoose) {
                 $or: [{
                     person1_id: req.body.userId,
                 }, {
-                    person2_id: req.body.UserId
+                    person2_id: req.body.userId
                 }]
             });
             return res.send({

@@ -39,7 +39,7 @@ class Chat extends Component {
 
   constructor(){
     super();
-    this.socket = SocketIOClient('http://localhost:3001');
+    this.socket = SocketIOClient(path.BASE_URL);
     this.onReceivedMessage = this.onReceivedMessage.bind(this);
   }
   state = {

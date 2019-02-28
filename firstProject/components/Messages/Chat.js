@@ -181,7 +181,11 @@ class Chat extends Component {
       if(res.data.success){
         const { chatObj, messagesArray } = res.data.data;
         console.log({ chatObj, messagesArray });
-        this.setState({ chatObj, messagesArray });
+        this.setState({ chatObj, messagesArray }, () => {
+                    setTimeout(() => {
+                      this.refs._scrollView.scrollToEnd();
+                    }, 10);
+                  });
          th.socket.on(chatObj._id, this.onReceivedMessage);
       }
     })
@@ -189,6 +193,12 @@ class Chat extends Component {
       console.log(err.message)
     })
   }
+componentWillUnmount = () => {
+  const { chatObj } = this.state;
+  this.socket.off(chatObj._id);
+};
+
+
   render() {
     let behavior = "";
     if (Platform.OS == "ios") {

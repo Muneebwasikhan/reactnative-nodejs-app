@@ -8,7 +8,7 @@ import {
 import { AsyncStorage } from "react-native";
 import Axios from "axios";
 import path from "../../config/Path";
-import ModalService from "../ModalService/ModalService";
+import ModalService from "../modalService/ModalService";
 import HomeItemCard from "./HomeItemCard";
 
 

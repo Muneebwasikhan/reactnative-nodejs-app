@@ -20,8 +20,27 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import { Actions } from "react-native-router-flux";
 import Axios from "axios";
 import path from "../../config/Path";
+import SocketIOClient from 'socket.io-client';
+
+
+
+
+// export default class App extends Component {
+//   constructor(props){
+//     super(props)
+//     console.log("From App")
+//     this.socket = SocketIOClient('https://a085829a.ngrok.io');
+//     this.socket.on('message', this.onReceivedMessage);
+//   }
+
+
 
 class Chat extends Component {
+
+  constructor(){
+    super();
+    this.socket = SocketIOClient('https://a085829a.ngrok.io');
+  }
   state = {
     refreshing: false,
     text: "",
@@ -104,6 +123,11 @@ class Chat extends Component {
     messagesArray: [],
     chatObj: null
   };
+
+    onReceivedMessage(message){
+    console.log("from server====>>>",message)
+  }
+
   _asyncGetRegStudent = async () => {
     try {
       let user = await AsyncStorage.getItem("regStudent");
@@ -123,8 +147,9 @@ class Chat extends Component {
       this.setState({ userData: user.studentData })
     });
     this.getChat();
-
+   
   }
+
 
   sendMessage = () => {
     const { text, userData, chatObj } = this.state;
@@ -139,6 +164,7 @@ class Chat extends Component {
     })
   }
   getChat = () => {
+    const th = this;
     const { person1, person2 } = this.props.propsData;
     console.log({ person1_id: person1,person2_id: person2 });
     console.log(path.GET_CHAT);
@@ -148,6 +174,7 @@ class Chat extends Component {
         const { chatObj, messagesArray } = res.data.data;
         console.log({ chatObj, messagesArray });
         this.setState({ chatObj, messagesArray });
+         th.socket.on(chatObj._id, this.onReceivedMessage);
       }
     })
     .catch(err => {

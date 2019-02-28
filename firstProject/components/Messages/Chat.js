@@ -129,7 +129,7 @@ class Chat extends Component {
     console.log("from server====>>>",message)
     const { messagesArray } = this.state;
     messagesArray.push(message);
-    this.setState({messagesArray}, () => {
+    this.setState({messagesArray,text: ""}, () => {
                     setTimeout(() => {
                       this.refs._scrollView.scrollToEnd();
                     }, 10);

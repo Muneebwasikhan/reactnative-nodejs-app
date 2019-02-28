@@ -196,6 +196,7 @@ class Chat extends Component {
 componentWillUnmount = () => {
   const { chatObj } = this.state;
   this.socket.off(chatObj._id);
+  this.socket.disconnect();
 };
 
 

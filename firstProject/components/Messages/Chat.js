@@ -39,7 +39,8 @@ class Chat extends Component {
 
   constructor(){
     super();
-    this.socket = SocketIOClient('https://a085829a.ngrok.io');
+    this.socket = SocketIOClient('http://localhost:3001');
+    this.onReceivedMessage = this.onReceivedMessage.bind(this);
   }
   state = {
     refreshing: false,
@@ -124,8 +125,15 @@ class Chat extends Component {
     chatObj: null
   };
 
-    onReceivedMessage(message){
+    onReceivedMessage = (message) => {
     console.log("from server====>>>",message)
+    const { messagesArray } = this.state;
+    messagesArray.push(message);
+    this.setState({messagesArray}, () => {
+                    setTimeout(() => {
+                      this.refs._scrollView.scrollToEnd();
+                    }, 10);
+                  });
   }
 
   _asyncGetRegStudent = async () => {

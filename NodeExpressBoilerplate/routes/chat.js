@@ -91,7 +91,6 @@ exports = module.exports = function (app, mongoose) {
 
     router.post('/sendmessage', async function (req, res, next) {
         console.log("socket.io")
-        app.io.emit("message", {newMessageObj:"newMessage"});
         try {
             let messageObj = {
                 message: req.body.message,
@@ -100,10 +99,10 @@ exports = module.exports = function (app, mongoose) {
             };
             let MessageModel = new app.db.models.Message(messageObj);
             let newMessageObj = await MessageModel.save();
-
+            
             res.send({
                 success: true,
-                data: newMessageObj
+                message: "Message Sent Successful"
             });
             io.emit(req.body.chatId, newMessageObj);
         } catch (err) {

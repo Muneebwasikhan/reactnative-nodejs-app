@@ -28,8 +28,7 @@ class HomeItemCard extends Component {
     const { value } = this.props.cardData;
     console.log(this.props)
     return (
-     
-            <View style={{ paddingTop: 10, paddingBottom: 10 }}>
+       <View style={{ paddingTop: 10, paddingBottom: 10 }}>
               <RkCard key={value}>
                 <View rkCardHeader={true}>
                   <View>

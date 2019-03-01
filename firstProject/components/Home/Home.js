@@ -75,8 +75,9 @@ class Home extends Component {
             />
           }
         >
-          {feed.map(value => (
+          {feed.map((value,index) => (
             <HomeItemCard
+            key={index}
               cardData={{ value }}
               changeState={paramsState => {
                 this.setState(paramsState);
@@ -91,43 +92,7 @@ class Home extends Component {
 const styles = StyleSheet.create({
   screen: {
     backgroundColor: "#f0f1f5"
-    // padding: 12,
-  },
-  // buttonIcon: {
-  //   marginRight: 7,
-  //   fontSize: 19.7
-  // },
-  // footer: {
-  //   marginHorizontal: 16
-  // },
-  // avatar: {
-  //   width: 42,
-  //   height: 42,
-  //   borderRadius: 21,
-  //   marginRight: 17
-  // },
-  // dot: {
-  //   fontSize: 6.5,
-  //   color: "#0000008e",
-  //   marginLeft: 2.5,
-  //   marginVertical: 10
-  // },
-  // floating: {
-  //   width: 56,
-  //   height: 56,
-  //   position: "absolute",
-  //   zIndex: 200,
-  //   right: 16,
-  //   top: 173
-  // },
-  // footerButtons: {
-  //   flexDirection: "row"
-  // },
-  // overlay: {
-  //   justifyContent: "flex-end",
-  //   paddingVertical: 23,
-  //   paddingHorizontal: 16
-  // }
+  }
 });
 
 export default Home;

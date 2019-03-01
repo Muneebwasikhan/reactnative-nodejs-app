@@ -34,7 +34,7 @@ const ElementHeader = props => {
       }
       centerComponent={{
         text: "Fiverr",
-        style: { color: "#fff", fontFamily: "Kailasa-Bold", ontWeight: "bold" }
+        style: { color: "#fff", fontWeight: "bold" }
       }}
       rightComponent={
         <TouchableOpacity onPress={() => {

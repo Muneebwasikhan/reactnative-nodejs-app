@@ -1,5 +1,5 @@
 export default class path {
-  static BASE_URL = 'https://61107208.ngrok.io';
+  static BASE_URL = 'https://fd1fd14d.ngrok.io';
 
   static LOGIN_AUTHENTICATION = path.BASE_URL + '/userauth';
 

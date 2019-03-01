@@ -15,7 +15,7 @@ import { Actions } from "react-native-router-flux";
 class ContactsList extends Component {
   
   componentDidMount() {
-    this._asyncGetRegStudent();
+    // this._asyncGetRegStudent();
   }
   render() {
     

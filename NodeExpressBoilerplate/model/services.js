@@ -1,37 +1,28 @@
+exports = module.exports = function(app, mongoose) {
+  // 'use strict';a
 
-exports = module.exports = function (app, mongoose) {
+  var Schema = mongoose.Schema
 
-    // 'use strict';a
+  var Services = new Schema({
+    title: {
+      type: String
+    },
+    imageUrl: {
+      type: String
+    },
+    user_id: {
+      type: String
+    },
+    discription: {
+      type: String
+    },
+    amount: {
+      type: String
+    },
+    category: {
+      type: String
+    }
+  })
 
-    var Schema = mongoose.Schema;
-
-    var Services = new Schema({
-        title: {
-            type: String
-        },
-        image: {
-            type: String
-        },
-        user_id: {
-            type: String
-        },
-        discription: {
-            type: String
-        },
-        amount: {
-            type: String
-        },
-        category: {
-            type: String
-        },
-        longitude: {
-            type: String
-        },
-        latitude: {
-            type: String
-        }
-    });
-
-    app.db.model('Services', Services);
-
+  app.db.model("Services", Services)
 }

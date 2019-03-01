@@ -7,11 +7,13 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import { Input, Button } from "react-native-elements";
 import axios from 'axios';
 import path from "../../config/Path";
+import { Actions } from "react-native-router-flux";
 
 class UploadData extends Component {
   state = {
     myNumber: "",
-    profilePhoto: "https://www.sparklabs.com/forum/styles/comboot/theme/images/default_avatar.jpg"
+    profilePhoto: "https://www.sparklabs.com/forum/styles/comboot/theme/images/default_avatar.jpg",
+    avatar: ''
   };
 
   onChanged(text) {
@@ -26,23 +28,56 @@ class UploadData extends Component {
   }
 
   updateData = () => {
-    // alert(this.state.myNumber);
-    // alert(this.state.profilePhoto);
-    const { myNumber, profilePhoto } = this.state;
-    this._asyncGetRegStudent().then((res) => {
-      if(res){
+    
+    const { myNumber, avatar } = this.state;
+    this._asyncGetRegStudent().then((resp) => {
+      var responce = resp;
+      if(responce && avatar){
+
+        console.log(responce);
+        console.log('data:image/png;base64,'+ avatar);
         axios.post(path.UPDATE_NUMBER_PROFILE, {
-      fbId: res.studentData.fbId,
+      fbId: responce.studentData.fbId,
       phoneNumber: myNumber,
-      profilePhoto: profilePhoto
+      profilePhoto: 'data:image/png;base64,'+ avatar
     }).then(data => {
-      console.log(data);
+      console.log(data.data);
+      // console.log(this._asyncGetRegStudent());
+      this._asyncGetRegStudent().then((res) => {
+        console.log(res);
+        var newData = res;
+        console.log(data.data.studentData);
+        if(data.data.studentData){
+          newData.studentData = data.data.studentData;
+          console.log(res)
+          this._storeData(JSON.stringify(newData)).then(res => {
+            console.log(res)
+            if(res){
+              Actions.replace("home");  
+              console.log(res);
+            }
+            else{
+              console.log('error')
+            }
+          })
+        }
+      })
+      
     })
       }
     });
-    
 
   }
+  _storeData = async (data) => {
+    try {
+      await AsyncStorage.setItem('regStudent', data);
+      console.log(data);
+      return true;
+    } catch (error) {
+      console.log('User Auth error');
+      return false;
+    }
+  };
   _asyncGetRegStudent = async () => {
     try{
       let user = await AsyncStorage.getItem('regStudent');
@@ -63,7 +98,7 @@ class UploadData extends Component {
             // containerStyle={{height: 150, backgroundColor: 'powderblue'}}
             onPhotoSelect={avatar => {
               if (avatar) {
-                console.log("Image base64 string: ", avatar);
+                this.setState({avatar})
               }
             }}
           >
@@ -109,15 +144,6 @@ class UploadData extends Component {
             onPress={this.updateData}
           />
         </View>
-        <View style={styles.horCenterCont }>
-          <Button
-            containerStyle={{width: '60%',marginTop: 20,}}
-            buttonStyle={{backgroundColor: 'gray',borderRadius: 27}}
-            title="CLEAR ASYNC STORAGE"
-            onPress={() => {AsyncStorage.clear(() => {console.log('cleared storage')})}}
-          />
-        </View>
-        {/* <Image source={this.state.avatarSource} style={styles.uploadAvatar} /> */}
       </View>
     );
   }

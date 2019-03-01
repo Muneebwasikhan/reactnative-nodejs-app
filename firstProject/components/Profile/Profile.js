@@ -17,18 +17,7 @@ class AddService extends Component {
     this._asyncGetRegStudent();
   }
   render() {
-    const list = [
-      {
-        name: 'Amy Farha',
-        avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
-        subtitle: 'Vice President'
-      },
-      {
-        name: 'Chris Jackson',
-        avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-        subtitle: 'Vice Chairman'
-      }
-    ];
+    
 
     return (
       <View style={styles.container}>
@@ -57,6 +46,18 @@ class AddService extends Component {
         // subtitle={l.subtitle}
         badge={{ value: 3, textStyle: { color: 'white' } }}
         onPress={() => {Actions.contactListPage()}}
+      />
+       <ListItem
+      containerStyle={{width: '100%'}}
+        leftIcon={() => (<Icon
+          name="cogs"
+          type="font-awesome"
+          color="gray"
+        />)}
+        title={'Edit Profile'}
+        // subtitle={l.subtitle}
+        badge={{ value: 3, textStyle: { color: 'white' } }}
+        onPress={() => {Actions.uploaddata2()}}
       />
       
       </View>

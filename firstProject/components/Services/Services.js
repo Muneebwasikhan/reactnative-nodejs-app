@@ -15,7 +15,7 @@ import { AsyncStorage } from "react-native";
 import { Actions } from "react-native-router-flux";
 import axios from "axios";
 import path from "../../config/Path";
-import ModalService from "../modalService/ModalService";
+import ModalService from "../ModalService/ModalService";
 
 class Services extends Component {
   state = {

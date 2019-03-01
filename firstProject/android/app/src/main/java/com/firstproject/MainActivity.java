@@ -1,8 +1,6 @@
 package com.firstproject;
 import android.content.Intent;
 import com.facebook.react.ReactActivity;
-import com.rt2zz.reactnativecontacts.ReactNativeContacts;
-
 
 public class MainActivity extends ReactActivity {
 
@@ -15,13 +13,6 @@ public class MainActivity extends ReactActivity {
         super.onActivityResult(requestCode, resultCode, data);
         MainApplication.getCallbackManager().onActivityResult(requestCode, resultCode, data);
     }
-    @Override
-    protected List<ReactPackage> getPackages() {
-        return Arrays.<ReactPackage>asList(
-                new MainReactPackage(),
-                new ReactNativeContacts());
-    }
-
     @Override
     protected String getMainComponentName() {
         return "firstProject";

@@ -74,9 +74,12 @@ export default class Map extends Component {
     console.log(origin);
     return (
       <MapView
-        showsUserLocation
-        followsUserLocation
+        showsUserLocation={true}
+        followsUserLocation={true}
+        showsMyLocationButton={true}
+        showsCompass={true}
         onUserLocationonChange={(userLocation => this.handleChange(userLocation))}
+        onMapReady={() => this._getLocationAsync()}
         provider={PROVIDER_GOOGLE}
         style={{ flex: 1 }}
         region={

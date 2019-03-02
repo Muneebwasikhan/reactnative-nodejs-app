@@ -17,6 +17,7 @@ import Chat from "../components/messages/Chat";
 import AllMessages from "../components/messages/AllMessages";
 import { LoginManager } from "react-native-fbsdk";
 
+
 const ElementHeader = props => {
   console.log(props);
   return (

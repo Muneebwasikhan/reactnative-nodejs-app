@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View, Button } from 'react-native';
 import Route from './route/Route';
 import SocketIOClient from 'socket.io-client';
+import Map from './components/map/Map';
 
 
 const instructions = Platform.select({
@@ -14,37 +15,18 @@ const instructions = Platform.select({
 
 
 
-// import MapView,{PROVIDER_GOOGLE} from 'react-native-maps'
 
-
-// export default class App extends Component {
-//   render() {
-//     return (
-//       <MapView
-//         provider={PROVIDER_GOOGLE}
-//         style={{ flex: 1 }}
-//         region={{
-//           latitude: 42.882004,
-//           longitude: 74.582748,
-//           latitudeDelta: 0.0922,
-//           longitudeDelta: 0.0421
-//         }}
-//         showsUserLocation={true}
-//       />
-//     );
-//   }
-// }
 
 
 export default class App extends Component {
-  constructor(props){
+  constructor(props) {
     super(props)
     console.log("From App")
     this.socket = SocketIOClient('https://a085829a.ngrok.io');
     this.socket.on('message', this.onReceivedMessage);
   }
-  onReceivedMessage(message){
-    console.log("from server====>>>",message)
+  onReceivedMessage(message) {
+    console.log("from server====>>>", message)
   }
 
   // render() {
@@ -57,10 +39,11 @@ export default class App extends Component {
   // }
 
   render() {
-      return (
-        <Route />
-      );
-    }
+    return (
+      // <Route />
+      <Map />
+    );
+  }
 }
 
 const styles = StyleSheet.create({
